@@ -6,12 +6,12 @@
  * @flow
  */
 
-import Home, {createAppContainer} from './screens/HomeScreen';
+import Home from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
 import {createStackNavigator} from 'react-navigation-stack';
-// import AppNavigator from './screens/AppNavigator';
-// import { createAppContainer } from 'react-navigation';
+import AppNavigator from './screens/AppNavigator';
+import { createAppContainer } from 'react-navigation';
 import React from 'react';
 import {
   SafeAreaView,
@@ -30,6 +30,18 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+
+
+const App = createAppContainer(AppNavigator);
+export default App;
+
+
+
+
+
+
+
+
 
 
 
@@ -131,7 +143,5 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 //     Profile: {screen: ProfileScreen},
 // });
 //
-// const App = createAppContainer(AppNavigator);
 
 
-export default Home;

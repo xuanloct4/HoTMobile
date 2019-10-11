@@ -9,62 +9,17 @@ import {
     StatusBar,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
-import ProfileScreen from './ProfileScreen';
+
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 // import { Ionicons } from '@expo/vector-icons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import TableView from 'react-native-tableview';
+import ProfileScreen from './ProfileScreen';
+import DetailsSCreen from './DetailsScreen';
 
 
-// class HomeScreen extends Component {
-//     static navigationOptions = {
-//         title: 'Welcome',
-//     };
-//     render() {
-//         const {navigate} = this.props.navigation;
-//         return (
-//             <Button
-//                 title="Go to Jane's profile"
-//                 onPress={() => navigate('Profile', {name: 'Jane'})}
-//             />
-//         );
-//     }
-// }
-
-// class SettingsScreen extends React.Component {
-//     render() {
-//         return (
-//             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//                 <Text>Settings!</Text>
-//             </View>
-//         );
-//     }
-// }
-//
-// const TabNavigator = createBottomTabNavigator({
-//     Home: HomeScreen,
-//     Settings: SettingsScreen,
-// });
-//
-// export default createAppContainer(TabNavigator);
-
-
-class DetailsScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Details',
-    };
-
-    render() {
-        return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Text>Details!</Text>
-            </View>
-        );
-    }
-}
 
 class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -84,32 +39,14 @@ class HomeScreen extends React.Component {
 
 }
 
-class SettingsScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Setting',
-    };
-
-    render() {
-        return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                {/* other code from before here */}
-                <Button
-                    title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details')}
-                />
-            </View>
-        );
-    }
-}
-
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
-    Details: DetailsScreen,
+    Details: DetailsSCreen,
 });
 
 const SettingsStack = createStackNavigator({
-    Settings: SettingsScreen,
-    Details: DetailsScreen,
+    Settings: ProfileScreen,
+    Details: DetailsSCreen,
 });
 
 
@@ -170,7 +107,7 @@ const Home = createAppContainer(
     createBottomTabNavigator(
         {
             Home: HomeStack,
-            Settings: SettingsStack,
+            Settings: ProfileScreen,
         },
         {
             // defaultNavigationOptions: ({ navigation }) => ({
@@ -209,7 +146,3 @@ const Home = createAppContainer(
 );
 
 export default Home;
-
-// export default HomeStack,SettingsStack;
-// export default SettingsStack;
-// export default HomeScreen;

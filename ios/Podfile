@@ -38,7 +38,6 @@ target 'HoTMobile' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
-  pod 'RNTableView', :path => '../node_modules/react-native-tableview'
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
