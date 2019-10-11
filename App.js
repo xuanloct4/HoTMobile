@@ -6,12 +6,12 @@
  * @flow
  */
 
-import HomeScreen from './screens/HomeScreen';
+import Home, {createAppContainer} from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
 import {createStackNavigator} from 'react-navigation-stack';
-import AppNavigator from './screens/AppNavigator';
-import { createAppContainer } from 'react-navigation';
+// import AppNavigator from './screens/AppNavigator';
+// import { createAppContainer } from 'react-navigation';
 import React from 'react';
 import {
   SafeAreaView,
@@ -29,6 +29,11 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+
+
+
+
 
 // const App: () => React$Node = () => {
 //   return (
@@ -121,11 +126,12 @@ import {
 
 // const AppContainer = createAppContainer(AppNavigator);
 //
-const MainNavigator = createStackNavigator({
-    Home: {screen: HomeScreen},
-    Profile: {screen: ProfileScreen},
-});
+// const MainNavigator = createStackNavigator({
+//     Home: {screen: HomeScreen},
+//     Profile: {screen: ProfileScreen},
+// });
+//
+// const App = createAppContainer(AppNavigator);
 
-const App = createAppContainer(AppNavigator);
 
-export default App;
+export default Home;

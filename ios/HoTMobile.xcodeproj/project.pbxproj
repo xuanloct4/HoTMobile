@@ -12,14 +12,40 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2C5DF235D5A3CEB7AE01401D /* libPods-HoTMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36EE9F9A90CAA41C9BD7E26E /* libPods-HoTMobile-tvOSTests.a */; };
+		1AAC3B382350E5EE009D46F6 /* libDoubleConversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B372350E5EE009D46F6 /* libDoubleConversion.a */; };
+		1AAC3B3A2350E5EE009D46F6 /* libFBReactNativeSpec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B392350E5EE009D46F6 /* libFBReactNativeSpec.a */; };
+		1AAC3B3C2350E5EE009D46F6 /* libFolly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B3B2350E5EE009D46F6 /* libFolly.a */; };
+		1AAC3B3E2350E5EE009D46F6 /* libglog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B3D2350E5EE009D46F6 /* libglog.a */; };
+		1AAC3B482350E5EF009D46F6 /* libRCTTypeSafety.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B472350E5EF009D46F6 /* libRCTTypeSafety.a */; };
+		1AAC3B4A2350E5EF009D46F6 /* libReact-Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B492350E5EF009D46F6 /* libReact-Core.a */; };
+		1AAC3B4C2350E5EF009D46F6 /* libReact-CoreModules.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B4B2350E5EF009D46F6 /* libReact-CoreModules.a */; };
+		1AAC3B4E2350E5EF009D46F6 /* libReact-cxxreact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B4D2350E5EF009D46F6 /* libReact-cxxreact.a */; };
+		1AAC3B502350E5EF009D46F6 /* libReact-jsi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B4F2350E5EF009D46F6 /* libReact-jsi.a */; };
+		1AAC3B522350E5EF009D46F6 /* libReact-jsiexecutor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B512350E5EF009D46F6 /* libReact-jsiexecutor.a */; };
+		1AAC3B542350E5EF009D46F6 /* libReact-jsinspector.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B532350E5EF009D46F6 /* libReact-jsinspector.a */; };
+		1AAC3B562350E5EF009D46F6 /* libReact-RCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B552350E5EF009D46F6 /* libReact-RCTActionSheet.a */; };
+		1AAC3B582350E5EF009D46F6 /* libReact-RCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B572350E5EF009D46F6 /* libReact-RCTAnimation.a */; };
+		1AAC3B5A2350E5EF009D46F6 /* libReact-RCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B592350E5EF009D46F6 /* libReact-RCTBlob.a */; };
+		1AAC3B5C2350E5EF009D46F6 /* libReact-RCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B5B2350E5EF009D46F6 /* libReact-RCTImage.a */; };
+		1AAC3B5E2350E5EF009D46F6 /* libReact-RCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B5D2350E5EF009D46F6 /* libReact-RCTLinking.a */; };
+		1AAC3B602350E5EF009D46F6 /* libReact-RCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B5F2350E5EF009D46F6 /* libReact-RCTNetwork.a */; };
+		1AAC3B622350E5EF009D46F6 /* libReact-RCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B612350E5EF009D46F6 /* libReact-RCTSettings.a */; };
+		1AAC3B642350E5EF009D46F6 /* libReact-RCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B632350E5EF009D46F6 /* libReact-RCTText.a */; };
+		1AAC3B662350E5EF009D46F6 /* libReact-RCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B652350E5EF009D46F6 /* libReact-RCTVibration.a */; };
+		1AAC3B682350E5EF009D46F6 /* libReactCommon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B672350E5EF009D46F6 /* libReactCommon.a */; };
+		1AAC3B6A2350E5EF009D46F6 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B692350E5EF009D46F6 /* libRNGestureHandler.a */; };
+		1AAC3B6C2350E5EF009D46F6 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B6B2350E5EF009D46F6 /* libRNReanimated.a */; };
+		1AAC3B6E2350E5EF009D46F6 /* libRNTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B6D2350E5EF009D46F6 /* libRNTableView.a */; };
+		1AAC3B702350E5EF009D46F6 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B6F2350E5EF009D46F6 /* libRNVectorIcons.a */; };
+		1AAC3B722350E5EF009D46F6 /* libYoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B712350E5EF009D46F6 /* libYoga.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* HoTMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HoTMobileTests.m */; };
-		39C799AEE7EF4ABCBA83C3DD /* libPods-HoTMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7BD5983EB8BC5D9C75509C6 /* libPods-HoTMobile-tvOS.a */; };
-		575DFF07E23A96243150FB11 /* libPods-HoTMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 797CB2FFC06196B84AB7FE1E /* libPods-HoTMobileTests.a */; };
-		95D91504F26729741CDC10CC /* libPods-HoTMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6EF46E39251030A9F40DFE /* libPods-HoTMobile.a */; };
+		35EEF878676EBAC3DD7CAE62 /* libPods-HoTMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9084BC1EDE16FC8B46056F6B /* libPods-HoTMobile-tvOSTests.a */; };
+		A31566C4DAC41C5CCBE56AD9 /* libPods-HoTMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F363C0389CA9DA9C3AF63528 /* libPods-HoTMobileTests.a */; };
+		E6661F0E272B39F086E76A37 /* libPods-HoTMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C2A391384468E7566D0415 /* libPods-HoTMobile-tvOS.a */; };
+		EB93DF0AAB13C2847115E7C0 /* libPods-HoTMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E579980FC3F0BFE1418B71C6 /* libPods-HoTMobile.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +70,8 @@
 		00E356EE1AD99517003FC87E /* HoTMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HoTMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HoTMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HoTMobileTests.m; sourceTree = "<group>"; };
-		043673C29F71269BAB5B2444 /* Pods-HoTMobile-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-HoTMobile-tvOSTests/Pods-HoTMobile-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		09967675DAEE4472A0C10914 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		0AB5C8887B104BEFA0282A6A /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* HoTMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoTMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HoTMobile/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = HoTMobile/AppDelegate.m; sourceTree = "<group>"; };
@@ -52,21 +79,79 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HoTMobile/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = HoTMobile/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HoTMobile/main.m; sourceTree = "<group>"; };
-		2A67353B7393D21207CFD4A9 /* Pods-HoTMobile-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-HoTMobile-tvOSTests/Pods-HoTMobile-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		1AAC3B152350E321009D46F6 /* libFBReactNativeSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBReactNativeSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B172350E321009D46F6 /* libReact-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B192350E321009D46F6 /* libReact-CoreModules.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-CoreModules.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B1B2350E321009D46F6 /* libReact-cxxreact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-cxxreact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B1D2350E321009D46F6 /* libReact-jsi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B1F2350E321009D46F6 /* libReact-jsiexecutor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsiexecutor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B212350E321009D46F6 /* libReact-jsinspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsinspector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B232350E321009D46F6 /* libReact-RCTActionSheet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTActionSheet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B252350E321009D46F6 /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B272350E321009D46F6 /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B292350E321009D46F6 /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B2B2350E321009D46F6 /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B2D2350E321009D46F6 /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B2F2350E321009D46F6 /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B312350E321009D46F6 /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B332350E321009D46F6 /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B352350E321009D46F6 /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B372350E5EE009D46F6 /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B392350E5EE009D46F6 /* libFBReactNativeSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBReactNativeSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B3B2350E5EE009D46F6 /* libFolly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFolly.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B3D2350E5EE009D46F6 /* libglog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglog.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B472350E5EF009D46F6 /* libRCTTypeSafety.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTTypeSafety.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B492350E5EF009D46F6 /* libReact-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B4B2350E5EF009D46F6 /* libReact-CoreModules.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-CoreModules.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B4D2350E5EF009D46F6 /* libReact-cxxreact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-cxxreact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B4F2350E5EF009D46F6 /* libReact-jsi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B512350E5EF009D46F6 /* libReact-jsiexecutor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsiexecutor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B532350E5EF009D46F6 /* libReact-jsinspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsinspector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B552350E5EF009D46F6 /* libReact-RCTActionSheet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTActionSheet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B572350E5EF009D46F6 /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B592350E5EF009D46F6 /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B5B2350E5EF009D46F6 /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B5D2350E5EF009D46F6 /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B5F2350E5EF009D46F6 /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B612350E5EF009D46F6 /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B632350E5EF009D46F6 /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B652350E5EF009D46F6 /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B672350E5EF009D46F6 /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B692350E5EF009D46F6 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B6B2350E5EF009D46F6 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNReanimated.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B6D2350E5EF009D46F6 /* libRNTableView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNTableView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B6F2350E5EF009D46F6 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AAC3B712350E5EF009D46F6 /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D9362DAE6F4C638155FCCA /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		26AED414220B4663BCDAAD6D /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		2752F8A8F8355B6A1BC9DA52 /* Pods-HoTMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-HoTMobileTests/Pods-HoTMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* HoTMobile-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HoTMobile-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* HoTMobile-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HoTMobile-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		36EE9F9A90CAA41C9BD7E26E /* libPods-HoTMobile-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HoTMobile-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		495EA8872FAB6DB9F53A0EA9 /* Pods-HoTMobile-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-HoTMobile-tvOS/Pods-HoTMobile-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		4E6EF46E39251030A9F40DFE /* libPods-HoTMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HoTMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		797CB2FFC06196B84AB7FE1E /* libPods-HoTMobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HoTMobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B818AB42B0E1E3FD39ACDD6 /* Pods-HoTMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobileTests.release.xcconfig"; path = "Target Support Files/Pods-HoTMobileTests/Pods-HoTMobileTests.release.xcconfig"; sourceTree = "<group>"; };
-		AA3EFCB992737774FC62A78E /* Pods-HoTMobile-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile-tvOS.release.xcconfig"; path = "Target Support Files/Pods-HoTMobile-tvOS/Pods-HoTMobile-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		C7BD5983EB8BC5D9C75509C6 /* libPods-HoTMobile-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HoTMobile-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CABF68C77449E9BE07B8F13C /* Pods-HoTMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-HoTMobileTests/Pods-HoTMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E60B4A19F29F36C6090001E9 /* Pods-HoTMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile.debug.xcconfig"; path = "Target Support Files/Pods-HoTMobile/Pods-HoTMobile.debug.xcconfig"; sourceTree = "<group>"; };
+		33DA2DD5D6206CBD7245F4BA /* Pods-HoTMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile.release.xcconfig"; path = "Target Support Files/Pods-HoTMobile/Pods-HoTMobile.release.xcconfig"; sourceTree = "<group>"; };
+		34D494C8C3BB44699EEA4B4C /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		35DEF558145803A9BDA7B7C6 /* Pods-HoTMobile-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-HoTMobile-tvOSTests/Pods-HoTMobile-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		38D36C41ADB4464097562C84 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		399D46A5795645809B9586B6 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		57E4131DBF694D2A9E2D11E1 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		5C97CD2B9812E84D7E23849C /* Pods-HoTMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile.debug.xcconfig"; path = "Target Support Files/Pods-HoTMobile/Pods-HoTMobile.debug.xcconfig"; sourceTree = "<group>"; };
+		6532602323C84BEE954B7628 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		72C2A391384468E7566D0415 /* libPods-HoTMobile-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HoTMobile-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AC5B004CE1D4EED8C867B06 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		80448694A7EF4303147C0C50 /* Pods-HoTMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobileTests.release.xcconfig"; path = "Target Support Files/Pods-HoTMobileTests/Pods-HoTMobileTests.release.xcconfig"; sourceTree = "<group>"; };
+		83D76769D20C4733A21E391F /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		8D06562ABF9DEA887E477C8B /* Pods-HoTMobile-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-HoTMobile-tvOSTests/Pods-HoTMobile-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		9084BC1EDE16FC8B46056F6B /* libPods-HoTMobile-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HoTMobile-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A40462048AF4F6282BBE940 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		9E4728A68C2D49FD89F07B48 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		A7E59DCFB7B045A5A2C21A21 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		BEDBD51726E344A8B8A057E8 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		D11205BAB5CB440F9FE4375F /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		DD051F7F64252BB0C804E76A /* Pods-HoTMobile-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile-tvOS.release.xcconfig"; path = "Target Support Files/Pods-HoTMobile-tvOS/Pods-HoTMobile-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		E579980FC3F0BFE1418B71C6 /* libPods-HoTMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HoTMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED284FB08681019ED66BCA6C /* Pods-HoTMobile-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-HoTMobile-tvOS/Pods-HoTMobile-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F208FC8426BE69A8A494943A /* Pods-HoTMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoTMobile.release.xcconfig"; path = "Target Support Files/Pods-HoTMobile/Pods-HoTMobile.release.xcconfig"; sourceTree = "<group>"; };
+		F363C0389CA9DA9C3AF63528 /* libPods-HoTMobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HoTMobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				575DFF07E23A96243150FB11 /* libPods-HoTMobileTests.a in Frameworks */,
+				A31566C4DAC41C5CCBE56AD9 /* libPods-HoTMobileTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +167,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95D91504F26729741CDC10CC /* libPods-HoTMobile.a in Frameworks */,
+				1AAC3B382350E5EE009D46F6 /* libDoubleConversion.a in Frameworks */,
+				1AAC3B3A2350E5EE009D46F6 /* libFBReactNativeSpec.a in Frameworks */,
+				1AAC3B3C2350E5EE009D46F6 /* libFolly.a in Frameworks */,
+				1AAC3B3E2350E5EE009D46F6 /* libglog.a in Frameworks */,
+				1AAC3B482350E5EF009D46F6 /* libRCTTypeSafety.a in Frameworks */,
+				1AAC3B4A2350E5EF009D46F6 /* libReact-Core.a in Frameworks */,
+				1AAC3B4C2350E5EF009D46F6 /* libReact-CoreModules.a in Frameworks */,
+				1AAC3B4E2350E5EF009D46F6 /* libReact-cxxreact.a in Frameworks */,
+				1AAC3B502350E5EF009D46F6 /* libReact-jsi.a in Frameworks */,
+				1AAC3B522350E5EF009D46F6 /* libReact-jsiexecutor.a in Frameworks */,
+				1AAC3B542350E5EF009D46F6 /* libReact-jsinspector.a in Frameworks */,
+				1AAC3B562350E5EF009D46F6 /* libReact-RCTActionSheet.a in Frameworks */,
+				1AAC3B582350E5EF009D46F6 /* libReact-RCTAnimation.a in Frameworks */,
+				1AAC3B5A2350E5EF009D46F6 /* libReact-RCTBlob.a in Frameworks */,
+				1AAC3B5C2350E5EF009D46F6 /* libReact-RCTImage.a in Frameworks */,
+				1AAC3B5E2350E5EF009D46F6 /* libReact-RCTLinking.a in Frameworks */,
+				1AAC3B602350E5EF009D46F6 /* libReact-RCTNetwork.a in Frameworks */,
+				1AAC3B622350E5EF009D46F6 /* libReact-RCTSettings.a in Frameworks */,
+				1AAC3B642350E5EF009D46F6 /* libReact-RCTText.a in Frameworks */,
+				1AAC3B662350E5EF009D46F6 /* libReact-RCTVibration.a in Frameworks */,
+				1AAC3B682350E5EF009D46F6 /* libReactCommon.a in Frameworks */,
+				1AAC3B6A2350E5EF009D46F6 /* libRNGestureHandler.a in Frameworks */,
+				1AAC3B6C2350E5EF009D46F6 /* libRNReanimated.a in Frameworks */,
+				1AAC3B6E2350E5EF009D46F6 /* libRNTableView.a in Frameworks */,
+				1AAC3B702350E5EF009D46F6 /* libRNVectorIcons.a in Frameworks */,
+				1AAC3B722350E5EF009D46F6 /* libYoga.a in Frameworks */,
+				EB93DF0AAB13C2847115E7C0 /* libPods-HoTMobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39C799AEE7EF4ABCBA83C3DD /* libPods-HoTMobile-tvOS.a in Frameworks */,
+				E6661F0E272B39F086E76A37 /* libPods-HoTMobile-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5DF235D5A3CEB7AE01401D /* libPods-HoTMobile-tvOSTests.a in Frameworks */,
+				35EEF878676EBAC3DD7CAE62 /* libPods-HoTMobile-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,12 +250,55 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AAC3B372350E5EE009D46F6 /* libDoubleConversion.a */,
+				1AAC3B392350E5EE009D46F6 /* libFBReactNativeSpec.a */,
+				1AAC3B3B2350E5EE009D46F6 /* libFolly.a */,
+				1AAC3B3D2350E5EE009D46F6 /* libglog.a */,
+				1AAC3B472350E5EF009D46F6 /* libRCTTypeSafety.a */,
+				1AAC3B492350E5EF009D46F6 /* libReact-Core.a */,
+				1AAC3B4B2350E5EF009D46F6 /* libReact-CoreModules.a */,
+				1AAC3B4D2350E5EF009D46F6 /* libReact-cxxreact.a */,
+				1AAC3B4F2350E5EF009D46F6 /* libReact-jsi.a */,
+				1AAC3B512350E5EF009D46F6 /* libReact-jsiexecutor.a */,
+				1AAC3B532350E5EF009D46F6 /* libReact-jsinspector.a */,
+				1AAC3B552350E5EF009D46F6 /* libReact-RCTActionSheet.a */,
+				1AAC3B572350E5EF009D46F6 /* libReact-RCTAnimation.a */,
+				1AAC3B592350E5EF009D46F6 /* libReact-RCTBlob.a */,
+				1AAC3B5B2350E5EF009D46F6 /* libReact-RCTImage.a */,
+				1AAC3B5D2350E5EF009D46F6 /* libReact-RCTLinking.a */,
+				1AAC3B5F2350E5EF009D46F6 /* libReact-RCTNetwork.a */,
+				1AAC3B612350E5EF009D46F6 /* libReact-RCTSettings.a */,
+				1AAC3B632350E5EF009D46F6 /* libReact-RCTText.a */,
+				1AAC3B652350E5EF009D46F6 /* libReact-RCTVibration.a */,
+				1AAC3B672350E5EF009D46F6 /* libReactCommon.a */,
+				1AAC3B692350E5EF009D46F6 /* libRNGestureHandler.a */,
+				1AAC3B6B2350E5EF009D46F6 /* libRNReanimated.a */,
+				1AAC3B6D2350E5EF009D46F6 /* libRNTableView.a */,
+				1AAC3B6F2350E5EF009D46F6 /* libRNVectorIcons.a */,
+				1AAC3B712350E5EF009D46F6 /* libYoga.a */,
+				1AAC3B152350E321009D46F6 /* libFBReactNativeSpec.a */,
+				1AAC3B172350E321009D46F6 /* libReact-Core.a */,
+				1AAC3B192350E321009D46F6 /* libReact-CoreModules.a */,
+				1AAC3B1B2350E321009D46F6 /* libReact-cxxreact.a */,
+				1AAC3B1D2350E321009D46F6 /* libReact-jsi.a */,
+				1AAC3B1F2350E321009D46F6 /* libReact-jsiexecutor.a */,
+				1AAC3B212350E321009D46F6 /* libReact-jsinspector.a */,
+				1AAC3B232350E321009D46F6 /* libReact-RCTActionSheet.a */,
+				1AAC3B252350E321009D46F6 /* libReact-RCTAnimation.a */,
+				1AAC3B272350E321009D46F6 /* libReact-RCTBlob.a */,
+				1AAC3B292350E321009D46F6 /* libReact-RCTImage.a */,
+				1AAC3B2B2350E321009D46F6 /* libReact-RCTLinking.a */,
+				1AAC3B2D2350E321009D46F6 /* libReact-RCTNetwork.a */,
+				1AAC3B2F2350E321009D46F6 /* libReact-RCTSettings.a */,
+				1AAC3B312350E321009D46F6 /* libReact-RCTText.a */,
+				1AAC3B332350E321009D46F6 /* libReact-RCTVibration.a */,
+				1AAC3B352350E321009D46F6 /* libReactCommon.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				4E6EF46E39251030A9F40DFE /* libPods-HoTMobile.a */,
-				C7BD5983EB8BC5D9C75509C6 /* libPods-HoTMobile-tvOS.a */,
-				36EE9F9A90CAA41C9BD7E26E /* libPods-HoTMobile-tvOSTests.a */,
-				797CB2FFC06196B84AB7FE1E /* libPods-HoTMobileTests.a */,
+				E579980FC3F0BFE1418B71C6 /* libPods-HoTMobile.a */,
+				72C2A391384468E7566D0415 /* libPods-HoTMobile-tvOS.a */,
+				9084BC1EDE16FC8B46056F6B /* libPods-HoTMobile-tvOSTests.a */,
+				F363C0389CA9DA9C3AF63528 /* libPods-HoTMobileTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -152,16 +306,15 @@
 		50813F8CF912730E32D45AD5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E60B4A19F29F36C6090001E9 /* Pods-HoTMobile.debug.xcconfig */,
-				F208FC8426BE69A8A494943A /* Pods-HoTMobile.release.xcconfig */,
-				495EA8872FAB6DB9F53A0EA9 /* Pods-HoTMobile-tvOS.debug.xcconfig */,
-				AA3EFCB992737774FC62A78E /* Pods-HoTMobile-tvOS.release.xcconfig */,
-				043673C29F71269BAB5B2444 /* Pods-HoTMobile-tvOSTests.debug.xcconfig */,
-				2A67353B7393D21207CFD4A9 /* Pods-HoTMobile-tvOSTests.release.xcconfig */,
-				CABF68C77449E9BE07B8F13C /* Pods-HoTMobileTests.debug.xcconfig */,
-				7B818AB42B0E1E3FD39ACDD6 /* Pods-HoTMobileTests.release.xcconfig */,
+				5C97CD2B9812E84D7E23849C /* Pods-HoTMobile.debug.xcconfig */,
+				33DA2DD5D6206CBD7245F4BA /* Pods-HoTMobile.release.xcconfig */,
+				ED284FB08681019ED66BCA6C /* Pods-HoTMobile-tvOS.debug.xcconfig */,
+				DD051F7F64252BB0C804E76A /* Pods-HoTMobile-tvOS.release.xcconfig */,
+				35DEF558145803A9BDA7B7C6 /* Pods-HoTMobile-tvOSTests.debug.xcconfig */,
+				8D06562ABF9DEA887E477C8B /* Pods-HoTMobile-tvOSTests.release.xcconfig */,
+				2752F8A8F8355B6A1BC9DA52 /* Pods-HoTMobileTests.debug.xcconfig */,
+				80448694A7EF4303147C0C50 /* Pods-HoTMobileTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -181,6 +334,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				50813F8CF912730E32D45AD5 /* Pods */,
+				DC4DAC0767AB4840BFD4CB74 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -198,6 +352,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DC4DAC0767AB4840BFD4CB74 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				34D494C8C3BB44699EEA4B4C /* AntDesign.ttf */,
+				9A40462048AF4F6282BBE940 /* Entypo.ttf */,
+				0AB5C8887B104BEFA0282A6A /* EvilIcons.ttf */,
+				A7E59DCFB7B045A5A2C21A21 /* Feather.ttf */,
+				BEDBD51726E344A8B8A057E8 /* FontAwesome.ttf */,
+				26AED414220B4663BCDAAD6D /* FontAwesome5_Brands.ttf */,
+				9E4728A68C2D49FD89F07B48 /* FontAwesome5_Regular.ttf */,
+				D11205BAB5CB440F9FE4375F /* FontAwesome5_Solid.ttf */,
+				57E4131DBF694D2A9E2D11E1 /* Fontisto.ttf */,
+				83D76769D20C4733A21E391F /* Foundation.ttf */,
+				09967675DAEE4472A0C10914 /* Ionicons.ttf */,
+				22D9362DAE6F4C638155FCCA /* MaterialCommunityIcons.ttf */,
+				399D46A5795645809B9586B6 /* MaterialIcons.ttf */,
+				7AC5B004CE1D4EED8C867B06 /* Octicons.ttf */,
+				6532602323C84BEE954B7628 /* SimpleLineIcons.ttf */,
+				38D36C41ADB4464097562C84 /* Zocial.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -205,7 +382,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "HoTMobileTests" */;
 			buildPhases = (
-				63D5CD3D6027BB49C7E8378A /* [CP] Check Pods Manifest.lock */,
+				8484EAC92E2F620AEEEA4310 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -224,12 +401,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "HoTMobile" */;
 			buildPhases = (
-				AA8E0DA65B3020569A0672D1 /* [CP] Check Pods Manifest.lock */,
+				CC0E4D9460062E881D35AF45 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				3D4352D45C8F5230BBF205A8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,7 +422,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "HoTMobile-tvOS" */;
 			buildPhases = (
-				E18EA588083A796A006613B9 /* [CP] Check Pods Manifest.lock */,
+				17D4B5FFDB3459F3891A1675 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -264,7 +442,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "HoTMobile-tvOSTests" */;
 			buildPhases = (
-				E23B4BD15590499738487AB0 /* [CP] Check Pods Manifest.lock */,
+				492170828D1C1AC2D6B08E86 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -285,19 +463,25 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = DFWCLDTJJD;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = DFWCLDTJJD;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = DFWCLDTJJD;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = DFWCLDTJJD;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -305,7 +489,7 @@
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "HoTMobile" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -371,67 +555,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native Code And Images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		63D5CD3D6027BB49C7E8378A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HoTMobileTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AA8E0DA65B3020569A0672D1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HoTMobile-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E18EA588083A796A006613B9 /* [CP] Check Pods Manifest.lock */ = {
+		17D4B5FFDB3459F3891A1675 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -453,7 +579,73 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E23B4BD15590499738487AB0 /* [CP] Check Pods Manifest.lock */ = {
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		3D4352D45C8F5230BBF205A8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HoTMobile/Pods-HoTMobile-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HoTMobile/Pods-HoTMobile-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		492170828D1C1AC2D6B08E86 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -469,6 +661,50 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-HoTMobile-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8484EAC92E2F620AEEEA4310 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HoTMobileTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC0E4D9460062E881D35AF45 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HoTMobile-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -580,9 +816,10 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CABF68C77449E9BE07B8F13C /* Pods-HoTMobileTests.debug.xcconfig */;
+			baseConfigurationReference = 2752F8A8F8355B6A1BC9DA52 /* Pods-HoTMobileTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -603,10 +840,11 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B818AB42B0E1E3FD39ACDD6 /* Pods-HoTMobileTests.release.xcconfig */;
+			baseConfigurationReference = 80448694A7EF4303147C0C50 /* Pods-HoTMobileTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				INFOPLIST_FILE = HoTMobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -623,11 +861,12 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E60B4A19F29F36C6090001E9 /* Pods-HoTMobile.debug.xcconfig */;
+			baseConfigurationReference = 5C97CD2B9812E84D7E23849C /* Pods-HoTMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				INFOPLIST_FILE = HoTMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -635,18 +874,20 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SimpleFFPlayer;
 				PRODUCT_NAME = HoTMobile;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F208FC8426BE69A8A494943A /* Pods-HoTMobile.release.xcconfig */;
+			baseConfigurationReference = 33DA2DD5D6206CBD7245F4BA /* Pods-HoTMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				INFOPLIST_FILE = HoTMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -654,23 +895,25 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SimpleFFPlayer;
 				PRODUCT_NAME = HoTMobile;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 495EA8872FAB6DB9F53A0EA9 /* Pods-HoTMobile-tvOS.debug.xcconfig */;
+			baseConfigurationReference = ED284FB08681019ED66BCA6C /* Pods-HoTMobile-tvOS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "HoTMobile-tvOS/Info.plist";
@@ -680,7 +923,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.HoTMobile-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SimpleFFPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -690,9 +933,9 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA3EFCB992737774FC62A78E /* Pods-HoTMobile-tvOS.release.xcconfig */;
+			baseConfigurationReference = DD051F7F64252BB0C804E76A /* Pods-HoTMobile-tvOS.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -700,6 +943,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "HoTMobile-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -708,7 +952,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.HoTMobile-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SimpleFFPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -718,7 +962,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 043673C29F71269BAB5B2444 /* Pods-HoTMobile-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 35DEF558145803A9BDA7B7C6 /* Pods-HoTMobile-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -726,6 +970,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "HoTMobile-tvOSTests/Info.plist";
@@ -745,7 +990,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A67353B7393D21207CFD4A9 /* Pods-HoTMobile-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 8D06562ABF9DEA887E477C8B /* Pods-HoTMobile-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -754,6 +999,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "HoTMobile-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
