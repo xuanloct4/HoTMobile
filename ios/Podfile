@@ -41,6 +41,10 @@ target 'HoTMobile' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'react-native-rsa-native', :path => '../node_modules/react-native-rsa-native'
+
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'HoTMobileTests' do
     inherit! :search_paths
     # Pods for testing

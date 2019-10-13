@@ -7,9 +7,10 @@ import LoginScreen from './LoginScreen';
 import FetchExample from './FetchExample'
 const AppNavigator = createStackNavigator(
     {
+        Fetch: { screen: FetchExample},
         Auth: { screen: LoginScreen},
         Home: {screen: Home},
-        Fetch: { screen: FetchExample},
+
         // Profile: {screen: ProfileScreen},
     },
     // {
