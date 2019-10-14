@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!-- < Only if you're using GCM or localNotificationSchedule() > -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <permission
             android:name="${applicationId}.permission.C2D_MESSAGE"
             android:protectionLevel="signature" />
@@ -60,9 +62,15 @@
         <!-- </ Only if you're using GCM or localNotificationSchedule() > -->
 
         <!-- < Else > -->
-        <service
-                android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
-                android:exported="false" >
+        <!--<service-->
+                <!--android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"-->
+                <!--android:exported="false" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+
+        <service android:name=".MyPushService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -98,7 +106,7 @@
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
         <activity
-                android:name=".MyActivity"
+                android:name=".DialingActitvity"
         android:label="@string/title_activity_example"
                 android:launchMode="singleTask"
                 android:taskAffinity=""
@@ -107,6 +115,24 @@
         android:showOnLockScreen="true"
         android:screenOrientation="sensorPortrait"
                 android:parentActivityName=".MainActivity"/>
+
+
+        <service android:name=".MyService">
+            <intent-filter>
+                <action android:name="com.hotmobile.MyService" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".MyReceiver"
+                  android:enabled="true"
+                  android:exported="true"
+                  android:label="Receiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED">
+                </action>
+            </intent-filter>
+
+        </receiver>
     </application>
 
 </manifest>

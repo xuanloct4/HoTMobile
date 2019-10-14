@@ -1,8 +1,16 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Text, View, AppState } from 'react-native';
+import { FlatList, ActivityIndicator, AppState } from 'react-native';
 import ApiUtils from '../utils/ApiUtils'
 import RSAUtils from '../utils/RSAUtils';
 import * as FileUtils from '../utils/FileUtils';
+
+import {
+    View, Text, TouchableOpacity
+} from 'react-native';
+import AppText from '../components/app-text';
+import { connect } from 'react-redux';
+import * as actions from './../redux/actions/index';
+
 
 import PushNotificationIOS from 'react-native';
 import PubNubReact from 'pubnub-react';
@@ -15,8 +23,11 @@ import bgMessaging from './bgMessaging';
 const activityStarter = NativeModules.ActivityStarter;
 
 
-export default class FetchExample extends React.Component {
-
+class FetchExample extends React.Component {
+    setLanguage = language => {
+        this.setState({ language });
+        this.props.setLanguage(language);
+    }
 
     static navigationOptions = {
         title: 'FetchExample',
@@ -209,17 +220,34 @@ export default class FetchExample extends React.Component {
 
 
     render(){
+        const { language } = this.props;
+        const isVNLang = language === 'vi' ? true : false;
 
-        if(this.state.isLoading){
-            return(
-                <View style={{flex: 1, padding: 20}}>
-                    <ActivityIndicator/>
-                </View>
-            )
-        }
+        // if(this.state.isLoading){
+        //     return(
+        //         <View style={{flex: 1, padding: 20}}>
+        //             <ActivityIndicator/>
+        //         </View>
+        //     )
+        // }
 
         return(
             <View style={{flex: 1, paddingTop:20}}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <AppText i18nKey={'this-is-home-page'}>This is home screen</AppText>
+                    <View style={{ flexDirection: 'row' }}>
+                        <AppText i18nKey={'set-language'}>Chọn ngôn ngữ</AppText>
+                        <TouchableOpacity onPress={() => this.setLanguage('vi')}
+                                          style={{ marginLeft: 20 }}>
+                            <Text style={{ color: isVNLang ? 'blue' : 'grey' }}>Việt Nam</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.setLanguage('en')}
+                                          style={{ marginLeft: 5 }}>
+                            <Text style={{ color: !isVNLang ? 'blue' : 'grey' }}>England</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 <Text style=" padding: 10,fontSize: 18,height: 100">{this.state.response}</Text>
 
                 {/*<FlatList*/}
@@ -231,3 +259,19 @@ export default class FetchExample extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        language: state.languageReducer.language
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setLanguage: language => {
+            dispatch(actions.changeLanguage(language));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FetchExample);

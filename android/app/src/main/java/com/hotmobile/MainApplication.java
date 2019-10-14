@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.burnweb.rnsendintent.RNSendIntentPackage;
 import com.poberwong.launcher.IntentLauncherPackage;
@@ -22,6 +23,18 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+
+    private static MainApplication instance;
+
+    public static MainApplication getInstance() {
+        return instance;
+    }
+
+    public static Context getContext(){
+        return instance;
+        // or return instance.getApplicationContext();
+    }
+
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -53,7 +66,7 @@ public class MainApplication extends Application implements ReactApplication {
   }
 
   @Override
-  public void onCreate() {
+  public void onCreate() { instance = this;
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this); // Remove this line if you don't want Flipper enabled

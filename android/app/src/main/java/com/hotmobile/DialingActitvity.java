@@ -2,13 +2,11 @@ package com.hotmobile;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import androidx.annotation.CallSuper;
+import com.hotmobile.R;
 
 import javax.annotation.Nullable;
 
@@ -16,7 +14,7 @@ import javax.annotation.Nullable;
  * Activity to start from React Native JavaScript, triggered via
  * {@link ActivityStarterModule#navigateToExample()}.
  */
-public class MyActivity extends Activity {
+public class DialingActitvity extends Activity {
     private BroadcastReceiver broadcastReceiver;
 
     @Override
@@ -38,19 +36,8 @@ public class MyActivity extends Activity {
         findViewById(R.id.trigger_alert_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityStarterModule.triggerAlert("Hello from " + MyActivity.class.getSimpleName());
+                ActivityStarterModule.triggerAlert("Hello from " + DialingActitvity.class.getSimpleName());
             }
         });
-
-
-        broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                // do your stuff related to start activity
-            }
-        };
-
-        registerReceiver(broadcastReceiver,
-                new IntentFilter("com.hotmobile"));
     }
 }

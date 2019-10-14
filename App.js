@@ -13,6 +13,17 @@ import {createStackNavigator} from 'react-navigation-stack';
 import AppNavigator from './screens/AppNavigator';
 import { createAppContainer } from 'react-navigation';
 import React from 'react';
+
+
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import appReducers from './redux/reducers';
+
+export const store = createStore(
+    appReducers
+)
+
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -32,7 +43,20 @@ import {
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 
-const App = createAppContainer(AppNavigator);
+const Navigator_ = createAppContainer(AppNavigator);
+
+
+class App extends React.Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <View style={{flex: 1}}>
+                    <Navigator_ />
+                </View>
+            </Provider>
+        );
+    }
+}
 export default App;
 
 
