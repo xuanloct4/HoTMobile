@@ -45,6 +45,8 @@ target 'HoTMobile' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
   target 'HoTMobileTests' do
     inherit! :search_paths
     # Pods for testing
