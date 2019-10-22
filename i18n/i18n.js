@@ -8,4 +8,7 @@ I18n.translations = {
     vi
 };
 
+
+I18n.fallbacks = true;
+
 export default I18n;

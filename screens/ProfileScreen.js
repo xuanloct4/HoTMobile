@@ -32,8 +32,10 @@ class ProfileScreen extends React.Component {
             <View style={styles.container}>
                 <SectionList
                     sections={[
-                        {title: 'D', data: ['Devin', 'Dan', 'Dominic', 'Devin', 'Dan', 'Dominic']},
-                        {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie', 'Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+                        {title: 'D', data: ['Profile']},
+                        {title: 'J', data: ['Devices Manage', 'Boards Manage', 'Account Manage']},
+                        {title: 'J', data: ['Term & Condition', 'About']},
+                        {title: 'J', data: ['Logout']},
                     ]}
                     renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
                     renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
@@ -42,16 +44,6 @@ class ProfileScreen extends React.Component {
             </View>
         );
 
-
-        // return (
-        //     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        //         {/* other code from before here */}
-        //         <Button
-        //             title="Go to Details"
-        //             onPress={() => this.props.navigation.navigate('Details')}
-        //         />
-        //     </View>
-        // );
     }
 }
 

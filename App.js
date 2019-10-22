@@ -19,6 +19,9 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import appReducers from './redux/reducers';
 
+import { connect } from 'react-redux';
+import I18n from './i18n/i18n';
+
 export const store = createStore(
     appReducers
 )
@@ -41,22 +44,84 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-
+import DefaultPreference from 'react-native-default-preference';
+import * as actions from './redux/actions';
 
 const Navigator_ = createAppContainer(AppNavigator);
 
 
 class App extends React.Component {
+
+    // state = {
+    //     locale: Localization.locale,
+    // };
+    //
+    // setLocale = locale => {
+    //     this.setState({ locale });
+    // };
+    //
+    // t = (scope, options) => {
+    //     return i18n.t(scope, { locale: this.state.locale, ...options });
+    // };
+
+    constructor(props) {
+        super(props);
+
+
+        // I18n.locale = 'vi'
+        this.state = {
+            i18n: I18n
+        };
+
+
+        DefaultPreference.get('App Language').then(function(language) {
+          console.log(language);
+            this.state = {
+                language: language
+            };
+        });
+    }
+
+
+    componentWillMount() {
+        const { language } = this.state;
+        if (language) this.setMainLocaleLanguage(language);
+    }
+
+    componentDidMount() {
+        const { language } = this.state;
+        if (language) this.setMainLocaleLanguage(language);
+    }
+
+
+
+    componentWillReceiveProps = nextProps => {
+        const { language } = nextProps;
+        if (language) this.setMainLocaleLanguage(language);
+    }
+
+    setMainLocaleLanguage = language => {
+        let i18n = this.state.i18n;
+        i18n.locale = language;
+        this.setState({ i18n });
+        this.props.setLanguage(language);
+    }
+
     render() {
         return (
             <Provider store={store}>
                 <View style={{flex: 1}}>
-                    <Navigator_ />
+                    <Navigator_ screenProps={{
+                        i18n: this.state.i18n,
+                        locale: this.state.locale,
+                        setLocale: this.setLocale,
+                    }}/>
                 </View>
             </Provider>
         );
     }
 }
+
 export default App;
 
 

@@ -179,6 +179,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-default-preference')
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation project(':react-native-i18n')
     implementation project(':react-native-firebase')
@@ -194,6 +195,16 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.android.support:multidex:1.0.3'
+
+//    // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+//    implementation 'com.facebook.fresco:animated-base-support:1.10.0'
+//    // For animated GIF support
+//    implementation 'com.facebook.fresco:animated-gif:1.12.0'
+//    // For WebP support, including animated WebP
+//    implementation 'com.facebook.fresco:animated-webp:1.10.0'
+//    implementation 'com.facebook.fresco:webpsupport:1.10.0'
+//    // For WebP support, without animations
+//    implementation 'com.facebook.fresco:webpsupport:1.10.0'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

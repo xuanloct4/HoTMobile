@@ -5,10 +5,14 @@ import {createStackNavigator} from 'react-navigation-stack';
 import Home from './HomeScreen'
 import LoginScreen from './LoginScreen';
 import FetchExample from './FetchExample'
+import { connect } from 'react-redux';
+import I18n from '../i18n/i18n';
+
 const AppNavigator = createStackNavigator(
     {
-        Fetch: { screen: FetchExample},
+
         Auth: { screen: LoginScreen},
+        Fetch: { screen: FetchExample},
         Home: {screen: Home},
 
         // Profile: {screen: ProfileScreen},
