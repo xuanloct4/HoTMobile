@@ -16,4 +16,13 @@ export default {
     'password_title': 'Mật khẩu',
     'password_placeholder': '******',
     'login_button_title': 'Đăng nhập',
+
+
+    'Profile': 'Tài khoản',
+    'Devices Manage': 'Quản lý thiết bị',
+    'Boards Manage': 'Quản lý cấu hình',
+    'Change Language': 'Thay đổi ngôn ngữ',
+    'Term & Condition': 'Điều khoản dịch vụ',
+    'About': 'Giới thiệu',
+    'Logout': 'Đăng xuất',
 };

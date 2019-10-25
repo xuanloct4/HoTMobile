@@ -7,6 +7,8 @@ import {
     Button,
     Alert,
     StatusBar,
+    TouchableHighlight,
+    Image,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
@@ -29,6 +31,16 @@ class LoginScreen extends React.Component {
                 <View style={styles.password}>
                 <CustomEditText secureTextEntry={true} i18nTitleKey={'password_title'} i18nMessageKey={'password_title'} i18nPlaceholderKey={'password_placeholder'}/>
                 </View>
+
+                <TouchableHighlight
+                    style={[styles.profileImgContainer, { borderColor: 'green', borderWidth:1 }]}
+                >
+                    <Image source={{ uri:"https://www.t-nation.com/system/publishing/articles/10005529/original/6-Reasons-You-Should-Never-Open-a-Gym.png" }} style={styles.profileImg} />
+                </TouchableHighlight>
+
+
+
+
                 <View style={styles.login}>
                 <CustomButton i18nKey={'login_button_title'}
                     onPress={() => this.props.navigation.navigate('Home')}/>
@@ -69,8 +81,22 @@ const styles = StyleSheet.create({
         left: 20,
         right: 20,
         bottom: 20,
+        borderRadius: 10,
+        backgroundColor:'#0000ff',
+    },
+    profileImgContainer: {
+        marginLeft: 8,
+        height: 82,
+        width: 82,
+        borderRadius: 82/2,
+        borderWidth: 1,
+    },
+    profileImg: {
+        height: 80,
+        width: 80,
+        borderRadius: 80/2,
+        overflow: 'hidden',
     },
 });
-
 
 export default LoginScreen;

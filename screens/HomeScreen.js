@@ -1,40 +1,30 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    Button,
     Alert,
-    StatusBar,
-    SectionList,
-    TouchableOpacity,
-    TouchableHighlight,
+    FlatList,
     Image,
     Modal,
-    FlatList,
+    Picker,
+    SectionList,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
-import {StackNavigator} from 'react-navigation';
+import {createAppContainer, StackNavigator} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-
-import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 // import { Ionicons } from '@expo/vector-icons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ProfileScreen from './ProfileScreen';
+import ProfileScreen from './Perference/ProfileScreen';
 import DetailsSCreen from './DetailsScreen';
-import CustomButton from '../components/CustomButton';
-import CustomPopover from '../components/CustomPopover';
-import I18n from '../i18n/i18n';
-import DefaultPreference from 'react-native-default-preference';
 import CustomTextView from '../components/CustomTextView';
 
-class ListItem  extends React.Component {
+class ListItem extends React.Component {
     render() {
-        const { onPress, section, word, isChecked, hasDetail, hasInfo } = this.props;
-        const { sectionStyle, termStyle } = listItemStyles;
-        if (section)
-        {
+        const {onPress, section, word, isChecked, hasDetail, hasInfo} = this.props;
+        const {sectionStyle, termStyle} = listItemStyles;
+        if (section) {
             return (
                 <TouchableOpacity>
                     <View>
@@ -46,8 +36,9 @@ class ListItem  extends React.Component {
         return (
             <TouchableOpacity
                 onPress={onPress}>
-                <View>
-                        <Text numberOfLines={1} style={listItemStyles.termStyle}>{word}</Text>
+                <View style={listItemStyles.itemStyle}>
+                    <Text style={listItemStyles.titleStyle} numberOfLines={1}>{word}</Text>
+                    <Image style={listItemStyles.rightIconStyle} source={require('../assets/images/ic_reveal.png')}/>
                 </View>
             </TouchableOpacity>
         );
@@ -64,40 +55,49 @@ const listItemStyles = StyleSheet.create({
         fontWeight: 'bold',
         backgroundColor: 'rgba(247,247,247,1.0)',
     },
-    termStyle: {
-        padding: 10,
-        fontSize: 18,
+    itemStyle: {
         height: 44,
-    }
+        justifyContent: 'center',
+    },
+    titleStyle: {
+        position: 'absolute',
+        left: 10,
+        right: 35,
+        fontSize: 15,
+    },
+    rightIconStyle: {
+        position: 'absolute',
+        right: 5,
+        width: 30,
+        height: 30,
+    },
 });
 
 class HomeScreen extends React.Component {
     static navigationOptions = {
-        title: 'Home',
+        header: null,
     };
 
     constructor(props) {
         super(props);
 
         var ds = [
-            { title: 'Includes', data: [{word: 'Devin'}, {word: 'Dan'}]},
-            { title: 'Excludes', data:[{word: 'Jackson'}, {word: 'John'}, {word: 'Julie'}]}
-            ];
-        this.state = {ds: {ds}};
-
+            {title: 'Includes', data: [{word: 'Devin'}, {word: 'Dan'}]},
+            {title: 'Excludes', data: [{word: 'Jackson'}, {word: 'John'}, {word: 'Julie'}]},
+        ];
         var languageDS = [{index: 0, word: 'Tiếng Việt'}, {index: 1, word: 'English'}];
-        // this.state = {languageDS: {languageDS}, ds: {ds}};
+        this.state = {languageDS: {languageDS}, ds: {ds}};
 
         // DefaultPreference.get('App Language').then(function(language) {
         //     this.setMainLocaleLanguage(language);
         // });
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({popoverIsOpen: false});
     }
 
-    onMenuPress(item){
+    onMenuPress(item) {
         console.log(item);
         Alert.alert(item.word);
         // this.props.navigation.navigate("Details");
@@ -113,24 +113,35 @@ class HomeScreen extends React.Component {
     setPopoverIsOpen = (isOpen) => {
         // this.state = {popoverIsOpen: {isOpen}};
         this.setState({popoverIsOpen: isOpen});
-    }
+    };
 
     render() {
-    const {ds} = this.state.ds;
-    // const {languageDS} = this.state.languageDS;
+        const {ds} = this.state.ds;
+        const {languageDS} = this.state.languageDS;
         return (
             <View style={homeStyles.container}>
+                <Picker
+                    selectedValue={this.state.language}
+                    style={{left: '10%', height: 80, width: '80%'}}
+                    onValueChange={(itemValue, itemIndex) =>
+                        this.setState({language: itemValue})
+                    }>
+                    <Picker.Item label="Java" value="java"/>
+                    <Picker.Item label="JavaScript" value="js"/>
+                </Picker>
                 <SectionList
                     ItemSeparatorComponent={this.FlatListItemSeparator}
                     sections={ds}
-                    renderItem={({item}) => <ListItem onPress={this.onMenuPress.bind(this,item)} word={item.word}/>}
-                    renderSectionHeader={({ section }) => <ListItem word={section.title} section/>}
+                    renderItem={({item}) => <ListItem onPress={this.onMenuPress.bind(this, item)} word={item.word}/>}
+                    renderSectionHeader={({section}) => <ListItem word={section.title} section/>}
                     keyExtractor={(item, index) => index}
                 />
 
-                <TouchableOpacity onPress={() => {this.setPopoverIsOpen(true)}} style={homeStyles.button}>
+                <TouchableOpacity onPress={() => {
+                    this.setPopoverIsOpen(true);
+                }} style={homeStyles.button}>
                     <View>
-                    <CustomTextView i18nKey='add_new' style={homeStyles.buttonText}/>
+                        <CustomTextView i18nKey='add_new' style={homeStyles.buttonText}/>
                     </View>
                 </TouchableOpacity>
 
@@ -139,21 +150,27 @@ class HomeScreen extends React.Component {
                     animationType="fade"
                     transparent={true}
                     visible={this.state.popoverIsOpen}
-                    onRequestClose={() => { alert("Modal has been closed.")}}>
-                    <TouchableOpacity onPressOut={() => {this.setPopoverIsOpen(false)}}
-                        style={{
-                        flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: 'rgba(0, 0, 0, 0.7)'}}>
+                    onRequestClose={() => {
+                        alert('Modal has been closed.');
+                    }}>
+                    <TouchableOpacity onPressOut={() => {
+                        this.setPopoverIsOpen(false);
+                    }}
+                                      style={{
+                                          flex: 1,
+                                          alignItems: 'center',
+                                          justifyContent: 'center',
+                                          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                      }}>
                         <View style={{
                             width: '90%',
                             height: 90,
-                        backgroundColor: '#ffffff'}}>
+                            backgroundColor: '#ffffff',
+                        }}>
                             <FlatList
                                 ItemSeparatorComponent={this.FlatListItemSeparator}
-                                data={[{index: 0, word: 'Tiếng Việt'}, {index: 1, word: 'English'}]}
-                                renderItem={({item}) => <Text style={homeStyles.item}>{item.word}</Text>} />
+                                data={languageDS}
+                                renderItem={({item}) => <Text style={homeStyles.item}>{item.word}</Text>}/>
                         </View>
                     </TouchableOpacity>
                 </Modal>
@@ -184,10 +201,11 @@ const homeStyles = StyleSheet.create({
         height: 44,
     },
     buttonText: {
-        right:0,
-        left:0,
-        top:0,
-        bottom:0,
+        right: 0,
+        left: 0,
+        top: 0,
+        bottom: 0,
+        overflow: 'hidden',
         backgroundColor: '#000080',
         borderColor: '#008080',
         borderWidth: 5,
@@ -201,14 +219,11 @@ const homeStyles = StyleSheet.create({
     button: {
         position: 'absolute',
         height: 50,
-        width:50,
+        width: 50,
         bottom: 30,
         right: 30,
-
-    }
+    },
 });
-
-
 
 
 const HomeStack = createStackNavigator({
@@ -313,6 +328,9 @@ const Home = createAppContainer(
                 activeTintColor: 'tomato',
                 inactiveTintColor: 'gray',
             },
+            navigationOptions: ({screenProps: {i18n, language}}) => ({
+                header: null,
+            }),
         },
     ),
 );

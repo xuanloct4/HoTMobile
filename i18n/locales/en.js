@@ -15,5 +15,13 @@ export default {
     'username_placeholder': 'John Doe',
     'password_title': 'Password',
     'password_placeholder': '******',
-    'login_button_title': 'Login'
+    'login_button_title': 'Login',
+
+    'Profile': 'Profile',
+    'Devices Manage': 'Devices Manage',
+    'Boards Manage': 'Boards Manage',
+    'Change Language': 'Change Language',
+    'Term & Condition': 'Term & Condition',
+    'About': 'About',
+    'Logout': 'Logout',
 };

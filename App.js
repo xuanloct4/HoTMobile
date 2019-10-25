@@ -7,7 +7,7 @@
  */
 
 import Home from './screens/HomeScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import ProfileScreen from './screens/Perference/ProfileScreen';
 
 import {createStackNavigator} from 'react-navigation-stack';
 import AppNavigator from './screens/AppNavigator';
@@ -83,7 +83,7 @@ class App extends React.Component {
     }
 
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const { language } = this.state;
         if (language) this.setMainLocaleLanguage(language);
     }
@@ -95,7 +95,7 @@ class App extends React.Component {
 
 
 
-    componentWillReceiveProps = nextProps => {
+    UNSAFE_componentWillReceiveProps = nextProps => {
         const { language } = nextProps;
         if (language) this.setMainLocaleLanguage(language);
     }
@@ -107,11 +107,14 @@ class App extends React.Component {
         this.props.setLanguage(language);
     }
 
+
+
+
     render() {
         return (
             <Provider store={store}>
                 <View style={{flex: 1}}>
-                    <Navigator_ screenProps={{
+                    <ConnectedRoot screenProps={{
                         i18n: this.state.i18n,
                         locale: this.state.locale,
                         setLocale: this.setLocale,
@@ -121,6 +124,24 @@ class App extends React.Component {
         );
     }
 }
+
+
+
+const mapStateToProps = state => {
+    return {
+        language: state.languageReducer.language
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setLanguage: language => {
+            dispatch(actions.changeLanguage(language));
+        }
+    }
+}
+
+const ConnectedRoot = connect(mapStateToProps, mapDispatchToProps)(Navigator_);
 
 export default App;
 
