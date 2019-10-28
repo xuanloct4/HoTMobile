@@ -10,11 +10,18 @@ import {
     Alert, TouchableOpacity, Image, Picker,
 } from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
+import {Popover, PopoverController} from 'react-native-modal-popover';
+import LinearGradient from 'react-native-linear-gradient';
 import DropdownMenu from 'react-native-dropdown-menu';
 import CustomTextView from '../../components/CustomTextView';
 import CustomEditText from '../../components/CustomEditText';
 import * as actions from '../../redux/actions/index';
 import connect from 'react-redux/es/connect/connect';
+import AccountInfoScreen from './AccountInfoScreen';
+import DeviceManageScreen from './DeviceManageScreen';
+import BoardManageScreen from './BoardManageScreen';
+import TermConditionScreen from './TermConditionScreen';
+import AboutScreen from './AboutScreen';
 
 // import TableView from 'react-native-tableview';
 // const {Section, Item} = TableView;
@@ -49,17 +56,26 @@ class ProfileScreen extends React.Component {
             isSelected: false,
         }];
         var ds = [
-            {title: 'D', data: [{title: 'Profile', firstname: 'Nguyen', lastname: 'Van', type: 'profile-reveal'}]},
             {
-                title: 'J', data: [{title: 'Devices Manage', type: 'reveal'},
-                    {title: 'Boards Manage', type: 'reveal'},
+                title: 'D',
+                data: [{
+                    title: 'Profile',
+                    firstname: 'Nguyen',
+                    lastname: 'Van',
+                    type: 'profile-reveal',
+                    navigation: 'AccountInfo',
+                }],
+            },
+            {
+                title: 'J', data: [{title: 'Devices Manage', type: 'reveal', navigation: 'Devices'},
+                    {title: 'Boards Manage', type: 'reveal', navigation: 'Boards'},
                     {title: 'Language', type: 'dropdown', ds: languageDS}],
             },
             {
-                title: 'J', data: [{title: 'Term & Condition'},
-                    {title: 'About'}],
+                title: 'J', data: [{title: 'Term & Condition', navigation: 'TermCondition'},
+                    {title: 'About', navigation: 'About'}],
             },
-            {title: 'J', data: [{title: 'Logout'}]},
+            {title: 'J', data: [{title: 'Logout', type: 'logout'}]},
         ];
 
         this.state = {language: 'vi', languageDS: languageDS, ds: ds};
@@ -69,16 +85,19 @@ class ProfileScreen extends React.Component {
         // });
     }
 
+    logout() {
+        console.log('Logout');
+    }
 
     onMenuPress(item) {
         console.log(item);
         if (item.type === 'dropdown') {
 
+        } else if (item.type === 'logout') {
+            this.logout();
         } else {
 
-            Alert.alert(item.word);
-
-            // this.props.navigation.navigate("Details");
+            this.props.navigation.navigate(item.navigation);
         }
     }
 
@@ -91,13 +110,6 @@ class ProfileScreen extends React.Component {
         setLanguage(language);
     }
 
-    FlatListItemSeparator = () => {
-        return (
-            //Item Separator
-            <View style={{height: 0.5, width: '100%', backgroundColor: '#C8C8C8'}}/>
-        );
-    };
-
     render() {
         const {ds, languageDS} = this.state;
         const {language} = this.props;
@@ -105,13 +117,13 @@ class ProfileScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <SectionList
-                    ItemSeparatorComponent={this.FlatListItemSeparator}
+                    ItemSeparatorComponent={FlatListItemSeparator}
                     sections={ds}
                     renderItem={({item}) => <ListItem onChange={(ds) => this.onChange(ds)}
                                                       onPress={this.onMenuPress.bind(this, item)} title={item.title}
                                                       type={item.type} ds={item.ds} i18nKey={item.title}
                                                       firstname={item.firstname}
-                                                        lastname={item.lastname}/>}
+                                                      lastname={item.lastname}/>}
                     renderSectionHeader={({section}) => <ListItem word={section.title} section/>}
                     keyExtractor={(item, index) => index}
                 />
@@ -148,6 +160,13 @@ class ListItem extends React.Component {
         this.state = {selectedLanguage: 'vi'};
     }
 
+    setLanguage = language => {
+        this.setState({language});
+        this.props.setLanguage(language);
+        // DefaultPreference.set('App Language', language).then(function() {console.log('Updated language:', language)});
+    };
+
+
     pickerChange(index, ds) {
         ds.map((v, i) => {
             if (index === i) {
@@ -163,7 +182,7 @@ class ListItem extends React.Component {
     }
 
     render() {
-        const {onPress, onChange, section, title, isChecked, hasDetail, hasInfo, type, ds, i18nKey, firstname, lastname} = this.props;
+        const {onPress, onChange, navigation, section, title, isChecked, hasDetail, hasInfo, type, ds, i18nKey, firstname, lastname} = this.props;
         if (section) {
             return (
                 <TouchableOpacity>
@@ -174,6 +193,78 @@ class ListItem extends React.Component {
             );
         }
         else if (type === 'dropdown') {
+            return (
+                <PopoverController>
+                    {({openPopover, closePopover, popoverVisible, setPopoverAnchor, popoverAnchorRect}) => (
+                        <React.Fragment>
+                            <TouchableOpacity
+                                ref={setPopoverAnchor} onPress={openPopover}>
+                                <View style={{ paddingTop: 20, height: 70}}>
+                                    <CustomTextView style={{ position: 'absolute',
+                                        left: 10,
+                                        right: 35,
+                                        top: 10,
+                                        fontSize: 15,}}
+                                                    numberOfLines={1}>
+                                        {title}
+                                    </CustomTextView>
+                                    <CustomTextView style={{ position: 'absolute',
+                                        left: 10,
+                                        right: 35,
+                                        top: 40,
+                                        fontSize: 15,}}
+                                                    numberOfLines={1}>
+                                        {title}
+                                    </CustomTextView>
+                                    <Image style={listItemStyles.rightIconStyle}
+                                           source={require('../../assets/images/ic_arrow_dropdown.png')}/>
+                                </View>
+                            </TouchableOpacity>
+                            <Popover
+                                contentStyle={{paddingLeft: 16, paddingRight: 16}}
+                                arrowStyle={styles.arrow}
+                                backgroundStyle={styles.background}
+                                visible={popoverVisible}
+                                onClose={closePopover}
+                                fromRect={popoverAnchorRect}
+                                supportedOrientations={['portrait', 'landscape']}
+                            >
+                                <View style={listItemStyles.languageItem}>
+                                    <TouchableOpacity onPress={() => {
+                                        console.log('Tiếng Việt');
+                                        closePopover();
+                                    }}>
+                                        <Text>Tiếng Việt</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <FlatListItemSeparator></FlatListItemSeparator>
+                                <View style={listItemStyles.languageItem}>
+                                    <TouchableOpacity onPress={() => {
+                                        console.log('English');
+                                        closePopover();
+                                    }}>
+                                        <Text>English</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </Popover>
+                        </React.Fragment>
+                    )}
+                </PopoverController>
+            );
+        } else if (type === 'logout') {
+            return (
+                <View style={listItemStyles.logoutButton}>
+                    <TouchableOpacity onPress={onPress}>
+                        <CustomTextView i18nKey={'Logout'} style={{
+                            textAlign: 'center',
+                            textAlignVertical: 'center',
+                            fontSize: 18,
+                        }}></CustomTextView>
+                    </TouchableOpacity>
+                </View>
+            );
+        }
+        else if (type === 'picker') {
             let items = ds.map((v) => {
                 return <Picker.Item label={v.title} value={v.value}/>;
             });
@@ -204,7 +295,7 @@ class ListItem extends React.Component {
         } else if (type === 'profile-reveal') {
 
             const avatar = firstname.charAt(0) + lastname.charAt(0);
-            const name = firstname + " " + lastname;
+            const name = firstname + ' ' + lastname;
             console.log(avatar);
             console.log(name);
             return (
@@ -212,7 +303,12 @@ class ListItem extends React.Component {
                     onPress={onPress}>
                     <View style={listItemStyles.profileContainer}>
                         <View style={listItemStyles.profileAvatar}>
-                            <Text style={listItemStyles.profileAvatarText}>{avatar}</Text>
+                            <LinearGradient start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
+                                            locations={[0, 0.5, 0.6]}
+                                            colors={['#4c669f', '#3b5998', '#192f6a']}
+                                            style={listItemStyles.linearGradient}>
+                                <Text style={listItemStyles.profileAvatarText}>{avatar}</Text>
+                            </LinearGradient>
                         </View>
                         <View style={listItemStyles.profileName}>
                             <Text style={listItemStyles.profileNameText}>{name}</Text>
@@ -276,19 +372,20 @@ const listItemStyles = StyleSheet.create({
         left: 15,
         width: 60,
         height: 60,
-        borderColor: "#00ffee",
+        borderColor: '#00ffee',
         borderWidth: 1,
-        borderRadius: 60/2,
-        backgroundColor: "#0033ff"
+        borderRadius: 60 / 2,
+        backgroundColor: '#0033ff',
+        overflow: 'hidden',
     },
     profileAvatarText: {
         width: '100%',
         height: '100%',
-       alignContent: 'center',
+        alignContent: 'center',
         textAlign: 'center',
         textAlignVertical: 'center',
         fontSize: 25,
-        color: '#ffffff'
+        color: '#ffffff',
 
     },
     profileName: {
@@ -298,7 +395,28 @@ const listItemStyles = StyleSheet.create({
     },
     profileNameText: {
         fontSize: 20,
-    }
+    },
+    linearGradient: {
+        flex: 1,
+    },
+    languageItem: {
+        paddingTop: 16,
+        paddingBottom: 16,
+    },
+    logoutButton: {
+        backgroundColor: '#006699',
+        borderColor: '#999999',
+        borderRadius: 5,
+        borderWidth: 1,
+        marginTop: 20,
+        marginBottom: 20,
+        marginLeft: 10,
+        marginRight: 10,
+
+        paddingTop: 10,
+        paddingBottom: 10,
+
+    },
 });
 
 
@@ -316,4 +434,12 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
+const FlatListItemSeparator = () => {
+    return (
+        //Item Separator
+        <View style={{height: 0.5, width: '100%', backgroundColor: '#C8C8C8'}}/>
+    );
+};
+
+// export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 export default ProfileScreen;

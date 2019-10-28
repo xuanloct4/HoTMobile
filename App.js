@@ -6,14 +6,35 @@
  * @flow
  */
 
-import Home from './screens/HomeScreen';
-import ProfileScreen from './screens/Perference/ProfileScreen';
+import Home from './screens/Setting/HomeScreen';
+import ProfileScreen from './screens/Profile/ProfileScreen';
 
 import {createStackNavigator} from 'react-navigation-stack';
-import AppNavigator from './screens/AppNavigator';
+import AppNavigator from './stacks/AppNavigator';
 import { createAppContainer } from 'react-navigation';
 import React from 'react';
+import {  } from 'react-native';
+import { Popover, PopoverController } from 'react-native-modal-popover';
+import {
+    Button,
+    SafeAreaView,
+    StyleSheet,
+    ScrollView,
+    View,
+    Text,
+    StatusBar,
+} from 'react-native';
 
+import {
+    Header,
+    LearnMoreLinks,
+    Colors,
+    DebugInstructions,
+    ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+import DefaultPreference from 'react-native-default-preference';
+import * as actions from './redux/actions';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -27,25 +48,7 @@ export const store = createStore(
 )
 
 
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
-import DefaultPreference from 'react-native-default-preference';
-import * as actions from './redux/actions';
 
 const Navigator_ = createAppContainer(AppNavigator);
 
@@ -93,13 +96,6 @@ class App extends React.Component {
         if (language) this.setMainLocaleLanguage(language);
     }
 
-
-
-    UNSAFE_componentWillReceiveProps = nextProps => {
-        const { language } = nextProps;
-        if (language) this.setMainLocaleLanguage(language);
-    }
-
     setMainLocaleLanguage = language => {
         let i18n = this.state.i18n;
         i18n.locale = language;
@@ -142,6 +138,53 @@ const mapDispatchToProps = dispatch => {
 }
 
 const ConnectedRoot = connect(mapStateToProps, mapDispatchToProps)(Navigator_);
+
+
+
+
+const styles = StyleSheet.create({
+    app: {
+        ...StyleSheet.absoluteFillObject,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#c2ffd2',
+    },
+    content: {
+        padding: 16,
+        backgroundColor: 'pink',
+        borderRadius: 8,
+    },
+    arrow: {
+        borderTopColor: 'pink',
+    },
+    background: {
+        backgroundColor: 'rgba(0, 0, 255, 0.5)'
+    },
+});
+
+// const App = () => (
+//     <View style={styles.app}>
+//         <PopoverController>
+//             {({ openPopover, closePopover, popoverVisible, setPopoverAnchor, popoverAnchorRect }) => (
+//                 <React.Fragment>
+//                     <Button title="Press me!" ref={setPopoverAnchor} onPress={openPopover} />
+//                     <Popover
+//                         contentStyle={styles.content}
+//                         arrowStyle={styles.arrow}
+//                         backgroundStyle={styles.background}
+//                         visible={popoverVisible}
+//                         onClose={closePopover}
+//                         fromRect={popoverAnchorRect}
+//                         supportedOrientations={['portrait', 'landscape']}
+//                     >
+//                         <Text>Hello from inside popover!</Text>
+//                     </Popover>
+//                 </React.Fragment>
+//             )}
+//         </PopoverController>
+//     </View>
+// );
+
 
 export default App;
 

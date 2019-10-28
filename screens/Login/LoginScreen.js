@@ -12,9 +12,9 @@ import {
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
-import CustomButton from '../components/CustomButton';
-import CustomTextView from '../components/CustomTextView';
-import  CustomEditText from '../components/CustomEditText'
+import CustomButton from '../../components/CustomButton';
+import CustomTextView from '../../components/CustomTextView';
+import  CustomEditText from '../../components/CustomEditText'
 
 class LoginScreen extends React.Component {
 

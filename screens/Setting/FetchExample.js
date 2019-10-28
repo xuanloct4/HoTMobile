@@ -1,15 +1,15 @@
 import React from 'react';
 import { FlatList, ActivityIndicator, AppState } from 'react-native';
-import ApiUtils from '../utils/ApiUtils'
-import RSAUtils from '../utils/RSAUtils';
-import * as FileUtils from '../utils/FileUtils';
+import ApiUtils from '../../utils/ApiUtils'
+import RSAUtils from '../../utils/RSAUtils';
+import * as FileUtils from '../../utils/FileUtils';
 
 import {
     View, Text, TouchableOpacity
 } from 'react-native';
-import CustomTextView from '../components/CustomTextView';
+import CustomTextView from '../../components/CustomTextView';
 import { connect } from 'react-redux';
-import * as actions from './../redux/actions/index';
+import * as actions from '../../redux/actions/index';
 
 import DefaultPreference from 'react-native-default-preference';
 

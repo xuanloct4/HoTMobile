@@ -16,9 +16,8 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 // import { Ionicons } from '@expo/vector-icons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ProfileScreen from './Perference/ProfileScreen';
-import DetailsSCreen from './DetailsScreen';
-import CustomTextView from '../components/CustomTextView';
+import CustomTextView from '../../components/CustomTextView';
+import ProfileStack from '../../stacks/ProfileStack';
 
 class ListItem extends React.Component {
     render() {
@@ -38,7 +37,7 @@ class ListItem extends React.Component {
                 onPress={onPress}>
                 <View style={listItemStyles.itemStyle}>
                     <Text style={listItemStyles.titleStyle} numberOfLines={1}>{word}</Text>
-                    <Image style={listItemStyles.rightIconStyle} source={require('../assets/images/ic_reveal.png')}/>
+                    <Image style={listItemStyles.rightIconStyle} source={require('../../assets/images/ic_reveal.png')}/>
                 </View>
             </TouchableOpacity>
         );
@@ -73,7 +72,7 @@ const listItemStyles = StyleSheet.create({
     },
 });
 
-class HomeScreen extends React.Component {
+class SettingScreen extends React.Component {
     static navigationOptions = {
         header: null,
     };
@@ -93,7 +92,7 @@ class HomeScreen extends React.Component {
         // });
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.setState({popoverIsOpen: false});
     }
 
@@ -120,15 +119,6 @@ class HomeScreen extends React.Component {
         const {languageDS} = this.state.languageDS;
         return (
             <View style={homeStyles.container}>
-                <Picker
-                    selectedValue={this.state.language}
-                    style={{left: '10%', height: 80, width: '80%'}}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({language: itemValue})
-                    }>
-                    <Picker.Item label="Java" value="java"/>
-                    <Picker.Item label="JavaScript" value="js"/>
-                </Picker>
                 <SectionList
                     ItemSeparatorComponent={this.FlatListItemSeparator}
                     sections={ds}
@@ -201,138 +191,26 @@ const homeStyles = StyleSheet.create({
         height: 44,
     },
     buttonText: {
-        right: 0,
-        left: 0,
-        top: 0,
-        bottom: 0,
         overflow: 'hidden',
-        backgroundColor: '#000080',
-        borderColor: '#008080',
-        borderWidth: 5,
-        borderRadius: 25,
-        fontSize: 30,
+        fontSize: 35,
         fontWeight: 'bold',
         textAlign: 'center',
         textAlignVertical: 'center',
         color: '#ffffff',
     },
     button: {
+        justifyContent: 'center',
+        backgroundColor: '#000068',
+        borderColor: '#000080',
+        borderWidth: 1,
+        borderRadius: 28,
         position: 'absolute',
-        height: 50,
-        width: 50,
-        bottom: 30,
-        right: 30,
+        height: 56,
+        width: 56,
+        bottom: 20,
+        right: 10,
     },
 });
 
 
-const HomeStack = createStackNavigator({
-    Home: HomeScreen,
-    Details: DetailsSCreen,
-});
-
-const SettingsStack = createStackNavigator({
-    Settings: ProfileScreen,
-    Details: DetailsSCreen,
-});
-
-
-class IconWithBadge extends React.Component {
-    render() {
-        const {name, badgeCount, color, size} = this.props;
-        return (
-            <View style={{width: 24, height: 24, margin: 5}}>
-                <Ionicons name={name} size={size} color={color}/>
-                {badgeCount > 0 && (
-                    <View
-                        style={{
-                            // /If you're using react-native < 0.57 overflow outside of the parent
-                            // will not work on Android, see https://git.io/fhLJ8
-                            position: 'absolute',
-                            right: -6,
-                            top: -3,
-                            backgroundColor: 'red',
-                            borderRadius: 6,
-                            width: 12,
-                            height: 12,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}>
-                        <Text style={{color: 'white', fontSize: 10, fontWeight: 'bold'}}>
-                            {badgeCount}
-                        </Text>
-                    </View>
-                )}
-            </View>
-        );
-    }
-}
-
-const HomeIconWithBadge = props => {
-    // You should pass down the badgeCount in some other ways like context, redux, mobx or event emitters.
-    return <IconWithBadge {...props} badgeCount={3}/>;
-};
-
-const getTabBarIcon = (navigation, focused, tintColor) => {
-    const {routeName} = navigation.state;
-    let IconComponent = Ionicons;
-    let iconName;
-    if (routeName === 'Home') {
-        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        // We want to add badges to home tab icon
-        IconComponent = HomeIconWithBadge;
-    } else if (routeName === 'Settings') {
-        iconName = `ios-options${focused ? '' : '-outline'}`;
-    }
-
-    // You can return any component that you like here!
-    return <IconComponent name={iconName} size={25} color={tintColor}/>;
-};
-
-
-const Home = createAppContainer(
-    createBottomTabNavigator(
-        {
-            Home: HomeStack,
-            Settings: ProfileScreen,
-        },
-        {
-            // defaultNavigationOptions: ({ navigation }) => ({
-            //     tabBarIcon: ({ focused, tintColor }) =>
-            //         getTabBarIcon(navigation, focused, tintColor),
-            // }),
-            // tabBarOptions: {
-            //     activeTintColor: 'tomato',
-            //     inactiveTintColor: 'gray',
-            // },
-
-            defaultNavigationOptions: ({navigation}) => ({
-                tabBarIcon: ({focused, horizontal, tintColor}) => {
-                    const {routeName} = navigation.state;
-                    let IconComponent = Ionicons;
-                    let iconName;
-                    if (routeName === 'Home') {
-                        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-                        // Sometimes we want to add badges to some icons.
-                        // You can check the implementation below.
-                        IconComponent = HomeIconWithBadge;
-                    } else if (routeName === 'Settings') {
-                        iconName = `ios-options`;
-                    }
-
-                    // You can return any component that you like here!
-                    return <IconComponent name={iconName} size={25} color={tintColor}/>;
-                },
-            }),
-            tabBarOptions: {
-                activeTintColor: 'tomato',
-                inactiveTintColor: 'gray',
-            },
-            navigationOptions: ({screenProps: {i18n, language}}) => ({
-                header: null,
-            }),
-        },
-    ),
-);
-
-export default Home;
+export default SettingScreen;
