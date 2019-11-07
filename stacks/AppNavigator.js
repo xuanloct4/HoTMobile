@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Text} from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 // import NavigationDrawerStructure from './NavigationDrawerStructure';
-import Home from '../screens/Setting/HomeScreen'
+import Home from '../screens/Setting/SettingScreen'
 import LoginScreen from '../screens/Login/LoginScreen';
 import FetchExample from '../screens/Setting/FetchExample'
 import { connect } from 'react-redux';

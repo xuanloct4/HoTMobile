@@ -1,60 +1,66 @@
 import React from 'react';
-import {Alert, FlatList, Modal, Picker, SectionList, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, FlatList, Image, Modal, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StackNavigator} from 'react-navigation';
+// import { Ionicons } from '@expo/vector-icons';
 import CustomTextView from '../../components/CustomTextView';
+import DateTimePickerModel from './DateTimePickerModel';
+import DTComponent from './DTComponent';
+import Loader from '../../components/Loader';
 
-
-class DatePickerModel {
-    static dateComponent = {
-        SECOND: 'second',
-        MINUTE: 'minute',
-        HOUR: 'hour',
-        DAY: 'day',
-        DAYSOFWEEK: 'daysOfWeek',
-        MONTH: 'month',
-        YEAR: 'year'
-    };
-
-    static daysOfWeek = {
-        MONSDAY: 'Monsday',
-        TUESDAY: 'Tuesday',
-        WEDNESDAY: 'Wednesday',
-        THIRSDAY: 'Thursday',
-        FRIDAY: 'Friday',
-        SATURDAY: 'Saturday',
-        SUNDAY: 'SUNDAY',
+class ListItem extends React.Component {
+    render() {
+        const {onPress, section, word, isChecked, hasDetail, hasInfo} = this.props;
+        const {sectionStyle, termStyle} = listItemStyles;
+        if (section) {
+            return (
+                <TouchableOpacity>
+                    <View>
+                        <Text style={listItemStyles.sectionStyle}>{word}</Text>
+                    </View>
+                </TouchableOpacity>
+            );
+        }
+        return (
+            <TouchableOpacity
+                onPress={onPress}>
+                <View style={listItemStyles.itemStyle}>
+                    <Text style={listItemStyles.titleStyle} numberOfLines={1}>{word}</Text>
+                    <Image style={listItemStyles.rightIconStyle} source={require('../../assets/images/ic_reveal.png')}/>
+                </View>
+            </TouchableOpacity>
+        );
     }
-
-    static secondRange = {
-        MIN: 0,
-        MAX: 60,
-    }
-
-    static minuteRange = {
-        MIN: 0,
-        MAX: 60,
-    }
-
-    static hourRange = {
-        MIN: 0,
-        MAX: 23,
-    }
-
-    static dayRange = {
-        MIN: 0,
-        MAX: 31,
-    }
-
-    static monthRange = {
-        MIN: 1,
-        MAX: 12,
-    }
-
-
-
-
 }
 
-class HomeScreen extends React.Component {
+const listItemStyles = StyleSheet.create({
+    sectionStyle: {
+        paddingTop: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
+        backgroundColor: 'rgba(247,247,247,1.0)',
+    },
+    itemStyle: {
+        height: 44,
+        justifyContent: 'center',
+    },
+    titleStyle: {
+        position: 'absolute',
+        left: 10,
+        right: 35,
+        fontSize: 15,
+    },
+    rightIconStyle: {
+        position: 'absolute',
+        right: 5,
+        width: 30,
+        height: 30,
+    },
+});
+
+class SettingScreen extends React.Component {
     static navigationOptions = {
         header: null,
     };
@@ -62,19 +68,27 @@ class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
 
+        let comp =  new DTComponent();
+        comp.InitializedDateTimeComponents();
+        comp.deselectAll(DateTimePickerModel.dateComponent.SECOND);
+        comp.selectAll(DateTimePickerModel.dateComponent.SECOND);
+        comp.deselectItem(DateTimePickerModel.dateComponent.SECOND, 1);
+        comp.deselectAllComponent();
+        console.log(comp.DateTimeObject.second.selectedItems);
+
         var ds = [
             {title: 'Includes', data: [{word: 'Devin'}, {word: 'Dan'}]},
             {title: 'Excludes', data: [{word: 'Jackson'}, {word: 'John'}, {word: 'Julie'}]},
         ];
         var languageDS = [{index: 0, word: 'Tiếng Việt'}, {index: 1, word: 'English'}];
-        this.state = {languageDS: {languageDS}, ds: {ds}};
+        this.state = {languageDS: {languageDS}, ds: {ds}, loading: false};
 
         // DefaultPreference.get('App Language').then(function(language) {
         //     this.setMainLocaleLanguage(language);
         // });
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.setState({popoverIsOpen: false});
     }
 
@@ -101,15 +115,8 @@ class HomeScreen extends React.Component {
         const {languageDS} = this.state.languageDS;
         return (
             <View style={homeStyles.container}>
-                <Picker
-                    selectedValue={this.state.language}
-                    style={{left: '10%', height: 80, width: '80%'}}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({language: itemValue})
-                    }>
-                    <Picker.Item label="Java" value="java"/>
-                    <Picker.Item label="JavaScript" value="js"/>
-                </Picker>
+                <Loader
+                    loading={this.state.loading}/>
                 <SectionList
                     ItemSeparatorComponent={this.FlatListItemSeparator}
                     sections={ds}
@@ -161,3 +168,47 @@ class HomeScreen extends React.Component {
         );
     }
 }
+
+const homeStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 22,
+    },
+    sectionHeader: {
+        paddingTop: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
+        backgroundColor: 'rgba(247,247,247,1.0)',
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+    },
+    buttonText: {
+        overflow: 'hidden',
+        fontSize: 35,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        color: '#ffffff',
+    },
+    button: {
+        justifyContent: 'center',
+        backgroundColor: '#000068',
+        borderColor: '#000080',
+        borderWidth: 1,
+        borderRadius: 28,
+        position: 'absolute',
+        height: 56,
+        width: 56,
+        bottom: 20,
+        right: 10,
+    },
+});
+
+
+export default SettingScreen;

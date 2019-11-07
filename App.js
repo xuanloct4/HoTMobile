@@ -6,41 +6,16 @@
  * @flow
  */
 
-import Home from './screens/Setting/HomeScreen';
-import ProfileScreen from './screens/Profile/ProfileScreen';
-
-import {createStackNavigator} from 'react-navigation-stack';
 import AppNavigator from './stacks/AppNavigator';
-import { createAppContainer } from 'react-navigation';
+import {createAppContainer} from 'react-navigation';
 import React from 'react';
-import {  } from 'react-native';
-import { Popover, PopoverController } from 'react-native-modal-popover';
-import {
-    Button,
-    SafeAreaView,
-    StyleSheet,
-    ScrollView,
-    View,
-    Text,
-    StatusBar,
-} from 'react-native';
-
-import {
-    Header,
-    LearnMoreLinks,
-    Colors,
-    DebugInstructions,
-    ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {StyleSheet, View} from 'react-native';
 import DefaultPreference from 'react-native-default-preference';
 import * as actions from './redux/actions';
 
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import {createStore} from 'redux';
+import {connect, Provider} from 'react-redux';
 import appReducers from './redux/reducers';
-
-import { connect } from 'react-redux';
 import I18n from './i18n/i18n';
 
 export const store = createStore(
