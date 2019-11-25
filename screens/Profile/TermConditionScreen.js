@@ -9,6 +9,7 @@ import {
     StatusBar,
     TouchableHighlight,
     Image,
+    WebView
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
@@ -25,22 +26,10 @@ class TermConditionScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.username}>
-                    <CustomEditText  i18nTitleKey={'username_title'} i18nMessageKey={'username_title'} i18nPlaceholderKey={'username_placeholder'}/>
-                </View>
-                <View style={styles.password}>
-                    <CustomEditText secureTextEntry={true} i18nTitleKey={'password_title'} i18nMessageKey={'password_title'} i18nPlaceholderKey={'password_placeholder'}/>
-                </View>
-
-                <TouchableHighlight
-                    style={[styles.profileImgContainer, { borderColor: 'green', borderWidth:1 }]}
-                >
-                    <Image source={{ uri:"https://www.t-nation.com/system/publishing/articles/10005529/original/6-Reasons-You-Should-Never-Open-a-Gym.png" }} style={styles.profileImg} />
-                </TouchableHighlight>
-                <View style={styles.login}>
-                    <CustomButton i18nKey={'login_button_title'}
-                                  onPress={() => this.props.navigation.navigate('Home')}/>
-                </View>
+                <WebView
+                    source={{uri: 'https://github.com/facebook/react-native'}}
+                    style={styles.webView}
+                />
             </View>
         );
     }
@@ -49,6 +38,10 @@ class TermConditionScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    webView: {
+        marginTop: 10,
+        marginBottom: 10,
     },
 });
 

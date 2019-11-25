@@ -3,12 +3,12 @@ import DataManager from '../app_data/DataManager'
 
 export default class RSAUtils {
     static async encrypt(message) {
-        var rsaKey = DataManager.getInstance().pubkeyRSA;
+        let rsaKey = DataManager.getInstance().pubkeyRSA;
         return await RSA.encrypt(message, rsaKey);
     }
 
     static async decrypt(message) {
-        var rsaKey = DataManager.getInstance().privkeyRSA;
+        let rsaKey = DataManager.getInstance().privkeyRSA;
         return await RSA.decrypt(message, rsaKey);
     }
 

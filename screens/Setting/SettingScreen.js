@@ -1,34 +1,85 @@
 import React from 'react';
-import {Alert, FlatList, Image, Modal, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+    Alert,
+    Button,
+    FlatList,
+    Image,
+    Modal,
+    SectionList,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    TouchableNativeFeedback,
+    TouchableHighlight,
+    View,
+    Platform,
+} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 // import { Ionicons } from '@expo/vector-icons';
 import CustomTextView from '../../components/CustomTextView';
 import DateTimePickerModel from './DateTimePickerModel';
 import DTComponent from './DTComponent';
 import Loader from '../../components/Loader';
+import API from '../../api/API';
 
 class ListItem extends React.Component {
     render() {
-        const {onPress, section, word, isChecked, hasDetail, hasInfo} = this.props;
+        const {onPress, onDelete, section, word, isEditing, isChecked, hasDetail, hasInfo} = this.props;
         const {sectionStyle, termStyle} = listItemStyles;
         if (section) {
+            var editingWord = 'Change';
+            if (isEditing) {
+                editingWord = 'Finish';
+            }
             return (
-                <TouchableOpacity>
-                    <View>
-                        <Text style={listItemStyles.sectionStyle}>{word}</Text>
+                <View style={listItemStyles.sectionStyle}>
+                    <Text style={listItemStyles.sectionTitleStyle} numberOfLines={1}>{word}</Text>
+                    <View style={listItemStyles.sectionRightButtonStyle}>
+                        <TouchableOpacity onPress={onPress}>
+                            <Text style={listItemStyles.sectionRightTextStyle} numberOfLines={1000}>{editingWord}</Text>
+                        </TouchableOpacity>
                     </View>
-                </TouchableOpacity>
-            );
-        }
-        return (
-            <TouchableOpacity
-                onPress={onPress}>
-                <View style={listItemStyles.itemStyle}>
-                    <Text style={listItemStyles.titleStyle} numberOfLines={1}>{word}</Text>
-                    <Image style={listItemStyles.rightIconStyle} source={require('../../assets/images/ic_reveal.png')}/>
                 </View>
-            </TouchableOpacity>
-        );
+            );
+        } else {
+            if (isEditing) {
+                let TouchablePlatformSpecific = Platform.OS === 'ios' ?
+                    TouchableHighlight :
+                    TouchableNativeFeedback;
+                return (
+
+                    <TouchableOpacity onPress={onPress}>
+
+                        <View style={listItemStyles.itemStyle}>
+                            <TouchablePlatformSpecific onPress={onDelete}>
+                                <Image style={listItemStyles.leftIconStyle}
+                                       source={require('../../assets/images/ic_delete.jpg')}/>
+                            </TouchablePlatformSpecific>
+                            <TouchablePlatformSpecific  onPress={onPress}>
+                                <View>
+
+                                    <Text style={[listItemStyles.titleStyle , listItemStyles.leftTitleEditing]} numberOfLines={1000}>{word}</Text>
+                                    <Image style={listItemStyles.rightIconStyle}
+                                           source={require('../../assets/images/ic_reveal.png')}/>
+
+                                </View>
+                            </TouchablePlatformSpecific>
+                        </View>
+                    </TouchableOpacity>
+
+                );
+            } else {
+                return (
+                    <View style={listItemStyles.itemStyle}>
+                        <TouchableOpacity
+                            onPress={onPress}>
+                            <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleUnEditing]} numberOfLines={1000}>{word}</Text>
+                        </TouchableOpacity>
+                    </View>
+                );
+            }
+        }
     }
 }
 
@@ -38,19 +89,60 @@ const listItemStyles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         paddingBottom: 10,
-        fontSize: 16,
-        fontWeight: 'bold',
+        height: 50,
+        justifyContent: 'center',
         backgroundColor: 'rgba(247,247,247,1.0)',
     },
+    sectionTitleStyle: {
+        position: 'absolute',
+        left: 10,
+        right: 100,
+        bottom: 10,
+        top: 20,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    sectionRightButtonStyle: {
+        position: 'absolute',
+        right: 10,
+        width: 80,
+        bottom: 10,
+        top: 20,
+    },
+    sectionRightTextStyle: {
+        textAlign: 'right',
+        textAlignVertical: 'center',
+        fontSize: 15,
+        color: 'rgba(50,50,247,1.0)',
+    },
+
     itemStyle: {
-        height: 44,
-        justifyContent: 'center',
+        height: 130,
     },
     titleStyle: {
         position: 'absolute',
-        left: 10,
         right: 35,
         fontSize: 15,
+    },
+    leftTitleUnEditing: {
+        left: 10,
+    },
+    leftTitleEditing: {
+        left: 50,
+    },
+    leftIconStyle: {
+        position: 'absolute',
+        left: 5,
+        width: 30,
+        height: 30,
+        // backgroundColor: '#008889',
+    },
+    mainStyle: {
+        position: 'absolute',
+        left: 100,
+        right: 5,
+        top: 0,
+        bottom: 0,
     },
     rightIconStyle: {
         position: 'absolute',
@@ -65,23 +157,56 @@ class SettingScreen extends React.Component {
         header: null,
     };
 
+    comp = new DTComponent();
+
     constructor(props) {
         super(props);
 
-        let comp =  new DTComponent();
-        comp.InitializedDateTimeComponents();
-        comp.deselectAll(DateTimePickerModel.dateComponent.SECOND);
-        comp.selectAll(DateTimePickerModel.dateComponent.SECOND);
-        comp.deselectItem(DateTimePickerModel.dateComponent.SECOND, 1);
-        comp.deselectAllComponent();
-        console.log(comp.DateTimeObject.second.selectedItems);
+        this.comp.InitializedDateTimeComponents();
+        this.comp.deselectAll(DateTimePickerModel.dateComponent.SECOND);
+        this.comp.selectAll(DateTimePickerModel.dateComponent.SECOND);
+        this.comp.deselectItem(DateTimePickerModel.dateComponent.SECOND, 1);
+        // this.comp.deselectAllComponent();
+        console.log(JSON.stringify(this.comp.DTSetting));
 
         var ds = [
-            {title: 'Includes', data: [{word: 'Devin'}, {word: 'Dan'}]},
-            {title: 'Excludes', data: [{word: 'Jackson'}, {word: 'John'}, {word: 'Julie'}]},
+            {
+                title: 'Includes',
+                data: [{
+                    indexPath: {section: 0, row: 0},
+                    timeSetting: this.comp.DTSetting,
+                    forRinging: true,
+                    forAlarm: false,
+                },
+                    {
+                        indexPath: {section: 0, row: 1},
+                        timeSetting: this.comp.DTSetting,
+                        forRinging: false,
+                        forAlarm: true,
+                    }],
+                isEditing: false,
+                id: 0,
+            },
+            {
+                title: 'Excludes',
+                data: [{
+                    indexPath: {section: 1, row: 0},
+                    timeSetting: this.comp.DTSetting,
+                    forRinging: true,
+                    forAlarm: true,
+                },
+                    {
+                        indexPath: {section: 0, row: 1},
+                        timeSetting: this.comp.DTSetting,
+                        forRinging: true,
+                        forAlarm: true,
+                    }],
+                isEditing: false,
+                id: 1,
+            },
         ];
         var languageDS = [{index: 0, word: 'Tiếng Việt'}, {index: 1, word: 'English'}];
-        this.state = {languageDS: {languageDS}, ds: {ds}, loading: false};
+        this.state = {languageDS: {languageDS}, ds: ds, loading: false, refresh: true};
 
         // DefaultPreference.get('App Language').then(function(language) {
         //     this.setMainLocaleLanguage(language);
@@ -92,10 +217,49 @@ class SettingScreen extends React.Component {
         this.setState({popoverIsOpen: false});
     }
 
-    onMenuPress(item) {
+    fetchTimeSetting() {
+        // fetchAPI(onSuccess, onError, url, bodyObject, additionalHeaders, method=API.httpMethods.GET, baseURL= API.baseURL.hot)
+        API.fetchAPI();
+    }
+
+    getTimeSettingSummary(item) {
+        console.log(JSON.stringify(item.timeSetting));
+        let sum = '';
+        for (let i = 0; i < DateTimePickerModel.TimeComponents().length; i++) {
+            if (i > 0) {
+                sum += ', \n';
+            }
+            sum += this.comp.summarize(DateTimePickerModel.TimeComponents()[i].component);
+        }
+
+        console.log(sum);
+        return sum;
+    }
+
+    onHeaderPress(section) {
+        console.log('On Section pressed');
+        console.log(section);
+
+        let ds = this.state.ds;
+        for (let i = 0; i < ds.length; i++) {
+            if (section.id == ds[i].id) {
+                ds[i].isEditing = !ds[i].isEditing;
+                break;
+            }
+        }
+        this.setState({ds: ds, refresh: !this.state.refresh});
+    }
+
+    onMenuPress(item, section) {
+        console.log('On Item pressed');
+        console.log(section);
+
+        this.props.navigation.navigate('DetailDateTime', {DateTimeSetting: item, isEditing: section.isEditing});
+    }
+
+    onItemDelete(item) {
+        console.log('On Item deleted');
         console.log(item);
-        Alert.alert(item.word);
-        // this.props.navigation.navigate("Details");
     }
 
     FlatListItemSeparator = () => {
@@ -111,7 +275,7 @@ class SettingScreen extends React.Component {
     };
 
     render() {
-        const {ds} = this.state.ds;
+        const {ds} = this.state;
         const {languageDS} = this.state.languageDS;
         return (
             <View style={homeStyles.container}>
@@ -120,10 +284,15 @@ class SettingScreen extends React.Component {
                 <SectionList
                     ItemSeparatorComponent={this.FlatListItemSeparator}
                     sections={ds}
-                    renderItem={({item}) => <ListItem onPress={this.onMenuPress.bind(this, item)} word={item.word}/>}
-                    renderSectionHeader={({section}) => <ListItem word={section.title} section/>}
+                    renderItem={({item, section}) => <ListItem onPress={this.onMenuPress.bind(this, item, section)}
+                                                               onDelete={this.onItemDelete.bind(this, item)}
+                                                               word={this.getTimeSettingSummary(item)}
+                                                               isEditing={section.isEditing}/>}
+                    renderSectionHeader={({section}) => <ListItem onPress={this.onHeaderPress.bind(this, section)}
+                                                                  isEditing={section.isEditing} word={section.title}
+                                                                  section/>}
                     keyExtractor={(item, index) => index}
-                />
+                    extraData={this.state.refresh}/>
 
                 <TouchableOpacity onPress={() => {
                     this.setPopoverIsOpen(true);
@@ -162,8 +331,6 @@ class SettingScreen extends React.Component {
                         </View>
                     </TouchableOpacity>
                 </Modal>
-
-
             </View>
         );
     }

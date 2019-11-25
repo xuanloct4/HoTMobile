@@ -4,53 +4,83 @@ import ProfileStack from './ProfileStack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import SettingStack from './SettingStack';
-import {Text, View} from 'react-native';
+import {BackHandler, Text, View} from 'react-native';
 
-const HomeTabStack = createAppContainer(
-    createBottomTabNavigator(
-        {
-            Setting: SettingStack,
-            Profile: ProfileStack,
-        },
-        {
-            // defaultNavigationOptions: ({ navigation }) => ({
-            //     tabBarIcon: ({ focused, tintColor }) =>
-            //         getTabBarIcon(navigation, focused, tintColor),
-            // }),
-            // tabBarOptions: {
-            //     activeTintColor: 'tomato',
-            //     inactiveTintColor: 'gray',
-            // },
 
-            defaultNavigationOptions: ({navigation}) => ({
-                tabBarIcon: ({focused, horizontal, tintColor}) => {
-                    const {routeName} = navigation.state;
-                    let IconComponent = Ionicons;
-                    let iconName;
-                    if (routeName === 'Setting') {
-                        iconName = `ios-options`;
-                        // Uncomment to add badges to some icons.
-                        // IconComponent = HomeIconWithBadge;
-                    } else if (routeName === 'Profile') {
-                        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-                    }
+class HomeTabStack extends React.Component {
+    static navigationOptions = {
+        header: null,
+    };
 
-                    // You can return any component that you like here!
-                    return <IconComponent name={iconName} size={25} color={tintColor}/>;
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+
+    componentWillUnmount() {
+        this.backHandler.remove()
+    }
+
+    handleBackPress = () => {
+        // this.goBack(); // works best when the goBack is async
+        console.log("On back pressed");
+        return true;
+    }
+
+    UNSAFE_componentWillMount() {
+        console.log('Componenet Will Mount');
+    }
+
+    render() {
+        const HomeStack = createAppContainer(
+            createBottomTabNavigator(
+                {
+                    Setting: SettingStack,
+                    Profile: ProfileStack,
                 },
-            }),
-            tabBarOptions: {
-                activeTintColor: 'tomato',
-                inactiveTintColor: 'gray',
-            },
-            navigationOptions: ({screenProps: {i18n, language}}) => ({
-                header: null,
-            }),
-        },
-    ),
-);
+                {
+                    // defaultNavigationOptions: ({ navigation }) => ({
+                    //     tabBarIcon: ({ focused, tintColor }) =>
+                    //         getTabBarIcon(navigation, focused, tintColor),
+                    // }),
+                    // tabBarOptions: {
+                    //     activeTintColor: 'tomato',
+                    //     inactiveTintColor: 'gray',
+                    // },
 
+                    defaultNavigationOptions: ({navigation}) => ({
+                        tabBarIcon: ({focused, horizontal, tintColor}) => {
+                            const {routeName} = navigation.state;
+                            let IconComponent = Ionicons;
+                            let iconName;
+                            if (routeName === 'Setting') {
+                                iconName = `ios-options`;
+                                // Uncomment to add badges to some icons.
+                                // IconComponent = HomeIconWithBadge;
+                            } else if (routeName === 'Profile') {
+                                iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+                            }
 
+                            // You can return any component that you like here!
+                            return <IconComponent name={iconName} size={25} color={tintColor}/>;
+                        },
+                    }),
+                    tabBarOptions: {
+                        activeTintColor: 'tomato',
+                        inactiveTintColor: 'gray',
+                    },
+                },
+            ),
+        );
+
+        return (<View style={{flex: 1}}>
+            <HomeStack></HomeStack>
+        </View>);
+    }
+}
 
 class IconWithBadge extends React.Component {
     render() {

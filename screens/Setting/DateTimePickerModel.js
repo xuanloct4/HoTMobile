@@ -47,7 +47,8 @@ class DateTimePickerModel {
     }
 
     static yearRange = {
-        MIN: 2019
+        MIN: 2019,
+        MAX: 2050,
     }
 
     static DaysOfWeek = () => {
@@ -85,7 +86,5 @@ class DateTimePickerModel {
         ];
     };
 }
-
-
 
 export default DateTimePickerModel;

@@ -30,7 +30,7 @@ class CustomEditText extends React.Component {
     }
 
     render() {
-        const { i18nTitleKey, i18nMessageKey, i18nPlaceholderKey, secureTextEntry=false } = this.props;
+        const { i18nTitleKey, i18nMessageKey, i18nPlaceholderKey, secureTextEntry=false, onTextChanged, onBlurred } = this.props;
         const { i18n } = this.state;
         return (
             <View
@@ -44,9 +44,15 @@ class CustomEditText extends React.Component {
                     value={this.state.text}
                     secureTextEntry={secureTextEntry}
                     placeholder={i18nPlaceholderKey ? i18n.t(i18nPlaceholderKey) : this.props.children}
-                    onChangeText={(value) => this.setState({ text: value, isEditing: true })}
+                    onChangeText={(value) => {
+                        this.setState({ text: value, isEditing: true });
+                        onTextChanged(value);
+                    }}
                     autoFocus
-                    onBlur={() => this.setState({ isEditing: false })}/>
+                    onBlur={() => {
+                        this.setState({isEditing: false});
+                        // onBlurred(value);
+                    }}/>
 
                     <CustomTextView i18nKey={i18nMessageKey} style={styles.message}>
                     </CustomTextView>

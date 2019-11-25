@@ -29,17 +29,17 @@ class CustomButton extends React.Component {
     }
 
     render() {
-        const { i18nKey, onPress, color, title = 'Enter', style = {}, textStyle = {}} = this.props;
+        const { i18nKey, onPress, color, title = 'Enter', buttonStyle = {}, textStyle = {}} = this.props;
         const { i18n } = this.state;
-        return (
-            <Button onPress={onPress} title={i18nKey ? i18n.t(i18nKey) : this.props.children} color={color}>
-            </Button>
-        );
         // return (
-        //     <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
-        //         <Text style={[styles.text, textStyle]}>{i18nKey ? i18n.t(i18nKey) : this.props.children}</Text>
-        //     </TouchableOpacity>
+        //     <Button onPress={onPress} title={i18nKey ? i18n.t(i18nKey) : this.props.children} color={color}>
+        //     </Button>
         // );
+        return (
+            <TouchableOpacity onPress={onPress} style={[styles.button, buttonStyle]}>
+                <Text style={[styles.text, textStyle]}>{i18nKey ? i18n.t(i18nKey) : this.props.children}</Text>
+            </TouchableOpacity>
+        );
     }
 }
 
@@ -51,11 +51,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
 
-        backgroundColor: '#2AC062',
-        shadowColor: '#2AC062',
-        shadowOpacity: 0.4,
-        shadowOffset: { height: 10, width: 0 },
-        shadowRadius: 20,
+        // backgroundColor: '#2AC062',
+        // shadowColor: '#2AC062',
+        // shadowOpacity: 0.4,
+        // shadowOffset: { height: 10, width: 0 },
+        // shadowRadius: 20,
     },
 
     text: {

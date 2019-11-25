@@ -1,6 +1,6 @@
 import * as types from './../constants/action-types';
 
-var initialState = {
+let initialState = {
     language: 'vi'
 };
 

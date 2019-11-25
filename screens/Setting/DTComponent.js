@@ -2,10 +2,7 @@ import React from 'react';
 import DateTimePickerModel from './DateTimePickerModel';
 
 export default class DTComponent {
-
-    // var [{component: dateComponent,[{value: 0 , isSelected: true}]}];
-    // Components = [];
-    DateTimeObject = new Object;
+    DTSetting = new Object();
 
     InitializedDateTimeComponents = () => {
         for (let i = 0; i < DateTimePickerModel.TimeComponents().length; i++) {
@@ -38,7 +35,7 @@ export default class DTComponent {
             }
 
             let m = comp.component;
-            this.DateTimeObject[m] = item;
+            this.DTSetting[m] = item;
         }
     };
 
@@ -48,81 +45,157 @@ export default class DTComponent {
             let comp = DateTimePickerModel.TimeComponents()[i];
             this.selectAll(comp.component);
         }
-    }
+    };
 
     deselectAllComponent = () => {
         for (let i = 0; i < DateTimePickerModel.TimeComponents().length; i++) {
             let comp = DateTimePickerModel.TimeComponents()[i];
             this.deselectAll(comp.component);
         }
-    }
+    };
 
     selectAll = (component) => {
-        let selectedItems = this.DateTimeObject[component].selectedItems;
-        if (selectedItems != undefined &&  selectedItems.length != undefined && selectedItems.length > 0) {
-            for (let j = 0; j < this.DateTimeObject[component].selectedItems.length; j++) {
-                this.DateTimeObject[component].selectedItems[j].isSelected = true;
+        let selectedItems = this.DTSetting[component].selectedItems;
+        if (selectedItems != undefined && selectedItems.length != undefined && selectedItems.length > 0) {
+            for (let j = 0; j < this.DTSetting[component].selectedItems.length; j++) {
+                this.DTSetting[component].selectedItems[j].isSelected = true;
             }
         }
 
-                let min = this.DateTimeObject[component].range.MIN;
-                let max = this.DateTimeObject[component].range.MAX;
+        let min = this.DTSetting[component].range.MIN;
+        let max = this.DTSetting[component].range.MAX;
+        let discreteValues = this.DTSetting[component].range;
 
-                if (min != undefined || max != undefined) {
-                    if (min != undefined && max == undefined) {
-                        this.DateTimeObject[component].selectedFrom = min;
-                    } else if (min == undefined && max != undefined) {
-                        this.DateTimeObject[component].selectedTo = max;
-                    } else {
-                        let selectedItems = [];
-                        for (let j = min; j <= max; j++) {
-                            selectedItems.push({value: j, isSelected: true});
-                        }
-                        this.DateTimeObject[component].selectedItems = selectedItems;
-                    }
+        if (min != undefined || max != undefined) {
+            if (min != undefined && max == undefined) {
+                this.DTSetting[component].selectedFrom = min;
+            } else if (min == undefined && max != undefined) {
+                this.DTSetting[component].selectedTo = max;
+            } else {
+                let selectedItems = [];
+                for (let j = min; j <= max; j++) {
+                    selectedItems.push({value: j, isSelected: true});
                 }
+                this.DTSetting[component].selectedItems = selectedItems;
+            }
+        } else {
+            let selectedItems = [];
+            for (let j = 0; j < discreteValues.length; j++) {
+                selectedItems.push({value: discreteValues[j], isSelected: true});
+            }
+            item.selectedItems = selectedItems;
+        }
     };
 
     deselectAll = (component) => {
-        let selectedItems = this.DateTimeObject[component].selectedItems;
-        if (selectedItems != undefined &&  selectedItems.length != undefined && selectedItems.length > 0) {
-            for (let j = 0; j < this.DateTimeObject[component].selectedItems.length; j++) {
-                this.DateTimeObject[component].selectedItems[j].isSelected = false;
+        let selectedItems = this.DTSetting[component].selectedItems;
+        if (selectedItems != undefined && selectedItems.length != undefined && selectedItems.length > 0) {
+            for (let j = 0; j < this.DTSetting[component].selectedItems.length; j++) {
+                this.DTSetting[component].selectedItems[j].isSelected = false;
             }
         }
 
-        let min = this.DateTimeObject[component].range.MIN;
-        let max = this.DateTimeObject[component].range.MAX;
+        let min = this.DTSetting[component].range.MIN;
+        let max = this.DTSetting[component].range.MAX;
+        let discreteValues = this.DTSetting[component].range;
 
-        if (min != undefined && max != undefined) {
+        if (min != undefined || max != undefined) {
+            if (min != undefined && max == undefined) {
+                this.DTSetting[component].selectedFrom = null;
+            } else if (min == undefined && max != undefined) {
+                this.DTSetting[component].selectedTo = null;
+            } else {
                 let selectedItems = [];
                 for (let j = min; j <= max; j++) {
                     selectedItems.push({value: j, isSelected: false});
                 }
-                this.DateTimeObject[component].selectedItems = selectedItems;
+                this.DTSetting[component].selectedItems = selectedItems;
+            }
+        } else {
+            let selectedItems = [];
+            for (let j = 0; j < discreteValues.length; j++) {
+                selectedItems.push({value: discreteValues[j], isSelected: false});
+            }
+            item.selectedItems = selectedItems;
         }
-
-        this.DateTimeObject[component].selectedFrom = null;
-        this.DateTimeObject[component].selectedTo = null;
     };
 
     selectItem = (component, value) => {
-        let selectedItems = this.DateTimeObject[component].selectedItems;
-        if (selectedItems != undefined &&  selectedItems.length != undefined && selectedItems.length > 0) {
-            for (let j = 0; j < this.DateTimeObject[component].selectedItems.length; j++) {
-                if (this.DateTimeObject[component].selectedItems[j].value === value) {
-                    this.DateTimeObject[component].selectedItems[j].isSelected = true;
+        let selectedItems = this.DTSetting[component].selectedItems;
+        if (selectedItems != undefined && selectedItems.length != undefined && selectedItems.length > 0) {
+            for (let j = 0; j < this.DTSetting[component].selectedItems.length; j++) {
+                if (this.DTSetting[component].selectedItems[j].value === value) {
+                    this.DTSetting[component].selectedItems[j].isSelected = true;
                 }
             }
         }
     };
 
     deselectItem = (component, value) => {
-        let selectedItems = this.DateTimeObject[component].selectedItems;
-        if (selectedItems != undefined &&  selectedItems.length != undefined && selectedItems.length > 0) {
-            for (let j = 0; j < this.DateTimeObject[component].selectedItems.length; j++) {
-                if (this.DateTimeObject[component].selectedItems[j].value === value) {
-                    this.DateTimeObject[component].selectedItems[j].isSelected = false;
+        let selectedItems = this.DTSetting[component].selectedItems;
+        if (selectedItems != undefined && selectedItems.length != undefined && selectedItems.length > 0) {
+            for (let j = 0; j < this.DTSetting[component].selectedItems.length; j++) {
+                if (this.DTSetting[component].selectedItems[j].value === value) {
+                    this.DTSetting[component].selectedItems[j].isSelected = false;
+                }
+            }
+        }
+    };
+
+    summarize = (component) => {
+        let min = this.DTSetting[component].range.MIN;
+        let max = this.DTSetting[component].range.MAX;
+        let discreteValues = this.DTSetting[component].selectedItems;
+        let selectedFrom = this.DTSetting[component].selectedFrom;
+        let selectedTo = this.DTSetting[component].selectedTo;
+        if (discreteValues != undefined && discreteValues.length != undefined && discreteValues.length > 0) {
+            let selectedDiscreteValues = discreteValues.filter(item => item.isSelected === true);
+            if (min != undefined && max == undefined) {
+                return '';
+            } else if (min == undefined && max != undefined) {
+                return '';
+            } else {
+                if (selectedDiscreteValues.length == 0) {
+                    return 'None of ' + component + ' selected';
+                } else if (selectedDiscreteValues.length != discreteValues.length) {
+                    return 'Some ' + component + ' selected';
+                } else {
+                    return 'All of ' + component + ' selected';
+                }
+            }
+        }
+    };
+
+    description = (component) => {
+        let min = this.DTSetting[component].range.MIN;
+        let max = this.DTSetting[component].range.MAX;
+        let discreteValues = this.DTSetting[component].selectedItems;
+        let selectedFrom = this.DTSetting[component].selectedFrom;
+        let selectedTo = this.DTSetting[component].selectedTo;
+        if (discreteValues != undefined && discreteValues.length != undefined && discreteValues.length > 0) {
+            let selectedDiscreteValues = discreteValues.filter(item => item.isSelected === true);
+            if (min != undefined && max == undefined) {
+                return '';
+            } else if (min == undefined && max != undefined) {
+                return '';
+            } else {
+                if (selectedDiscreteValues.length == 0) {
+                    return 'None of ' + component + ' selected';
+                } else if (selectedDiscreteValues.length != discreteValues.length) {
+                    selectedDiscreteValues = selectedDiscreteValues.sort(function (a, b) {
+                        return a - b;
+                    });
+                    let str = component + ' ';
+                    for (let i = 0; i < selectedDiscreteValues.length; i++) {
+                        if (i > 0) {
+                            str += ', ';
+                        }
+                        str += selectedDiscreteValues[i].value;
+                    }
+                    str += ' selected';
+                    return str;
+                } else {
+                    return 'All of ' + component + ' selected';
                 }
             }
         }

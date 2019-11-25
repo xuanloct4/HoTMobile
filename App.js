@@ -52,12 +52,10 @@ class App extends React.Component {
         };
 
 
-        DefaultPreference.get('App Language').then(function(language) {
-          console.log(language);
-            this.state = {
-                language: language
-            };
-        });
+        // DefaultPreference.get('App Language').then(language => {
+        //   console.log(language);
+        //     this.setState({ language: language });
+        // });
     }
 
 
@@ -78,17 +76,13 @@ class App extends React.Component {
         this.props.setLanguage(language);
     }
 
-
-
-
     render() {
         return (
             <Provider store={store}>
                 <View style={{flex: 1}}>
                     <ConnectedRoot screenProps={{
                         i18n: this.state.i18n,
-                        locale: this.state.locale,
-                        setLocale: this.setLocale,
+                        language: this.state.language,
                     }}/>
                 </View>
             </Provider>
