@@ -390,7 +390,8 @@ const homeStyles = StyleSheet.create({
         borderBottomRightRadius: 5,
     },
     selectedSegment: {
-        flex: 3,
+        flex: 1,
+        flexDirection: 'row',
         borderWidth: 1,
         borderColor: '#333333',
         backgroundColor: '#0088ff',
@@ -398,7 +399,8 @@ const homeStyles = StyleSheet.create({
         alignItems: 'center',
     },
     disableSegment: {
-        flex: 3,
+        flex: 1,
+        flexDirection: 'row',
         borderWidth: 1,
         borderColor: '#333333',
         backgroundColor: '#333333',
@@ -406,7 +408,8 @@ const homeStyles = StyleSheet.create({
         alignItems: 'center',
     },
     unselectedSegment: {
-        flex: 3,
+        flex: 1,
+        flexDirection: 'row',
         borderWidth: 1,
         borderColor: '#333333',
         backgroundColor: 'rgba(247,247,247,0.0)',
@@ -419,6 +422,7 @@ const homeStyles = StyleSheet.create({
         fontSize: 10,
         textAlign: 'center',
         textAlignVertical: 'center',
+        alignItems: 'center',
     },
     sectionList: {
         position: 'absolute',

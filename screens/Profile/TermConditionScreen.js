@@ -21,7 +21,7 @@ import I18n from '../../i18n/i18n';
 class TermConditionScreen extends React.Component {
 
     static navigationOptions = ({ screenProps: { i18n, language } }) => ({
-        title: I18n.t('login_screen_title'),
+        title: I18n.t('Term & Condition'),
     });
 
     constructor(props) {

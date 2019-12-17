@@ -11,8 +11,8 @@ export default {
     'add_new': '+',
     'fetch-page': 'Ví dụ',
 
-
-
+    'OK': 'Đồng ý',
+    'Cancel': 'Huỷ bỏ',
 
     'Profile': 'Tài khoản',
     'Devices Manage': 'Quản lý thiết bị',
@@ -63,4 +63,10 @@ export default {
     // About
     'about_app_version': 'Các bạn đang dùng SmartHome HoTMobile phiên bản',
     'copyright': 'Bản quyền SmartHome HoT 2020',
+
+    // Logout
+    'logout_alert_title': 'Xác nhận đăng xuất',
+    'logout_alert_message': 'Bạn thật sự muốn đăng xuất?',
+    'logout_error_alert_title': 'Đăng xuất thất bại',
+    'logout_error_alert_message': 'Gặp sự cố khi đăng xuất. Vui lòng thử lại!',
 };

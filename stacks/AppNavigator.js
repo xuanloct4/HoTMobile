@@ -56,7 +56,7 @@ class AppNavigator extends React.Component {
                     Auth: {
                         screen: LoginScreen, navigationOptions: {
                             headerLeft: null,
-                            // gesturesEnabled: false,
+                            gesturesEnabled: false,
                         },
                     },
                     Fetch: {screen: FetchExample},
@@ -65,7 +65,7 @@ class AppNavigator extends React.Component {
                             <HomeTabStack screenProps={{parentNavigation: navigation, ...screenProps}}/>,
                         navigationOptions: {
                             header: null,
-                            // gesturesEnabled: false,
+                            gesturesEnabled: false,
                             headerVisible: false,
                         },
                         // screen: HomeTabStack, navigationOptions: {
@@ -81,7 +81,7 @@ class AppNavigator extends React.Component {
                 //     initialRouteName: "Drawer",
                 //     headerMode: "none",
                 // }
-            ),
+            )
         );
 
         return (
@@ -89,5 +89,44 @@ class AppNavigator extends React.Component {
         );
     }
 }
+
+// const AppNavigator =  createStackNavigator(
+//     {
+//         Splash: {
+//             screen: SplashScreen, navigationOptions: {
+//                 header: null,
+//                 headerLeft: null,
+//                 gesturesEnabled: false,
+//             },
+//         },
+//         Auth: {
+//             screen: LoginScreen, navigationOptions: {
+//                 headerLeft: null,
+//                 // gesturesEnabled: false,
+//             },
+//         },
+//         Fetch: {screen: FetchExample},
+//         Home: {
+//             screen: ({navigation, screenProps}) =>
+//                 <HomeTabStack screenProps={{parentNavigation: navigation, ...screenProps}}/>,
+//             navigationOptions: {
+//                 header: null,
+//                 // gesturesEnabled: false,
+//                 headerVisible: false,
+//             },
+//             // screen: HomeTabStack, navigationOptions: {
+//             //     header: null,
+//             //     // gesturesEnabled: false,
+//             //     headerVisible: false,
+//             // },
+//         },
+//
+//         // Profile: {screen: ProfileScreen},
+//     },
+//     // {
+//     //     initialRouteName: "Drawer",
+//     //     headerMode: "none",
+//     // }
+// );
 
 export default AppNavigator;

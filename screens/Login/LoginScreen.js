@@ -21,11 +21,12 @@ import DateTimePickerModel from '../Setting/DateTimePickerModel';
 import DefaultPreference from 'react-native-default-preference';
 import Loader from '../../components/Loader';
 import DataManager from '../../app_data/DataManager';
+import I18n from '../../i18n/i18n';
 
 class LoginScreen extends React.Component {
 
     static navigationOptions = ({screenProps: {i18n, locale}}) => ({
-        title: i18n.t('login_screen_title'),
+        title: I18n.t('login_screen_title'),
     });
 
     username;

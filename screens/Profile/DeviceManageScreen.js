@@ -145,7 +145,7 @@ const listItemStyles = StyleSheet.create({
 class DeviceManageScreen extends React.Component {
 
     static navigationOptions = ({ screenProps: { i18n, language } }) => ({
-        title: I18n.t('login_screen_title'),
+        title: I18n.t('Devices Manage'),
     });
 
     constructor(props) {

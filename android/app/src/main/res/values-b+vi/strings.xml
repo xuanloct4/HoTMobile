@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">HoTMobile</string>
+    <string name="title_activity_dailing">ExampleActivity</string>
+<string name="dialing_activity_title">Báo động an toàn từ ngôi nhà của bạn</string>
+<string name="go_back">Quay lại</string>
+<string name="go_to_the_app">Đi đến ứng dụng</string>
+<string name="reverse_text_activity_title">Reversed text!</string>
+<string name="menuitem_reverse_text_label">Reverse text</string>
+
+</resources>

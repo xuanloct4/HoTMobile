@@ -21,8 +21,8 @@ export default class API {
     };
 
     static baseURL = {
-        hot: 'http://192.168.0.148/hot/public/api',
-        // hot: 'http://localhost/hot/public/api',
+        // hot: 'http://192.168.0.148/hot/public/api',
+        hot: 'http://localhost/hot/public/api',
     };
 
     static defaultHeaders = {

@@ -52,13 +52,13 @@ class ProfileScreen extends React.Component {
     constructor(props) {
         super(props);
 
-        var languageDS = [{index: 0, title: 'Tiếng Việt', value: 'vi', isSelected: true}, {
+        let languageDS = [{index: 0, title: 'Tiếng Việt', value: 'vi', isSelected: true}, {
             index: 1,
             title: 'English',
             value: 'en',
             isSelected: false,
         }];
-        var ds = [
+        let ds = [
             {
                 title: 'D',
                 data: [{
@@ -82,39 +82,62 @@ class ProfileScreen extends React.Component {
         ];
 
         this.state = {language: 'vi', languageDS: languageDS, ds: ds, loading: false};
-
-        // DefaultPreference.get('App Language').then(function(language) {
-        //     this.setMainLocaleLanguage(language);
-        // });
     }
 
     logout() {
         console.log('Logout');
         console.log(JSON.stringify(this.props));
-        this.props.navigation.screenProps.parentNavigation.navigate("Auth");
-        // this.setState({loading: true});
-        // API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_LOGOUT, {}, {}, API.httpMethods.POST, API.baseURL.hot);
+        Alert.alert(
+            I18n.t('logout_alert_title'),
+            I18n.t('logout_alert_message'),
+            [
+                {
+                    text: I18n.t('Cancel'),
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                {
+                    text: I18n.t('OK'),
+                    onPress: () => {
+                        // this.props.screenProps.parentNavigation.navigate("Auth");
+                        this.setState({loading: true});
+                        API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_LOGOUT, {}, {}, API.httpMethods.POST, API.baseURL.hot);
+                    }
+                    },
+            ],
+            {cancelable: false},
+        );
     }
 
     onSuccess(json) {
         console.log('Success');
         this.setState({loading: false});
-        this.props.navigation.screenProps.parentNavigation.navigate("Auth");
+        this.props.screenProps.parentNavigation.navigate("Auth");
     }
 
     onError(error) {
         this.setState({loading: false});
-        // this.setState({loading: false, usernameErrorKey: '', passwordErrorKey : 'wrong_username_or_password'});
+        Alert.alert(
+            I18n.t('logout_error_alert_title'),
+                I18n.t('logout_error_alert_message'),
+            [
+                {
+                    text: I18n.t('OK'),
+                    onPress: () => {}
+                },
+            ],
+            {cancelable: true},
+        );
     }
 
     onMenuPress(item) {
+        console.log(JSON.stringify(this.props));
         console.log(item);
         if (item.type === 'dropdown') {
 
         } else if (item.type === 'logout') {
             this.logout();
         } else {
-
             this.props.navigation.navigate(item.navigation);
         }
     }
@@ -129,6 +152,10 @@ class ProfileScreen extends React.Component {
     }
 
     render() {
+
+        console.log("this.props.screenProps");
+        console.log(JSON.stringify(this.props));
+
         const {ds, languageDS} = this.state;
         const {language} = this.props;
         const isVNLang = language === 'vi' ? true : false;

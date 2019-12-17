@@ -23,12 +23,12 @@ class HomeTabStack extends React.Component {
     }
 
     componentDidMount() {
-        // this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
         // console.log("I18 ", this.state.i18n);
     }
 
     componentWillUnmount() {
-        // this.backHandler.remove();
+        this.backHandler.remove();
     }
 
     handleBackPress = () => {
@@ -42,8 +42,7 @@ class HomeTabStack extends React.Component {
     }
 
     render() {
-        console.log("this.props.screenProps");
-        console.log(JSON.stringify(this.props));
+
         const HomeStack = createAppContainer(
             createBottomTabNavigator(
                 {

@@ -8,6 +8,7 @@ import React from 'react';
 import AccountInfoScreen from '../screens/Profile/AccountInfoScreen';
 import I18n from '../i18n/i18n';
 import {createAppContainer} from "react-navigation";
+import SettingStack from './SettingStack';
 
 
 class ProfileStack extends React.Component {
@@ -46,7 +47,10 @@ class ProfileStack extends React.Component {
 
         const Nav = createAppContainer(
             createStackNavigator({
-                    Main: ProfileScreen,
+                    Main: {
+                        screen: ({navigation}) => <ProfileScreen navigation={navigation} screenProps={{ parentNavigation: this.props.screenProps.parentNavigation}} />,
+
+                    },
                     AccountInfo: AccountInfoScreen,
                     Devices: DeviceManageScreen,
                     Boards: BoardManageScreen,

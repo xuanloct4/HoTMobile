@@ -50,14 +50,14 @@ const listItemStyles = StyleSheet.create({
     },
     leftIconStyle: {
         position: 'absolute',
-        left: 5,
+        left: 15,
         width: 150,
         height: 30,
         color: '#333333',
     },
     rightIconStyle: {
         position: 'absolute',
-        right: 5,
+        right: 15,
         left: 100,
         height: 30,
     },

@@ -11,7 +11,8 @@ export default {
     'add_new': '+',
     'fetch-page': 'Fetch',
 
-
+    'OK': 'OK',
+    'Cancel': 'Cancel',
 
     'Profile': 'Profile',
     'Devices Manage': 'Devices Manage',
@@ -61,4 +62,11 @@ export default {
     // About
     'about_app_version': 'You are using SmartHome HoTMobile version',
     'copyright': 'SmartHome HoT 2020 @ All right Reserved',
+
+    // Logout
+    'logout_alert_title': 'Confirm Logout',
+    'logout_alert_message': 'Are you really want to logout?',
+    'logout_error_alert_title': 'Error Logout',
+    'logout_error_alert_message': 'There is a problem when logout. Please try again!',
+
 };

@@ -25,7 +25,7 @@ export const store = createStore(
 
 
 
-const Navigator_ = createAppContainer(AppNavigator);
+const Navigator_ = AppNavigator;
 
 
 class App extends React.Component {
