@@ -15,36 +15,24 @@ import {StackNavigator} from 'react-navigation';
 import CustomButton from '../../components/CustomButton';
 import CustomTextView from '../../components/CustomTextView';
 import  CustomEditText from '../../components/CustomEditText'
+import I18n from '../../i18n/i18n';
+import DataManager from '../../app_data/DataManager';
 
 class AboutScreen extends React.Component {
 
     static navigationOptions = ({ screenProps: { i18n, language } }) => ({
-        title: i18n.t('login_screen_title'),
+        title: I18n.t('About'),
     });
 
     render() {
+        DataManager.getInstance().storeKeyValue("app-version", "1.0.0");
+        let version = I18n.t('about_app_version') + ' ' + DataManager.getInstance().valueForKey("app-version");
+
         return (
             <View style={styles.container}>
-                <View style={styles.username}>
-                    <CustomEditText  i18nTitleKey={'username_title'} i18nMessageKey={'username_title'} i18nPlaceholderKey={'username_placeholder'}/>
-                </View>
-                <View style={styles.password}>
-                    <CustomEditText secureTextEntry={true} i18nTitleKey={'password_title'} i18nMessageKey={'password_title'} i18nPlaceholderKey={'password_placeholder'}/>
-                </View>
-
-                <TouchableHighlight
-                    style={[styles.profileImgContainer, { borderColor: 'green', borderWidth:1 }]}
-                >
-                    <Image source={{ uri:"https://www.t-nation.com/system/publishing/articles/10005529/original/6-Reasons-You-Should-Never-Open-a-Gym.png" }} style={styles.profileImg} />
-                </TouchableHighlight>
-
-
-
-
-                <View style={styles.login}>
-                    <CustomButton i18nKey={'login_button_title'}
-                                  onPress={() => this.props.navigation.navigate('Home')}/>
-                </View>
+                <Text style={styles.appVersion}>{version}</Text>
+                <View style={{height: 0.5, width: '100%', backgroundColor: '#C8C8C8'}}/>
+                <CustomTextView style={styles.copyright} i18nKey={"copyright"}/>
             </View>
         );
     }
@@ -53,6 +41,22 @@ class AboutScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    appVersion: {
+        left: 10,
+        right: 10,
+        height: 60,
+        textAlignVertical: 'center',
+        fontSize: 18,
+        color: '#333333',
+    },
+    copyright: {
+        left: 10,
+        right: 10,
+        height: 50,
+        textAlignVertical: 'center',
+        fontSize: 15,
+        color: 'rgba(50,50,247,1.0)',
     },
 });
 

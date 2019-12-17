@@ -22,6 +22,9 @@ import DeviceManageScreen from './DeviceManageScreen';
 import BoardManageScreen from './BoardManageScreen';
 import TermConditionScreen from './TermConditionScreen';
 import AboutScreen from './AboutScreen';
+import I18n from '../../i18n/i18n';
+import API from '../../api/API';
+import Loader from '../../components/Loader';
 
 // import TableView from 'react-native-tableview';
 // const {Section, Item} = TableView;
@@ -78,7 +81,7 @@ class ProfileScreen extends React.Component {
             {title: 'J', data: [{title: 'Logout', type: 'logout'}]},
         ];
 
-        this.state = {language: 'vi', languageDS: languageDS, ds: ds};
+        this.state = {language: 'vi', languageDS: languageDS, ds: ds, loading: false};
 
         // DefaultPreference.get('App Language').then(function(language) {
         //     this.setMainLocaleLanguage(language);
@@ -87,6 +90,21 @@ class ProfileScreen extends React.Component {
 
     logout() {
         console.log('Logout');
+        console.log(JSON.stringify(this.props));
+        this.props.navigation.screenProps.parentNavigation.navigate("Auth");
+        // this.setState({loading: true});
+        // API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_LOGOUT, {}, {}, API.httpMethods.POST, API.baseURL.hot);
+    }
+
+    onSuccess(json) {
+        console.log('Success');
+        this.setState({loading: false});
+        this.props.navigation.screenProps.parentNavigation.navigate("Auth");
+    }
+
+    onError(error) {
+        this.setState({loading: false});
+        // this.setState({loading: false, usernameErrorKey: '', passwordErrorKey : 'wrong_username_or_password'});
     }
 
     onMenuPress(item) {
@@ -116,6 +134,8 @@ class ProfileScreen extends React.Component {
         const isVNLang = language === 'vi' ? true : false;
         return (
             <View style={styles.container}>
+                <Loader
+                    loading={this.state.loading}/>
                 <SectionList
                     ItemSeparatorComponent={FlatListItemSeparator}
                     sections={ds}
@@ -381,7 +401,6 @@ const listItemStyles = StyleSheet.create({
     profileAvatarText: {
         width: '100%',
         height: '100%',
-        alignContent: 'center',
         textAlign: 'center',
         textAlignVertical: 'center',
         fontSize: 25,
@@ -398,6 +417,8 @@ const listItemStyles = StyleSheet.create({
     },
     linearGradient: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     languageItem: {
         paddingTop: 16,

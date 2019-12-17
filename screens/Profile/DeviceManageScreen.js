@@ -8,7 +8,7 @@ import {
     Alert,
     StatusBar,
     TouchableHighlight,
-    Image, TouchableOpacity, SectionList,
+    Image, TouchableOpacity, SectionList, RefreshControl, Platform, TouchableNativeFeedback,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
@@ -18,57 +18,40 @@ import  CustomEditText from '../../components/CustomEditText'
 import DTComponent from '../Setting/DTComponent';
 import DateTimePickerModel from '../Setting/DateTimePickerModel';
 import Loader from '../../components/Loader';
+import I18n from '../../i18n/i18n';
+import API from '../../api/API';
 
 class ListItem extends React.Component {
     render() {
-        const {onPress, onDelete, section, word, isEditing, isChecked, hasDetail, hasInfo} = this.props;
-        const {sectionStyle, termStyle} = listItemStyles;
-        if (section) {
-            var editingWord = 'Change';
-            if (isEditing) {
-                editingWord = 'Finish';
-            }
-            return (
-                <View style={listItemStyles.sectionStyle}>
-                    <Text style={listItemStyles.sectionTitleStyle} numberOfLines={1}>{word}</Text>
-                    <View style={listItemStyles.sectionRightButtonStyle}>
-                        <TouchableOpacity onPress={onPress}>
-                            <Text style={listItemStyles.sectionRightTextStyle} numberOfLines={1}>{editingWord}</Text>
-                        </TouchableOpacity>
-                    </View>
+        const {title, detail, image, onPress} = this.props;
+        let TouchablePlatformSpecific = Platform.OS === 'ios' ?
+            TouchableHighlight :
+            TouchableNativeFeedback;
+        return (
+
+            <TouchableOpacity onPress={onPress}>
+
+                <View style={listItemStyles.itemStyle}>
+                    <TouchablePlatformSpecific>
+                        <View style={listItemStyles.leftIconContainer}>
+                        <Image style={listItemStyles.leftIconStyle}
+                               source={require('../../assets/images/ic_delete.jpg')}/>
+                        </View>
+                    </TouchablePlatformSpecific>
+                    <TouchablePlatformSpecific>
+                        <View>
+
+                            <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleEditing]}
+                                  numberOfLines={1000}>{title}</Text>
+                            <Text style={[listItemStyles.detailStyle, listItemStyles.leftTitleEditing]}
+                                  numberOfLines={1000}>{detail}</Text>
+
+                        </View>
+                    </TouchablePlatformSpecific>
                 </View>
-            );
-        } else {
-            if (isEditing) {
-                return (
+            </TouchableOpacity>
 
-                    <View style={listItemStyles.itemStyle}>
-
-                        <TouchableOpacity onPress={onPress}>
-                            <View  style={listItemStyles.leftIconStyle}>
-                                <Image style={listItemStyles.leftIconStyle}
-                                       source={require('../../assets/images/ic_delete.jpg')}/>
-                            </View>
-                        </TouchableOpacity>
-
-
-                        <Text style={listItemStyles.titleStyle} numberOfLines={1}>{word}</Text>
-                        <Image style={listItemStyles.rightIconStyle}
-                               source={require('../../assets/images/ic_reveal.png')}/>
-
-                    </View>
-                );
-            } else {
-                return (
-                    <View style={listItemStyles.itemStyle}>
-                        <TouchableOpacity
-                            onPress={onPress}>
-                            <Text style={listItemStyles.titleStyle} numberOfLines={1}>{word}</Text>
-                        </TouchableOpacity>
-                    </View>
-                );
-            }
-        }
+        );
     }
 }
 
@@ -106,22 +89,45 @@ const listItemStyles = StyleSheet.create({
     },
 
     itemStyle: {
-        height: 44,
-        justifyContent: 'center',
+        height: 60,
+        marginTop: 24,
     },
     titleStyle: {
-        position: 'absolute',
-        left: 50,
-        right: 35,
+        height: "50%",
+        top: 0,
         fontSize: 15,
     },
-    leftIconStyle: {
+    detailStyle: {
+        height: "50%",
+        bottom: 0,
+        fontSize: 13,
+    },
+    leftTitleUnEditing: {
+        left: 10,
+        right: 35,
+    },
+    leftTitleEditing: {
+        left: 50,
+        right: 35,
+    },
+    leftIconContainer: {
         position: 'absolute',
         left: 5,
         width: 30,
-        height: 30,
+        top: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+        // backgroundColor: '#008889',
     },
-    mainStyle:{
+    leftIconStyle: {
+        position: 'absolute',
+        height: 30,
+        width: 30,
+
+        // backgroundColor: '#008889',
+    },
+    mainStyle: {
         position: 'absolute',
         left: 100,
         right: 5,
@@ -136,59 +142,68 @@ const listItemStyles = StyleSheet.create({
     },
 });
 
-
 class DeviceManageScreen extends React.Component {
 
     static navigationOptions = ({ screenProps: { i18n, language } }) => ({
-        title: i18n.t('login_screen_title'),
+        title: I18n.t('login_screen_title'),
     });
 
     constructor(props) {
         super(props);
-
-        let comp = new DTComponent();
-        comp.InitializedDateTimeComponents();
-        comp.deselectAll(DateTimePickerModel.dateComponent.SECOND);
-        comp.selectAll(DateTimePickerModel.dateComponent.SECOND);
-        comp.deselectItem(DateTimePickerModel.dateComponent.SECOND, 1);
-        // comp.deselectAllComponent();
-        console.log(JSON.stringify(comp.DTSetting));
-
-        var ds = [
-            {
-                title: 'Includes',
-                data: [{indexPath: {section: 0, row: 0}, timeSetting: comp.DTSetting}, {
-                    indexPath: {section: 0, row: 1},
-                    timeSetting: comp.DTSetting,
-                }],
-                isEditing: false,
-                id: 0,
-            },
-            {
-                title: 'Excludes',
-                data: [{indexPath: {section: 1, row: 0}, timeSetting: comp.DTSetting}],
-                isEditing: false,
-                id: 1,
-            },
-        ];
-        var languageDS = [{index: 0, word: 'Tiếng Việt'}, {index: 1, word: 'English'}];
-        this.state = {languageDS: {languageDS}, ds: ds, loading: false, refresh: true};
-
-        // DefaultPreference.get('App Language').then(function(language) {
-        //     this.setMainLocaleLanguage(language);
-        // });
+        this.state ={ds: [], loading: false, refresh: true};
     }
+
 
     UNSAFE_componentWillMount() {
         this.setState({popoverIsOpen: false});
     }
 
-    onSelectAll() {
-        console.log("Select All");
+    componentDidMount() {
+        // const {language} = this.props;
+        // if (language) this.setMainLocaleLanguage(language);
+        console.log('Props: ', this.prop);
+        this.fetchBoardConfiguration();
     }
 
-    onUnselect() {
-        console.log("Unselect All");
+    fetchBoardConfiguration() {
+        this.setState({loading: false, refresh: true});
+        API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_DEVICE_ITS, {}, {}, API.httpMethods.GET, API.baseURL.hot);
+    }
+
+    handleRefresh() {
+        this.fetchBoardConfiguration();
+    }
+
+    onSuccess(json) {
+        console.log('Success');
+
+        let devices = JSON.parse(json);
+        let i = 0;
+        let deviceList = devices.map(device => {
+            let item  = new Object();
+            item.indexPath = {section: 0, row: i};
+            item.info = device;
+            i++;
+            return item;
+        });
+
+        console.log(JSON.stringify(deviceList));
+
+        var ds = [
+            {
+                title: 'Includes',
+                data: deviceList,
+                id: 0,
+            }
+        ];
+
+
+        this.setState({ds: ds, loading: false, refresh: false});
+    }
+
+    onError(error) {
+        this.setState({ds: ds, loading: false, refresh: false});
+        // this.setState({loading: false, usernameErrorKey: '', passwordErrorKey : 'wrong_username_or_password'});
     }
 
     FlatListItemSeparator = () => {
@@ -205,37 +220,23 @@ class DeviceManageScreen extends React.Component {
 
     render() {
         const {ds} = this.state;
-        const {languageDS} = this.state.languageDS;
+        console.log(JSON.stringify(this.state.ds));
         return (
             <View style={homeStyles.container}>
                 <Loader
                     loading={this.state.loading}/>
-
-                <View style={homeStyles.segmentSelection}>
-                    <View style={homeStyles.selectAllButton}>
-                        <TouchableOpacity onPress={this.onSelectAll.bind(this)}>
-                            <Text style={{  height: '100%', width: '100%', fontSize: 10, textAlign: 'center', textAlignVertical: 'center'}}>Chuông và thông báo</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={homeStyles.unselectButton}>
-                        <TouchableOpacity onPress={this.onUnselect.bind(this)}>
-                            <Text style={{ height: '100%', width: '100%', fontSize: 10, textAlign: 'center', textAlignVertical: 'center'}}>Chỉ chuông</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
                 <SectionList
                     ItemSeparatorComponent={this.FlatListItemSeparator}
                     sections={ds}
-                    renderItem={({item, section}) => <ListItem onPress={this.onMenuPress.bind(this, item)}
-                                                               onDelete={this.onItemDelete.bind(this, item)}
-                                                               word={item.word}
-                                                               isEditing={section.isEditing}/>}
-                    renderSectionHeader={({section}) => <ListItem onPress={this.onMenuPress.bind(this, section)}
-                                                                  isEditing={section.isEditing} word={section.title}
-                                                                  section/>}
+                    renderItem={({item, section}) => <ListItem title={item.info.name}
+                                                               detail={item.info.os + " " + item.info.version}/>}
                     keyExtractor={(item, index) => index}
-                    extraData={this.state.refresh}/>
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refresh}
+                            onRefresh={this.handleRefresh.bind(this)}/>
+                    }
+                    extraData={this.state.refreshing}/>
 
             </View>
         );

@@ -19,6 +19,7 @@ import DateTimePickerModel from './DateTimePickerModel';
 import DTComponent from './DTComponent';
 import Loader from '../../components/Loader';
 import CustomButton from '../../components/CustomButton';
+import I18n from '../../i18n/i18n';
 
 class ListItem extends React.Component {
     render() {
@@ -130,7 +131,7 @@ const listItemStyles = StyleSheet.create({
 
 class DateTimePickerScreen extends React.Component {
     static navigationOptions = ({screenProps: {i18n, locale}}) => ({
-        title: i18n.t('login_screen_title'),
+        title: I18n.t('time_picker_screen_title'),
         // title: 'Time Setting',
     });
 
@@ -381,6 +382,5 @@ const homeStyles = StyleSheet.create({
         overflow: 'hidden',
     },
 });
-
 
 export default DateTimePickerScreen;

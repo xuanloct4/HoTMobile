@@ -8,32 +8,33 @@ import {
     Alert,
     StatusBar,
     TouchableHighlight,
-    Image, TouchableOpacity, SectionList,
+    Image, TouchableOpacity, SectionList, RefreshControl,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
 import CustomButton from '../../components/CustomButton';
 import CustomTextView from '../../components/CustomTextView';
-import  CustomEditText from '../../components/CustomEditText'
+import CustomEditText from '../../components/CustomEditText';
 import DTComponent from '../Setting/DTComponent';
 import DateTimePickerModel from '../Setting/DateTimePickerModel';
 import Loader from '../../components/Loader';
+import I18n from '../../i18n/i18n';
+import API from '../../api/API';
 
 class ListItem extends React.Component {
     render() {
-        const {key, value} = this.props;
-
-            return (
-                <View style={listItemStyles.sectionStyle}>
-                    <Text style={listItemStyles.sectionTitleStyle} numberOfLines={1}>{word}</Text>
-                    <View style={listItemStyles.sectionRightButtonStyle}>
-                        <TouchableOpacity onPress={onPress}>
-                            <Text style={listItemStyles.sectionRightTextStyle} numberOfLines={1}>{editingWord}</Text>
-                        </TouchableOpacity>
-                    </View>
+        const {label, value, onPress} = this.props;
+        return (
+            <View style={listItemStyles.itemStyle}>
+                <Text style={listItemStyles.leftIconStyle} numberOfLines={1}>{label}</Text>
+                <View style={listItemStyles.rightIconStyle}>
+                    <TouchableOpacity onPress={onPress}>
+                        <Text style={listItemStyles.sectionRightTextStyle} numberOfLines={1}>{value}</Text>
+                    </TouchableOpacity>
                 </View>
-            );
-        }
+            </View>
+        );
+    }
 }
 
 const listItemStyles = StyleSheet.create({
@@ -50,13 +51,14 @@ const listItemStyles = StyleSheet.create({
     leftIconStyle: {
         position: 'absolute',
         left: 5,
-        width: 30,
+        width: 150,
         height: 30,
+        color: '#333333',
     },
     rightIconStyle: {
         position: 'absolute',
         right: 5,
-        width: 30,
+        left: 100,
         height: 30,
     },
 });
@@ -64,38 +66,59 @@ const listItemStyles = StyleSheet.create({
 
 class AccountInfoScreen extends React.Component {
 
-    static navigationOptions = ({});
+    static navigationOptions = ({ screenProps: { i18n, language } }) => ({
+        title: I18n.t('Profile'),
+    });
 
     constructor(props) {
         super(props);
 
-        var ds = [
-            {
-                title: 'Includes',
-                data: [{indexPath: {section: 0, row: 0}, timeSetting: comp.DTSetting}, {
-                    indexPath: {section: 0, row: 1},
-                    timeSetting: comp.DTSetting,
-                }],
-                isEditing: false,
-                id: 0,
-            },
-            {
-                title: 'Excludes',
-                data: [{indexPath: {section: 1, row: 0}, timeSetting: comp.DTSetting}],
-                isEditing: false,
-                id: 1,
-            },
-        ];
-        var languageDS = [{index: 0, word: 'Tiếng Việt'}, {index: 1, word: 'English'}];
-        this.state = {languageDS: {languageDS}, ds: ds, loading: false, refresh: true};
-
-        // DefaultPreference.get('App Language').then(function(language) {
-        //     this.setMainLocaleLanguage(language);
-        // });
+        this.state = {ds: [], loading: false, refresh: true};
     }
+
 
     UNSAFE_componentWillMount() {
         this.setState({popoverIsOpen: false});
+    }
+
+    componentDidMount() {
+        // const {language} = this.props;
+        // if (language) this.setMainLocaleLanguage(language);
+        console.log('Props: ', this.prop);
+        this.fetchUserInfo();
+    }
+
+    fetchUserInfo() {
+        this.setState({loading: false, refresh: true});
+        API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER, {}, {}, API.httpMethods.GET, API.baseURL.hot);
+    }
+
+    handleRefresh() {
+        this.fetchUserInfo();
+    }
+
+    onSuccess(json) {
+        console.log('Success');
+        let userInfo = JSON.parse(json);
+        let info = [{indexPath: {section: 0, row: 0}, info: {'key': "Name", 'value': userInfo.name}},
+            {indexPath: {section: 0, row: 1}, info: {'key': "Address", 'value': userInfo.address}},
+            {indexPath: {section: 0, row: 2}, info: {'key': "Location", 'value': userInfo.location}},
+            {indexPath: {section: 0, row: 3}, info: {'key': "Phone", 'value': userInfo.phone}},
+            {indexPath: {section: 0, row: 4}, info: {'key': "Gender", 'value': userInfo.gender}},
+            {indexPath: {section: 0, row: 5}, info: {'key': "Status", 'value': userInfo.status}}];
+        let ds = [
+            {
+                title: 'Includes',
+                data: info,
+            },
+        ];
+
+        this.setState({ds: ds, loading: false, refresh: false});
+    }
+
+    onError(error) {
+        this.setState({ds: ds, loading: false, refresh: false});
+        // this.setState({loading: false, usernameErrorKey: '', passwordErrorKey : 'wrong_username_or_password'});
     }
 
     FlatListItemSeparator = () => {
@@ -112,7 +135,7 @@ class AccountInfoScreen extends React.Component {
 
     render() {
         const {ds} = this.state;
-        const {languageDS} = this.state.languageDS;
+        console.log(JSON.stringify(this.state.ds));
         return (
             <View style={homeStyles.container}>
                 <Loader
@@ -120,15 +143,16 @@ class AccountInfoScreen extends React.Component {
                 <SectionList
                     ItemSeparatorComponent={this.FlatListItemSeparator}
                     sections={ds}
-                    renderItem={({item, section}) => <ListItem onPress={this.onMenuPress.bind(this, item)}
-                                                               onDelete={this.onItemDelete.bind(this, item)}
-                                                               word={item.word}
-                                                               isEditing={section.isEditing}/>}
-                    renderSectionHeader={({section}) => <ListItem onPress={this.onMenuPress.bind(this, section)}
-                                                                  isEditing={section.isEditing} word={section.title}
-                                                                  section/>}
+                    renderItem={({item, section}) => <ListItem label={item.info.key}
+                                                               value={item.info.value}/>}
+                    renderSectionHeader={({section}) => <ListItem section/>}
                     keyExtractor={(item, index) => index}
-                    extraData={this.state.refresh}/>
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refresh}
+                            onRefresh={this.handleRefresh.bind(this)}/>
+                    }
+                    extraData={this.state.refreshing}/>
 
             </View>
         );
@@ -154,7 +178,7 @@ const homeStyles = StyleSheet.create({
         fontSize: 18,
         height: 44,
     },
-    segmentSelection:{
+    segmentSelection: {
         padding: 5,
         justifyContent: 'center',
         alignItems: 'center',
@@ -166,7 +190,7 @@ const homeStyles = StyleSheet.create({
         flex: 3,
         borderWidth: 1,
         borderTopLeftRadius: 5,
-        borderBottomLeftRadius:5,
+        borderBottomLeftRadius: 5,
         borderColor: '#333333',
         backgroundColor: '#0088ff',
     },

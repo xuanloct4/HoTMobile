@@ -107,7 +107,7 @@
 
         <activity
                 android:name=".DialingActitvity"
-        android:label="@string/title_activity_example"
+        android:label="@string/title_activity_dailing"
                 android:launchMode="singleTask"
                 android:taskAffinity=""
                 android:excludeFromRecents="true"

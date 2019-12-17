@@ -1,45 +1,64 @@
-import {createAppContainer} from "react-navigation";
+import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import ProfileStack from './ProfileStack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import SettingStack from './SettingStack';
 import {BackHandler, Text, View} from 'react-native';
+import I18n from '../i18n/i18n';
+import SplashScreen from '../screens/Splash/SplashScreen';
 
 
 class HomeTabStack extends React.Component {
-    static navigationOptions = {
-        header: null,
-    };
+    static navigationOptions = ({screenProps: {i18n, locale, parentNavigation}}) =>
+        ({
+        title: i18n.t('login_screen_title'),
+    });
 
     constructor(props) {
         super(props);
+        this.state = {
+            i18n: I18n
+        };
     }
 
     componentDidMount() {
-        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        // this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        // console.log("I18 ", this.state.i18n);
     }
 
     componentWillUnmount() {
-        this.backHandler.remove()
+        // this.backHandler.remove();
     }
 
     handleBackPress = () => {
         // this.goBack(); // works best when the goBack is async
-        console.log("On back pressed");
+        console.log('On back pressed');
         return true;
-    }
+    };
 
     UNSAFE_componentWillMount() {
         console.log('Componenet Will Mount');
     }
 
     render() {
+        console.log("this.props.screenProps");
+        console.log(JSON.stringify(this.props));
         const HomeStack = createAppContainer(
             createBottomTabNavigator(
                 {
-                    Setting: SettingStack,
-                    Profile: ProfileStack,
+                    Setting: {
+                        screen: ({navigation}) => <SettingStack screenProps={{ parentNavigation: this.props.screenProps.parentNavigation}} />,
+                        navigationOptions: {
+                            screenProps: {i18n: this.state.i18n, locale: this.state.language, parentNavigation: this.props.screenProps.parentNavigation}
+                        },
+                    },
+                    Profile: {
+                        screen: ({navigation}) => <ProfileStack screenProps={{ parentNavigation: this.props.screenProps.parentNavigation}} />,
+                        navigationOptions: {
+                            screenProps: {i18n: this.state.i18n, locale: this.state.language, parentNavigation: this.props.screenProps.parentNavigation}
+                        },
+                    },
                 },
                 {
                     // defaultNavigationOptions: ({ navigation }) => ({

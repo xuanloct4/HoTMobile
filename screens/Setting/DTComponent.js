@@ -83,7 +83,7 @@ export default class DTComponent {
             for (let j = 0; j < discreteValues.length; j++) {
                 selectedItems.push({value: discreteValues[j], isSelected: true});
             }
-            item.selectedItems = selectedItems;
+            this.DTSetting[component].selectedItems = selectedItems;
         }
     };
 
@@ -116,7 +116,7 @@ export default class DTComponent {
             for (let j = 0; j < discreteValues.length; j++) {
                 selectedItems.push({value: discreteValues[j], isSelected: false});
             }
-            item.selectedItems = selectedItems;
+            this.DTSetting[component].selectedItems = selectedItems;
         }
     };
 
@@ -142,7 +142,7 @@ export default class DTComponent {
         }
     };
 
-    summarize = (component) => {
+    summarize = (component, i18n) => {
         let min = this.DTSetting[component].range.MIN;
         let max = this.DTSetting[component].range.MAX;
         let discreteValues = this.DTSetting[component].selectedItems;
@@ -156,17 +156,18 @@ export default class DTComponent {
                 return '';
             } else {
                 if (selectedDiscreteValues.length == 0) {
-                    return 'None of ' + component + ' selected';
+                    return i18n.t('none_text') + i18n.t(component) + i18n.t('selected_text');
                 } else if (selectedDiscreteValues.length != discreteValues.length) {
-                    return 'Some ' + component + ' selected';
+                    return i18n.t('some_text') + i18n.t(component)  + i18n.t('selected_text');
                 } else {
-                    return 'All of ' + component + ' selected';
+                    return i18n.t('all_text') + i18n.t(component)  + i18n.t('selected_text');
                 }
             }
         }
     };
 
-    description = (component) => {
+    description = (component, i18n) => {
+        console.log(component);
         let min = this.DTSetting[component].range.MIN;
         let max = this.DTSetting[component].range.MAX;
         let discreteValues = this.DTSetting[component].selectedItems;
@@ -180,7 +181,7 @@ export default class DTComponent {
                 return '';
             } else {
                 if (selectedDiscreteValues.length == 0) {
-                    return 'None of ' + component + ' selected';
+                    return i18n.t('none_text') + i18n.t(component) + i18n.t('selected_text');
                 } else if (selectedDiscreteValues.length != discreteValues.length) {
                     selectedDiscreteValues = selectedDiscreteValues.sort(function (a, b) {
                         return a - b;
@@ -192,10 +193,10 @@ export default class DTComponent {
                         }
                         str += selectedDiscreteValues[i].value;
                     }
-                    str += ' selected';
+                    str += ' ' + i18n.t('selected_text');
                     return str;
                 } else {
-                    return 'All of ' + component + ' selected';
+                    return i18n.t('all_text') + i18n.t(component) + ' ' + i18n.t('selected_text');
                 }
             }
         }

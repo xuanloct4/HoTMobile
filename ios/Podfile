@@ -51,6 +51,10 @@ target 'HoTMobile' do
 
   pod 'RNDefaultPreference', :path => '../node_modules/react-native-default-preference'
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'HoTMobileTests' do
     inherit! :search_paths
     # Pods for testing

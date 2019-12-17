@@ -1,13 +1,17 @@
 package com.hotmobile;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,6 +27,7 @@ import java.io.File;
  */
 public class DialingActitvity extends Activity {
     MediaPlayer mp;
+    Ringtone ringtoneSound;
 
     @Override
     @CallSuper
@@ -36,15 +41,18 @@ public class DialingActitvity extends Activity {
                 WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         findViewById(R.id.trigger_alert_button).setEnabled(true);
         findViewById(R.id.go_back_button).setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.ECLAIR)
             @Override
             public void onClick(View view) {
+                stopAudio();
                 onBackPressed();
             }
         });
         findViewById(R.id.trigger_alert_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityStarterModule.triggerAlert("Hello from " + DialingActitvity.class.getSimpleName());
+                stopAudio();
+                openTheApp();
             }
         });
 
@@ -53,6 +61,20 @@ public class DialingActitvity extends Activity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         playAudio();
 
+    }
+
+    void openTheApp() {
+//        ActivityStarterModule.triggerAlert("Hello from " + DialingActitvity.class.getSimpleName());
+
+        final String appPackageName = getApplicationContext().getPackageName();
+        Intent intent = getPackageManager().getLaunchIntentForPackage(appPackageName);
+        startActivity(intent);
+    }
+
+    void stopAudio() {
+        if (ringtoneSound != null) {
+            ringtoneSound.stop();
+        }
     }
 
     void playAudio() {
@@ -86,7 +108,7 @@ public class DialingActitvity extends Activity {
 //        }
 
         Uri ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        Ringtone ringtoneSound = RingtoneManager.getRingtone(getApplicationContext(), ringtoneUri);
+        ringtoneSound = RingtoneManager.getRingtone(getApplicationContext(), ringtoneUri);
 
         if (ringtoneSound != null) {
             ringtoneSound.play();
@@ -96,9 +118,6 @@ public class DialingActitvity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-
-
-
     }
 
     @Override

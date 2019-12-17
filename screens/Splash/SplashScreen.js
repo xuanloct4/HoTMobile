@@ -16,6 +16,7 @@ import * as actions from '../../redux/actions';
 import CustomButton from '../../components/CustomButton';
 import CustomTextView from '../../components/CustomTextView';
 import DefaultPreference from 'react-native-default-preference';
+import DataManager from '../../app_data/DataManager';
 
 class SplashScreen extends React.Component {
     static navigationOptions = {
@@ -36,11 +37,49 @@ class SplashScreen extends React.Component {
         // } else {
         DefaultPreference.get('App Language').then((language) => {
             console.log('Get language:', language);
-            this.setLanguage(language);
-            setTimeout(() => {
-                this.goLogin();
-            }, 2000);
+            let appLanaguage = language;
+            if (language == null) {
+                appLanaguage = "vi";
+            }
+            this.setLanguage(appLanaguage);
+
+            let json = new Object();
+            json.token = "bTAZS1IZvpjmRqYMUUvafSBm09xtnicGE8RMPg8W1VhLDd2UDE6vcQJC97QaBblW";
+            json.expired_interval = 7776000;
+            json.number_of_valid_access = 1;
+
+            DefaultPreference.set('Authorization', JSON.stringify(json)).then(function() {
+                DefaultPreference.get('Authorization').then((a) => {
+                    console.log("Save Authorization: ", a);
+                });
+            });
+
+            DefaultPreference.get('Authorization').then((auth) => {
+                console.log('Authorization: ', auth);
+                if (auth) {
+                    let token = JSON.parse(auth).token;
+                    console.log('Token: ', token);
+                    if (token) {
+                        DataManager.getInstance().storeKeyValue('token', token);
+                        setTimeout(() => {
+                            this.goHome();
+                        }, 2000);
+                    } else {
+                        setTimeout(() => {
+                            this.goLogin();
+                        }, 1000);
+                    }
+                } else {
+                    setTimeout(() => {
+                        this.goLogin();
+                    }, 1000);
+                }
+            });
         });
+    }
+
+    goHome() {
+        this.props.navigation.navigate('Home', {screenProps: {i18n: this.state.i18n, locale: this.state.language}});
     }
 
     goLogin() {
@@ -62,15 +101,6 @@ class SplashScreen extends React.Component {
             console.log('Updated language:', language);
         });
     };
-
-    goLogin() {
-        // screenProps={{
-        //     i18n: this.state.i18n,
-        //         locale: this.state.locale,
-        //         setLocale: this.setLocale,
-        // }}
-        this.props.navigation.navigate('Auth', {screenProps: {i18n: this.state.i18n, locale: this.state.language}});
-    }
 
     render() {
         // const { language } = this.props;

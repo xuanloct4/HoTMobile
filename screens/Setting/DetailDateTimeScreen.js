@@ -21,6 +21,7 @@ import DTComponent from './DTComponent';
 import Loader from '../../components/Loader';
 import CustomButton from '../../components/CustomButton';
 import Alarm from './AlarmType';
+import I18n from '../../i18n/i18n';
 
 class ListItem extends React.Component {
     render() {
@@ -131,7 +132,7 @@ const listItemStyles = StyleSheet.create({
 
 class DetailDateTimeScreen extends React.Component {
     static navigationOptions = ({screenProps: {i18n, locale}}) => ({
-        title: i18n.t('login_screen_title'),
+        title: I18n.t('time_setting_detail_screen_title'),
         // title: 'Time Setting',
     });
 
@@ -163,11 +164,10 @@ class DetailDateTimeScreen extends React.Component {
     reset() {
         console.log("Reset");
         const { navigation } = this.props;
-        this.initDS(navigation.getParam('DateTimeSetting'), navigation.getParam('isEditing'));
+        this.initDS(navigation.getParam('DateTimeSetting'), navigation.getParam('isEditing'), navigation.getParam('isAddNew'));
     }
 
-    initDS(item, isEditing) {
-        console.log(JSON.stringify(item));
+    initDS(item, isEditing, isAddNew) {
         let arr = [];
         let dtComponent = new DTComponent;
 
@@ -177,7 +177,7 @@ class DetailDateTimeScreen extends React.Component {
 
         for (let i = 0; i < DateTimePickerModel.TimeComponents().length; i++) {
             let comp = DateTimePickerModel.TimeComponents()[i].component;
-            let desc = dtComponent.description(comp);
+            let desc = dtComponent.description(comp, I18n);
             console.log(desc);
 
             arr.push({
@@ -195,6 +195,7 @@ class DetailDateTimeScreen extends React.Component {
                 title: 'Selected Items',
                 data: arr,
                 isEditing: isEditing,
+                isAddNew: isAddNew,
                 forRinging: item.forRinging,
                 forAlarm: item.forAlarm,
                 id: 0,
@@ -211,7 +212,7 @@ class DetailDateTimeScreen extends React.Component {
         for (let i = 0; i < ds[0].data.length; i++) {
             if ( ds[0].data[i].component === component) {
                 ds[0].data[i].selectedItems = selectedItems;
-                ds[0].data[i].description = comp.description(component);
+                ds[0].data[i].description = comp.description(component, I18n);
                 break;
             }
         }
@@ -235,6 +236,10 @@ class DetailDateTimeScreen extends React.Component {
     }
 
     onMenuPress(item, section) {
+        if (!this.state.ds[0].isEditing) {
+            return;
+        }
+
         console.log('On Item pressed');
         console.log(section);
         console.log(item);
@@ -246,15 +251,22 @@ class DetailDateTimeScreen extends React.Component {
     }
 
     confirmChange() {
-        let ds = this.state.ds;
-        let selectedItems = [];
-        for (let i = 0; i < ds[0].data.length; i++) {
-            selectedItems.push(ds[0].data[i].item);
+        if (!this.state.ds[0].isEditing) {
+
+        } else {
+            let ds = this.state.ds;
+            let selectedItems = [];
+            for (let i = 0; i < ds[0].data.length; i++) {
+                selectedItems.push(ds[0].data[i].item);
+            }
         }
-        this.props.navigation.navigate('Home');
+        this.props.navigation.navigate('Setting', {"refresh": true});
     }
 
     setAlarmType = (type) => {
+        if (!this.state.ds[0].isEditing) {
+            return;
+        }
         let ds = this.state.ds;
         switch (type) {
             case Alarm.AlarmType.RING_ONLY:

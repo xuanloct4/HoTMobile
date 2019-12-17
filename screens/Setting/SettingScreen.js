@@ -14,6 +14,7 @@ import {
     TouchableHighlight,
     View,
     Platform,
+    RefreshControl,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 // import { Ionicons } from '@expo/vector-icons';
@@ -22,22 +23,29 @@ import DateTimePickerModel from './DateTimePickerModel';
 import DTComponent from './DTComponent';
 import Loader from '../../components/Loader';
 import API from '../../api/API';
+import DataManager from '../../app_data/DataManager';
+import I18n from '../../i18n/i18n';
+// import connect from 'react-redux/es/connect/connect';
+import {connect} from 'react-redux';
+import DefaultPreference from 'react-native-default-preference';
 
 class ListItem extends React.Component {
     render() {
         const {onPress, onDelete, section, word, isEditing, isChecked, hasDetail, hasInfo} = this.props;
         const {sectionStyle, termStyle} = listItemStyles;
         if (section) {
-            var editingWord = 'Change';
+            var editingWord = 'change_text';
             if (isEditing) {
-                editingWord = 'Finish';
+                editingWord = 'finish_text';
             }
             return (
                 <View style={listItemStyles.sectionStyle}>
-                    <Text style={listItemStyles.sectionTitleStyle} numberOfLines={1}>{word}</Text>
+                    <CustomTextView i18nKey={word} style={listItemStyles.sectionTitleStyle}
+                                    numberOfLines={1}></CustomTextView>
                     <View style={listItemStyles.sectionRightButtonStyle}>
                         <TouchableOpacity onPress={onPress}>
-                            <Text style={listItemStyles.sectionRightTextStyle} numberOfLines={1000}>{editingWord}</Text>
+                            <CustomTextView i18nKey={editingWord} style={listItemStyles.sectionRightTextStyle}
+                                            numberOfLines={1000}></CustomTextView>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -56,10 +64,11 @@ class ListItem extends React.Component {
                                 <Image style={listItemStyles.leftIconStyle}
                                        source={require('../../assets/images/ic_delete.jpg')}/>
                             </TouchablePlatformSpecific>
-                            <TouchablePlatformSpecific  onPress={onPress}>
+                            <TouchablePlatformSpecific onPress={onPress}>
                                 <View>
 
-                                    <Text style={[listItemStyles.titleStyle , listItemStyles.leftTitleEditing]} numberOfLines={1000}>{word}</Text>
+                                    <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleEditing]}
+                                          numberOfLines={1000}>{word}</Text>
                                     <Image style={listItemStyles.rightIconStyle}
                                            source={require('../../assets/images/ic_reveal.png')}/>
 
@@ -74,7 +83,8 @@ class ListItem extends React.Component {
                     <View style={listItemStyles.itemStyle}>
                         <TouchableOpacity
                             onPress={onPress}>
-                            <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleUnEditing]} numberOfLines={1000}>{word}</Text>
+                            <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleUnEditing]}
+                                  numberOfLines={1000}>{word}</Text>
                         </TouchableOpacity>
                     </View>
                 );
@@ -153,60 +163,26 @@ const listItemStyles = StyleSheet.create({
 });
 
 class SettingScreen extends React.Component {
-    static navigationOptions = {
-        header: null,
+    static navigationOptions = ({navigation, screenProps, navigationOptions}) => {
+        console.log('Navigation options:   ', JSON.stringify(navigationOptions));
+        if (navigationOptions.screenProps && navigationOptions.screenProps.i18n) {
+            return {
+                title: navigationOptions.screenProps.i18n.t('time_setting_screen_title'),
+            };
+        } else if (screenProps.i18n) {
+            return {
+                title: screenProps.i18n.t('time_setting_screen_title'),
+            };
+        }
     };
 
-    comp = new DTComponent();
 
     constructor(props) {
         super(props);
-
-        this.comp.InitializedDateTimeComponents();
-        this.comp.deselectAll(DateTimePickerModel.dateComponent.SECOND);
-        this.comp.selectAll(DateTimePickerModel.dateComponent.SECOND);
-        this.comp.deselectItem(DateTimePickerModel.dateComponent.SECOND, 1);
-        // this.comp.deselectAllComponent();
-        console.log(JSON.stringify(this.comp.DTSetting));
-
-        var ds = [
-            {
-                title: 'Includes',
-                data: [{
-                    indexPath: {section: 0, row: 0},
-                    timeSetting: this.comp.DTSetting,
-                    forRinging: true,
-                    forAlarm: false,
-                },
-                    {
-                        indexPath: {section: 0, row: 1},
-                        timeSetting: this.comp.DTSetting,
-                        forRinging: false,
-                        forAlarm: true,
-                    }],
-                isEditing: false,
-                id: 0,
-            },
-            {
-                title: 'Excludes',
-                data: [{
-                    indexPath: {section: 1, row: 0},
-                    timeSetting: this.comp.DTSetting,
-                    forRinging: true,
-                    forAlarm: true,
-                },
-                    {
-                        indexPath: {section: 0, row: 1},
-                        timeSetting: this.comp.DTSetting,
-                        forRinging: true,
-                        forAlarm: true,
-                    }],
-                isEditing: false,
-                id: 1,
-            },
-        ];
-        var languageDS = [{index: 0, word: 'Tiếng Việt'}, {index: 1, word: 'English'}];
-        this.state = {languageDS: {languageDS}, ds: ds, loading: false, refresh: true};
+        this.state = {
+            i18n: I18n,
+        };
+        this.state = {ds: [], loading: false, refresh: false};
 
         // DefaultPreference.get('App Language').then(function(language) {
         //     this.setMainLocaleLanguage(language);
@@ -217,22 +193,128 @@ class SettingScreen extends React.Component {
         this.setState({popoverIsOpen: false});
     }
 
+    componentDidMount() {
+        // const {language} = this.props;
+        // if (language) this.setMainLocaleLanguage(language);
+        console.log('Props: ', this.prop);
+        this.fetchTimeSetting();
+    }
+
+    setMainLocaleLanguage = language => {
+        let i18n = this.state.i18n;
+        i18n.locale = language;
+        this.setState({i18n});
+    };
+
     fetchTimeSetting() {
-        // fetchAPI(onSuccess, onError, url, bodyObject, additionalHeaders, method=API.httpMethods.GET, baseURL= API.baseURL.hot)
-        API.fetchAPI();
+        this.setState({loading: false, refresh: true});
+
+        let query = new Object();
+        let category = new Object();
+        category.list = '2';
+        category.isAnd = false;
+        query.category_spec = category;
+        query.is_deleted = false;
+        query.is_activated = true;
+        query.isAnd = false;
+
+        API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_CONFIGURATION_SEARCH, query, {}, API.httpMethods.POST, API.baseURL.hot);
+    }
+
+
+    onSuccess(json) {
+        console.log('Success');
+        // let j = json.replace(/\\\"/g, "\"");
+        // console.log("JSON:  ",j);
+        let list = JSON.parse(json).list;
+        list = list.map(item => {
+            let m = item;
+            m.strings = JSON.parse(item.strings);
+            return m;
+        });
+
+        let excludesList = list.filter(item => {
+            if (item.strings && item.strings.excludes) {
+                return true;
+            }
+        });
+
+        let includesList = list.filter(item => {
+            if (item.strings && item.strings.includes) {
+                return true;
+            }
+        });
+
+        let inDS = new Array();
+        let exDS = new Array();
+        for (let i = 0; i < includesList.length; i++) {
+            let inItem = new Object();
+            let indexPath = new Object();
+            indexPath.row = i;
+            indexPath.section = 0;
+            inItem.indexPath = indexPath;
+            inItem.timeSetting = includesList[i].strings.includes;
+            inItem.forRinging = includesList[i].strings.forRinging;
+            inItem.forAlarm = includesList[i].strings.forAlarm;
+            inDS.push(inItem);
+        }
+
+        for (let i = 0; i < excludesList.length; i++) {
+            let exItem = new Object();
+            let indexPath = new Object();
+            indexPath.row = i;
+            indexPath.section = 1;
+            exItem.indexPath = indexPath;
+            exItem.timeSetting = excludesList[i].strings.excludes;
+            exItem.forRinging = excludesList[i].strings.forRinging;
+            exItem.forAlarm = excludesList[i].strings.forAlarm;
+            exDS.push(exItem);
+        }
+
+        // console.log('InDS ', JSON.stringify(inDS));
+        // console.log('ExDS ', JSON.stringify(exDS));
+
+        let ds = new Array();
+        let ii = new Object();
+        ii.title = 'includes_text';
+        ii.data = inDS;
+        ii.isEditing = false;
+        ii.id = 0;
+
+        let ex = new Object();
+        ex.title = 'excludes_text';
+        ex.data = exDS;
+        ex.isEditing = false;
+        ex.id = 1;
+
+        ds.push(ii);
+        ds.push(ex);
+
+        console.log(JSON.stringify(ds));
+
+        this.setState({ds: ds, loading: false, refresh: false});
+    }
+
+    onError(error) {
+        this.setState({ds: ds, loading: false, refresh: false});
+        // this.setState({loading: false, usernameErrorKey: '', passwordErrorKey : 'wrong_username_or_password'});
     }
 
     getTimeSettingSummary(item) {
-        console.log(JSON.stringify(item.timeSetting));
+        let ts = new DTComponent();
+        ts.DTSetting = item.timeSetting;
+
+        // console.log("I18n: ", I18n);
+        // console.log(JSON.stringify(item.timeSetting));
         let sum = '';
         for (let i = 0; i < DateTimePickerModel.TimeComponents().length; i++) {
             if (i > 0) {
                 sum += ', \n';
             }
-            sum += this.comp.summarize(DateTimePickerModel.TimeComponents()[i].component);
+            sum += ts.summarize(DateTimePickerModel.TimeComponents()[i].component, I18n);
         }
 
-        console.log(sum);
+        console.log(JSON.stringify(ts));
         return sum;
     }
 
@@ -247,19 +329,63 @@ class SettingScreen extends React.Component {
                 break;
             }
         }
-        this.setState({ds: ds, refresh: !this.state.refresh});
+        this.setState({ds: ds, loading: false, refresh: false});
     }
 
     onMenuPress(item, section) {
         console.log('On Item pressed');
         console.log(section);
 
-        this.props.navigation.navigate('DetailDateTime', {DateTimeSetting: item, isEditing: section.isEditing});
+        this.props.navigation.navigate('DetailDateTime', {
+            DateTimeSetting: item,
+            isEditing: section.isEditing,
+            isAddNew: false,
+            screenProps: {i18n: this.state.i18n, locale: this.state.language},
+        });
+    }
+
+    addNewInclude() {
+        console.log("Add new Include");
+        var comp = new DTComponent();
+        comp.InitializedDateTimeComponents();
+        // this.comp.deselectAll(DateTimePickerModel.dateComponent.SECOND);
+        // this.comp.selectAll(DateTimePickerModel.dateComponent.SECOND);
+        // this.comp.deselectItem(DateTimePickerModel.dateComponent.SECOND, 1);
+        // this.comp.deselectAllComponent();
+        comp.selectAllComponent();
+        // console.log(JSON.stringify(comp.DTSetting));
+
+        this.setPopoverIsOpen(false);
+        this.props.navigation.navigate('DetailDateTime', {
+            DateTimeSetting: {timeSetting: comp.DTSetting},
+            isEditing: true,
+            isAddNew: true,
+            screenProps: {i18n: this.state.i18n, locale: this.state.language},
+        });
+    }
+
+    addNewExclude() {
+        console.log("Add new Exclude");
+        var comp = new DTComponent();
+        comp.InitializedDateTimeComponents();
+        comp.deselectAllComponent();
+        // console.log(JSON.stringify(comp.DTSetting));
+        this.setPopoverIsOpen(false);
+        this.props.navigation.navigate('DetailDateTime', {
+            DateTimeSetting: {timeSetting: comp.DTSetting},
+            isEditing: true,
+            isAddNew: true,
+            screenProps: {i18n: this.state.i18n, locale: this.state.language},
+        });
     }
 
     onItemDelete(item) {
         console.log('On Item deleted');
         console.log(item);
+    }
+
+    handleRefresh() {
+        this.fetchTimeSetting();
     }
 
     FlatListItemSeparator = () => {
@@ -276,7 +402,6 @@ class SettingScreen extends React.Component {
 
     render() {
         const {ds} = this.state;
-        const {languageDS} = this.state.languageDS;
         return (
             <View style={homeStyles.container}>
                 <Loader
@@ -292,7 +417,12 @@ class SettingScreen extends React.Component {
                                                                   isEditing={section.isEditing} word={section.title}
                                                                   section/>}
                     keyExtractor={(item, index) => index}
-                    extraData={this.state.refresh}/>
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refresh}
+                            onRefresh={this.handleRefresh.bind(this)}/>
+                    }
+                    extraData={this.state.refreshing}/>
 
                 <TouchableOpacity onPress={() => {
                     this.setPopoverIsOpen(true);
@@ -324,10 +454,20 @@ class SettingScreen extends React.Component {
                             height: 90,
                             backgroundColor: '#ffffff',
                         }}>
-                            <FlatList
-                                ItemSeparatorComponent={this.FlatListItemSeparator}
-                                data={languageDS}
-                                renderItem={({item}) => <Text style={homeStyles.item}>{item.word}</Text>}/>
+
+                            <View style={homeStyles.addInclude}>
+                                <TouchableOpacity onPress={this.addNewInclude.bind(this)}>
+                                    <CustomTextView i18nKey='add_include_text'
+                                                    style={homeStyles.addNewText}/>
+                                </TouchableOpacity>
+                            </View>
+                            <this.FlatListItemSeparator style={{top: '49%'}}/>
+                            <View style={homeStyles.addExclude}>
+                                <TouchableOpacity onPress={this.addNewExclude.bind(this)}>
+                                    <CustomTextView i18nKey='add_exclude_text'
+                                                    style={homeStyles.addNewText}/>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </TouchableOpacity>
                 </Modal>
@@ -375,7 +515,28 @@ const homeStyles = StyleSheet.create({
         bottom: 20,
         right: 10,
     },
+    addInclude: {
+        top: 0,
+        height: '50%',
+    },
+    addExclude: {
+        bottom: 0,
+        height: '50%',
+    },
+    addNewText: {
+        width: '100%',
+        height: '100%',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontSize: 18,
+        color: 'rgba(50,50,247,1.0)',
+    },
 });
 
+const mapStateToProps = state => {
+    return {
+        language: state.languageReducer.language,
+    };
+};
 
-export default SettingScreen;
+export default connect(mapStateToProps, null)(SettingScreen);

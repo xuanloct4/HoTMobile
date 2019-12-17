@@ -24,6 +24,9 @@ export default {
     'confirm_button_title': 'Confirm',
 
     // Setting
+    'time_setting_screen_title': 'Time Setting',
+    'time_setting_detail_screen_title': 'Time Setting Detail',
+    'time_picker_screen_title': 'Time Picker',
     'ring_only_text': 'Ring only',
     'alarm_only_text': 'Notification only',
     'both_ring_alarm_text': 'Ring and Notification',
@@ -32,14 +35,17 @@ export default {
     'change_text': 'Change',
     'finish_text': 'Finish',
     'reset_text': 'Reset',
+    'add_include_text': 'Add an include item',
+    'add_exclude_text': 'Add an exclude item',
     'none_text': 'None of ',
     'all_text': 'All of ',
     'some_text': 'Some ',
+    'selected_text': ' selected',
     'second': 'second',
     'minute': 'minute',
     'hour': 'hour',
     'day': 'day',
-    'dayOfWeek': 'week day',
+    'daysOfWeek': 'week day',
     'month': 'month',
     'year': 'year',
 
@@ -51,4 +57,8 @@ export default {
     'password_placeholder': '******',
     'login_button_title': 'Login',
     'wrong_username_or_password': 'The username or password is incorrect, please try again.',
+
+    // About
+    'about_app_version': 'You are using SmartHome HoTMobile version',
+    'copyright': 'SmartHome HoT 2020 @ All right Reserved',
 };
