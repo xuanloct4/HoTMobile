@@ -24,6 +24,18 @@ class AboutScreen extends React.Component {
         title: I18n.t('About'),
     });
 
+    constructor(props) {
+        super(props);
+        this.state = {loading: false, refresh: true};
+    }
+
+
+    UNSAFE_componentWillMount() {
+    }
+
+    componentDidMount() {
+    }
+
     render() {
         DataManager.getInstance().storeKeyValue("app-version", "1.0.0");
         let version = I18n.t('about_app_version') + ' ' + DataManager.getInstance().valueForKey("app-version");

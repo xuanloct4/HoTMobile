@@ -89,8 +89,6 @@ class SplashScreen extends React.Component {
     setMainLocaleLanguage = language => {
         let i18n = this.state.i18n;
         i18n.locale = language;
-        // this.setState({ i18n });
-        // this.setState({ language });
         this.setState({i18n: i18n, language: language});
     };
 
@@ -99,6 +97,7 @@ class SplashScreen extends React.Component {
         this.props.setLanguage(language);
         DefaultPreference.set('App Language', language).then(function () {
             console.log('Updated language:', language);
+            DataManager.getInstance().storeKeyValue('App Language', language);
         });
     };
 
@@ -126,7 +125,7 @@ class SplashScreen extends React.Component {
 
                     <TouchableOpacity onPress={this.goLogin.bind(this)}
                                       style={{marginLeft: 20}}>
-                        <Text style={{color: isVNLang ? 'blue' : 'grey'}}>Login</Text>
+                        <Text style={{color: 'blue'}}>Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>

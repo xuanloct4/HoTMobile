@@ -7,7 +7,7 @@ import {
     Button,
     StatusBar,
     SectionList,
-    Alert, TouchableOpacity, Image, Picker,
+    Alert, TouchableOpacity, Image, Picker, Platform, TouchableHighlight, TouchableNativeFeedback,
 } from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 import {Popover, PopoverController} from 'react-native-modal-popover';
@@ -16,7 +16,7 @@ import DropdownMenu from 'react-native-dropdown-menu';
 import CustomTextView from '../../components/CustomTextView';
 import CustomEditText from '../../components/CustomEditText';
 import * as actions from '../../redux/actions/index';
-import connect from 'react-redux/es/connect/connect';
+import {connect} from 'react-redux';
 import AccountInfoScreen from './AccountInfoScreen';
 import DeviceManageScreen from './DeviceManageScreen';
 import BoardManageScreen from './BoardManageScreen';
@@ -25,6 +25,8 @@ import AboutScreen from './AboutScreen';
 import I18n from '../../i18n/i18n';
 import API from '../../api/API';
 import Loader from '../../components/Loader';
+import DataManager from '../../app_data/DataManager';
+import DefaultPreference from 'react-native-default-preference';
 
 // import TableView from 'react-native-tableview';
 // const {Section, Item} = TableView;
@@ -43,21 +45,60 @@ class ProfileScreen extends React.Component {
         header: null,
     };
 
-    setLanguage = language => {
-        this.setState({language});
-        this.props.setLanguage(language);
-        // DefaultPreference.set('App Language', language).then(function() {console.log('Updated language:', language)});
+    setMainLocaleLanguage = language => {
+        // this.props.setLanguage(language);
+        let i18n = I18n;
+        // let i18n = this.state.i18n;
+        i18n.locale = language;
+        this.setState({i18n: i18n, language: language});
     };
+
+
+    setMainLocaleLanguage = language => {
+        this.props.setLanguage(language);
+        let i18n = I18n;
+        // let i18n = this.state.i18n;
+        i18n.locale = language;
+        this.setState({i18n: i18n, language: language});
+    };
+
+    setLanguage = language => {
+        console.log(language);
+        this.setMainLocaleLanguage(language);
+        this.initDS();
+        DefaultPreference.set('App Language', language).then(function () {
+            console.log('Updated language:', language);
+            DataManager.getInstance().storeKeyValue('App Language', language);
+
+        });
+    };
+
+    selectedLanguage = '';
 
     constructor(props) {
         super(props);
+        this.state = {language: DataManager.getInstance().valueForKey('App Language'), languageDS: [], ds: [], loading: false, refresh: true};
+    }
 
-        let languageDS = [{index: 0, title: 'Tiếng Việt', value: 'vi', isSelected: true}, {
-            index: 1,
-            title: 'English',
-            value: 'en',
-            isSelected: false,
-        }];
+
+    componentDidMount() {
+        this.initDS();
+    }
+
+    initDS() {
+        let languageDS = [{index: 0, title: 'Tiếng Việt', value: 'vi', isSelected: true},
+            {index: 1, title: 'English', value: 'en', isSelected: false}];
+
+        let appLanguage = DataManager.getInstance().valueForKey('App Language');
+        let selectedLanguageDS = languageDS.filter(function (item) {
+            return item.value === appLanguage;
+        });
+
+        if (selectedLanguageDS.length > 0) {
+            this.selectedLanguage = selectedLanguageDS[0].title;
+        }
+
+
         let ds = [
             {
                 title: 'D',
@@ -70,18 +111,18 @@ class ProfileScreen extends React.Component {
                 }],
             },
             {
-                title: 'J', data: [{title: 'Devices Manage', type: 'reveal', navigation: 'Devices'},
-                    {title: 'Boards Manage', type: 'reveal', navigation: 'Boards'},
-                    {title: 'Language', type: 'dropdown', ds: languageDS}],
+                title: 'J', data: [{title: I18n.t('Devices Manage'), type: 'reveal', navigation: 'Devices'},
+                    {title: I18n.t('Boards Manage'), type: 'reveal', navigation: 'Boards'},
+                    {title: I18n.t('Language'), detail: this.selectedLanguage, type: 'dropdown', ds: languageDS}],
             },
             {
-                title: 'J', data: [{title: 'Term & Condition', navigation: 'TermCondition'},
-                    {title: 'About', navigation: 'About'}],
+                title: 'J', data: [{title: I18n.t('Term & Condition'), navigation: 'TermCondition'},
+                    {title: I18n.t('About'), navigation: 'About'}],
             },
-            {title: 'J', data: [{title: 'Logout', type: 'logout'}]},
+            {title: 'J', data: [{title: I18n.t('Logout'), type: 'logout'}]},
         ];
 
-        this.state = {language: 'vi', languageDS: languageDS, ds: ds, loading: false};
+        this.setState({language: appLanguage, languageDS: languageDS, ds: ds, loading: false, refresh: true});
     }
 
     logout() {
@@ -102,8 +143,8 @@ class ProfileScreen extends React.Component {
                         // this.props.screenProps.parentNavigation.navigate("Auth");
                         this.setState({loading: true});
                         API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_LOGOUT, {}, {}, API.httpMethods.POST, API.baseURL.hot);
-                    }
                     },
+                },
             ],
             {cancelable: false},
         );
@@ -112,18 +153,19 @@ class ProfileScreen extends React.Component {
     onSuccess(json) {
         console.log('Success');
         this.setState({loading: false});
-        this.props.screenProps.parentNavigation.navigate("Auth");
+        this.props.screenProps.parentNavigation.navigate('Auth');
     }
 
     onError(error) {
         this.setState({loading: false});
         Alert.alert(
             I18n.t('logout_error_alert_title'),
-                I18n.t('logout_error_alert_message'),
+            I18n.t('logout_error_alert_message'),
             [
                 {
                     text: I18n.t('OK'),
-                    onPress: () => {}
+                    onPress: () => {
+                    },
                 },
             ],
             {cancelable: true},
@@ -143,19 +185,21 @@ class ProfileScreen extends React.Component {
     }
 
     onChange(ds) {
+        console.log('On change ds');
         console.log(ds);
-        const language = ds.filter(function (item) {
-            return item.isSelected == true;
-        })[0].value;
+        let selectedLanguageDS = ds.filter(function (item) {
+            return item.isSelected === true;
+        });
 
-        setLanguage(language);
+        if (selectedLanguageDS.length > 0) {
+            const language = selectedLanguageDS[0].value;
+            this.setLanguage(language);
+        }
+
+
     }
 
     render() {
-
-        console.log("this.props.screenProps");
-        console.log(JSON.stringify(this.props));
-
         const {ds, languageDS} = this.state;
         const {language} = this.props;
         const isVNLang = language === 'vi' ? true : false;
@@ -167,12 +211,15 @@ class ProfileScreen extends React.Component {
                     ItemSeparatorComponent={FlatListItemSeparator}
                     sections={ds}
                     renderItem={({item}) => <ListItem onChange={(ds) => this.onChange(ds)}
-                                                      onPress={this.onMenuPress.bind(this, item)} title={item.title}
+                                                      onPress={this.onMenuPress.bind(this, item)}
+                                                      title={item.title}
+                                                      detail={item.detail}
                                                       type={item.type} ds={item.ds} i18nKey={item.title}
                                                       firstname={item.firstname}
                                                       lastname={item.lastname}/>}
                     renderSectionHeader={({section}) => <ListItem word={section.title} section/>}
                     keyExtractor={(item, index) => index}
+                    extraData={this.state.refresh}
                 />
             </View>
         );
@@ -229,7 +276,10 @@ class ListItem extends React.Component {
     }
 
     render() {
-        const {onPress, onChange, navigation, section, title, isChecked, hasDetail, hasInfo, type, ds, i18nKey, firstname, lastname} = this.props;
+        let TouchablePlatformSpecific = Platform.OS === 'ios' ?
+            TouchableHighlight :
+            TouchableNativeFeedback;
+        const {onPress, onChange, navigation, section, title, detail, isChecked, hasDetail, hasInfo, type, ds, i18nKey, firstname, lastname} = this.props;
         if (section) {
             return (
                 <TouchableOpacity>
@@ -246,8 +296,9 @@ class ListItem extends React.Component {
                         <React.Fragment>
                             <TouchableOpacity
                                 ref={setPopoverAnchor} onPress={openPopover}>
-                                <View style={{ paddingTop: 20, height: 70}}>
-                                    <CustomTextView style={{ position: 'absolute',
+                                <View style={{paddingTop: 20, height: 70}}>
+                                    <CustomTextView style={{
+                                        position: 'absolute',
                                         left: 10,
                                         right: 35,
                                         top: 10,
@@ -255,13 +306,16 @@ class ListItem extends React.Component {
                                                     numberOfLines={1}>
                                         {title}
                                     </CustomTextView>
-                                    <CustomTextView style={{ position: 'absolute',
+                                    <CustomTextView style={{
+                                        position: 'absolute',
                                         left: 10,
                                         right: 35,
-                                        top: 40,
-                                        fontSize: 15,}}
+                                        top: 35,
+                                        fontSize: 12,
+                                        color: '#999999',
+                                    }}
                                                     numberOfLines={1}>
-                                        {title}
+                                        {detail}
                                     </CustomTextView>
                                     <Image style={listItemStyles.rightIconStyle}
                                            source={require('../../assets/images/ic_arrow_dropdown.png')}/>
@@ -278,8 +332,10 @@ class ListItem extends React.Component {
                             >
                                 <View style={listItemStyles.languageItem}>
                                     <TouchableOpacity onPress={() => {
-                                        console.log('Tiếng Việt');
+                                        console.log('Choose Tiếng Việt');
                                         closePopover();
+                                        this.pickerChange(0, ds);
+                                        onChange(ds);
                                     }}>
                                         <Text>Tiếng Việt</Text>
                                     </TouchableOpacity>
@@ -287,8 +343,10 @@ class ListItem extends React.Component {
                                 <FlatListItemSeparator></FlatListItemSeparator>
                                 <View style={listItemStyles.languageItem}>
                                     <TouchableOpacity onPress={() => {
-                                        console.log('English');
+                                        console.log('Choose English');
                                         closePopover();
+                                        this.pickerChange(1, ds);
+                                        onChange(ds);
                                     }}>
                                         <Text>English</Text>
                                     </TouchableOpacity>
@@ -302,11 +360,11 @@ class ListItem extends React.Component {
             return (
                 <View style={listItemStyles.logoutButton}>
                     <TouchableOpacity onPress={onPress}>
-                        <CustomTextView i18nKey={'Logout'} style={{
+                        <CustomTextView style={{
                             textAlign: 'center',
                             textAlignVertical: 'center',
                             fontSize: 18,
-                        }}></CustomTextView>
+                        }}>{title}</CustomTextView>
                     </TouchableOpacity>
                 </View>
             );
@@ -370,8 +428,8 @@ class ListItem extends React.Component {
                 <TouchableOpacity
                     onPress={onPress}>
                     <View style={listItemStyles.itemStyle}>
-                        <CustomTextView i18nKey={i18nKey} style={listItemStyles.titleStyle}
-                                        numberOfLines={1}/>
+                        <CustomTextView style={listItemStyles.titleStyle}
+                                        numberOfLines={1}>{title}</CustomTextView>
                         <Image style={listItemStyles.rightIconStyle}
                                source={require('../../assets/images/ic_reveal.png')}/>
                     </View>
@@ -489,5 +547,4 @@ const FlatListItemSeparator = () => {
     );
 };
 
-// export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
-export default ProfileScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);

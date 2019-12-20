@@ -14,11 +14,13 @@ export default {
     'OK': 'OK',
     'Cancel': 'Cancel',
 
+    'Setting': 'Setting',
     'Profile': 'Profile',
     'Devices Manage': 'Devices Manage',
     'Boards Manage': 'Boards Manage',
     'Change Language': 'Change Language',
     'Term & Condition': 'Term & Condition',
+    'Language': 'Language',
     'About': 'About',
     'Logout': 'Logout',
 

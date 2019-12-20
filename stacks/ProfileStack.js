@@ -7,17 +7,19 @@ import AboutScreen from '../screens/Profile/AboutScreen';
 import React from 'react';
 import AccountInfoScreen from '../screens/Profile/AccountInfoScreen';
 import I18n from '../i18n/i18n';
-import {createAppContainer} from "react-navigation";
+import {createAppContainer} from 'react-navigation';
 import SettingStack from './SettingStack';
 
 
 class ProfileStack extends React.Component {
-    static navigationOptions = ({});
+    static navigationOptions = ({ screenProps: { i18n, language } }) => ({
+        title: I18n.t('Profile'),
+    });
 
     constructor(props) {
         super(props);
         this.state = {
-            i18n: I18n
+            i18n: I18n,
         };
     }
 
@@ -48,8 +50,12 @@ class ProfileStack extends React.Component {
         const Nav = createAppContainer(
             createStackNavigator({
                     Main: {
-                        screen: ({navigation}) => <ProfileScreen navigation={navigation} screenProps={{ parentNavigation: this.props.screenProps.parentNavigation}} />,
-
+                        screen: ({navigation}) => <ProfileScreen navigation={navigation}
+                                                                 screenProps={{parentNavigation: this.props.screenProps.parentNavigation}}/>,
+                        navigationOptions: {
+                            header: null,
+                            headerVisible: false,
+                        },
                     },
                     AccountInfo: AccountInfoScreen,
                     Devices: DeviceManageScreen,
@@ -68,10 +74,10 @@ class ProfileStack extends React.Component {
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         },
-                        screenProps: {i18n: this.state.i18n, locale: this.state.language}
+                        screenProps: {i18n: this.state.i18n, locale: this.state.language},
                     },
-                }
-            )
+                },
+            ),
         );
 
         return (

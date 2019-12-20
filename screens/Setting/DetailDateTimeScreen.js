@@ -28,18 +28,28 @@ class ListItem extends React.Component {
         const {onPress, onDelete, section, word, isEditing, isChecked, hasDetail, hasInfo} = this.props;
         const {sectionStyle, termStyle} = listItemStyles;
         if (section) {
-            let editingWord = 'Change';
-            let resetingWord = 'Reset';
-            return (
-                <View style={listItemStyles.sectionStyle}>
-                    <Text style={listItemStyles.sectionTitleStyle} numberOfLines={1}>{word}</Text>
-                    <View style={listItemStyles.sectionRightButtonStyle}>
-                        <TouchableOpacity onPress={onPress}>
-                            <Text style={listItemStyles.sectionRightTextStyle} numberOfLines={1}>{resetingWord}</Text>
-                        </TouchableOpacity>
+            if (isEditing) {
+                let editingWord = 'Change';
+                let resetingWord = 'Reset';
+                return (
+                    <View style={listItemStyles.sectionStyle}>
+                        <Text style={listItemStyles.sectionTitleStyle} numberOfLines={1}>{word}</Text>
+
+                        <View style={listItemStyles.sectionRightButtonStyle}>
+                            <TouchableOpacity onPress={onPress}>
+                                <Text style={listItemStyles.sectionRightTextStyle}
+                                      numberOfLines={1}>{resetingWord}</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-            );
+                );
+            } else {
+                return (
+                    <View style={listItemStyles.sectionStyle}>
+                        <Text style={listItemStyles.sectionTitleStyle} numberOfLines={1}>{word}</Text>
+                    </View>
+                );
+            }
         } else {
             if (isEditing) {
                 return (
@@ -165,6 +175,7 @@ class DetailDateTimeScreen extends React.Component {
         console.log("Reset");
         const { navigation } = this.props;
         this.initDS(navigation.getParam('DateTimeSetting'), navigation.getParam('isEditing'), navigation.getParam('isAddNew'));
+        navigation.setParams({"component": null});
     }
 
     initDS(item, isEditing, isAddNew) {
@@ -216,6 +227,10 @@ class DetailDateTimeScreen extends React.Component {
                 break;
             }
         }
+
+        console.log('onComponentUpdated');
+        console.log(component);
+        console.log(selectedItems);
 
         return ds;
         // this.setState({ds: ds, refresh: !this.state.refresh});
@@ -307,11 +322,12 @@ class DetailDateTimeScreen extends React.Component {
 
 
         let ds;
-        console.log(navigation.getParam("component"));
-        console.log(navigation.getParam("selectedItems"));
+        // console.log(navigation.getParam("component"));
+        // console.log(navigation.getParam("selectedItems"));
         if (navigation.getParam("component")) {
             console.log("Got param component");
             ds = this.onComponentUpdated(navigation.getParam("component"), navigation.getParam("selectedItems"));
+            console.log(JSON.stringify(ds));
         } else {
             ds = this.state.ds;
         }
@@ -319,7 +335,7 @@ class DetailDateTimeScreen extends React.Component {
         console.log('Rendered');
         // const {ds} = this.state;
         console.log(ds[0].forRinging);
-        console.log(ds[0].forAlarm);
+        // console.log(ds[0].forAlarm);
         return (
             <View style={homeStyles.container}>
                 <Loader

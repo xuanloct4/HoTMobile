@@ -49,13 +49,17 @@ class HomeTabStack extends React.Component {
                     Setting: {
                         screen: ({navigation}) => <SettingStack screenProps={{ parentNavigation: this.props.screenProps.parentNavigation}} />,
                         navigationOptions: {
-                            screenProps: {i18n: this.state.i18n, locale: this.state.language, parentNavigation: this.props.screenProps.parentNavigation}
+                            screenProps: {i18n: this.state.i18n, locale: this.state.language, parentNavigation: this.props.screenProps.parentNavigation},
+                            title: I18n.t("Setting")
                         },
                     },
                     Profile: {
                         screen: ({navigation}) => <ProfileStack screenProps={{ parentNavigation: this.props.screenProps.parentNavigation}} />,
                         navigationOptions: {
-                            screenProps: {i18n: this.state.i18n, locale: this.state.language, parentNavigation: this.props.screenProps.parentNavigation}
+                            screenProps: {i18n: this.state.i18n, locale: this.state.language, parentNavigation: this.props.screenProps.parentNavigation},
+                            header: null,
+                            headerVisible: false,
+                            title: I18n.t("Profile")
                         },
                     },
                 },

@@ -51,42 +51,48 @@ class ListItem extends React.Component {
                 </View>
             );
         } else {
+            let TouchablePlatformSpecific = Platform.OS === 'ios' ?
+                TouchableHighlight :
+                TouchableNativeFeedback;
             if (isEditing) {
-                let TouchablePlatformSpecific = Platform.OS === 'ios' ?
-                    TouchableHighlight :
-                    TouchableNativeFeedback;
                 return (
-
                     <TouchableOpacity onPress={onPress}>
-
                         <View style={listItemStyles.itemStyle}>
-                            <TouchablePlatformSpecific onPress={onDelete}>
-                                <Image style={listItemStyles.leftIconStyle}
-                                       source={require('../../assets/images/ic_delete.jpg')}/>
-                            </TouchablePlatformSpecific>
-                            <TouchablePlatformSpecific onPress={onPress}>
-                                <View>
 
+
+                            <View style={listItemStyles.leftIconContainer}>
+                                <TouchablePlatformSpecific onPress={onDelete}>
+                                    <View style={listItemStyles.leftIconStyle}>
+                                    <Image style={{width: 30, height: 30}}
+                                           source={require('../../assets/images/ic_delete.jpg')}/>
+                                    </View>
+                                </TouchablePlatformSpecific>
+                            </View>
+
+                                <View style={listItemStyles.mainItemContainer}>
                                     <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleEditing]}
                                           numberOfLines={1000}>{word}</Text>
-                                    <Image style={listItemStyles.rightIconStyle}
-                                           source={require('../../assets/images/ic_reveal.png')}/>
-
+                                    <View style={listItemStyles.rightIconContainer}>
+                                        <Image style={listItemStyles.rightIconStyle}
+                                               source={require('../../assets/images/ic_reveal.png')}/>
+                                    </View>
                                 </View>
-                            </TouchablePlatformSpecific>
                         </View>
                     </TouchableOpacity>
 
                 );
             } else {
                 return (
-                    <View style={listItemStyles.itemStyle}>
-                        <TouchableOpacity
-                            onPress={onPress}>
+                    <TouchablePlatformSpecific onPress={onPress}>
+                        <View style={listItemStyles.itemStyle}>
                             <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleUnEditing]}
                                   numberOfLines={1000}>{word}</Text>
-                        </TouchableOpacity>
-                    </View>
+                            <View style={listItemStyles.rightIconContainer}>
+                                <Image style={listItemStyles.rightIconStyle}
+                                       source={require('../../assets/images/ic_reveal.png')}/>
+                            </View>
+                        </View>
+                    </TouchablePlatformSpecific>
                 );
             }
         }
@@ -138,14 +144,20 @@ const listItemStyles = StyleSheet.create({
         left: 10,
     },
     leftTitleEditing: {
-        left: 50,
+        left: 0,
+    },
+    leftIconContainer: {
+        position: 'absolute',
+        height: '100%',
+        width: 50,
+        left: 0,
+        justifyContent: 'center',
     },
     leftIconStyle: {
         position: 'absolute',
         left: 5,
         width: 30,
         height: 30,
-        // backgroundColor: '#008889',
     },
     mainStyle: {
         position: 'absolute',
@@ -153,6 +165,19 @@ const listItemStyles = StyleSheet.create({
         right: 5,
         top: 0,
         bottom: 0,
+    },
+    mainItemContainer: {
+        position: 'absolute',
+        height: '100%',
+        left: 50,
+        right: 0,
+    },
+    rightIconContainer: {
+        position: 'absolute',
+        height: '100%',
+        width: 30,
+        right: 0,
+        justifyContent: 'center',
     },
     rightIconStyle: {
         position: 'absolute',
@@ -345,7 +370,7 @@ class SettingScreen extends React.Component {
     }
 
     addNewInclude() {
-        console.log("Add new Include");
+        console.log('Add new Include');
         var comp = new DTComponent();
         comp.InitializedDateTimeComponents();
         // this.comp.deselectAll(DateTimePickerModel.dateComponent.SECOND);
@@ -365,7 +390,7 @@ class SettingScreen extends React.Component {
     }
 
     addNewExclude() {
-        console.log("Add new Exclude");
+        console.log('Add new Exclude');
         var comp = new DTComponent();
         comp.InitializedDateTimeComponents();
         comp.deselectAllComponent();

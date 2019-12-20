@@ -72,7 +72,6 @@ class AccountInfoScreen extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {ds: [], loading: false, refresh: true};
     }
 
@@ -145,7 +144,6 @@ class AccountInfoScreen extends React.Component {
                     sections={ds}
                     renderItem={({item, section}) => <ListItem label={item.info.key}
                                                                value={item.info.value}/>}
-                    renderSectionHeader={({section}) => <ListItem section/>}
                     keyExtractor={(item, index) => index}
                     refreshControl={
                         <RefreshControl

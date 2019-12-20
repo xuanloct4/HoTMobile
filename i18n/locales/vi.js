@@ -14,10 +14,11 @@ export default {
     'OK': 'Đồng ý',
     'Cancel': 'Huỷ bỏ',
 
+    'Setting': 'Cài đặt',
     'Profile': 'Tài khoản',
     'Devices Manage': 'Quản lý thiết bị',
     'Boards Manage': 'Quản lý cấu hình',
-    'Change Language': 'Thay đổi ngôn ngữ',
+    'Language': 'Ngôn ngữ',
     'Term & Condition': 'Điều khoản dịch vụ',
     'About': 'Giới thiệu',
     'Logout': 'Đăng xuất',
