@@ -241,17 +241,18 @@ class SettingScreen extends React.Component {
         query.category_spec = category;
         query.is_deleted = false;
         query.is_activated = true;
-        query.isAnd = false;
+        query.isAnd = true;
 
-        API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_CONFIGURATION_SEARCH, query, {}, API.httpMethods.POST, API.baseURL.hot);
+        API.fetchAPI(this.onFetchSuccess.bind(this), this.onFetchError.bind(this), API.url.USER_CONFIGURATION_SEARCH, query, {}, API.httpMethods.POST, API.baseURL.hot);
     }
 
 
-    onSuccess(json) {
+    onFetchSuccess(json) {
         console.log('Success');
-        // let j = json.replace(/\\\"/g, "\"");
-        // console.log("JSON:  ",j);
-        let list = JSON.parse(json).list;
+        console.log("JSON:  ",json);
+
+        let configObj = JSON.parse(json);
+        let list = configObj.list;
         list = list.map(item => {
             let m = item;
             m.strings = JSON.parse(item.strings);
@@ -278,6 +279,8 @@ class SettingScreen extends React.Component {
             indexPath.row = i;
             indexPath.section = 0;
             inItem.indexPath = indexPath;
+            inItem.id = includesList[i].id;
+            inItem.updateOrder = includesList[i].update_order;
             inItem.timeSetting = includesList[i].strings.includes;
             inItem.forRinging = includesList[i].strings.forRinging;
             inItem.forAlarm = includesList[i].strings.forAlarm;
@@ -290,6 +293,8 @@ class SettingScreen extends React.Component {
             indexPath.row = i;
             indexPath.section = 1;
             exItem.indexPath = indexPath;
+            exItem.id = excludesList[i].id;
+            exItem.updateOrder = excludesList[i].update_order;
             exItem.timeSetting = excludesList[i].strings.excludes;
             exItem.forRinging = excludesList[i].strings.forRinging;
             exItem.forAlarm = excludesList[i].strings.forAlarm;
@@ -304,23 +309,27 @@ class SettingScreen extends React.Component {
         ii.title = 'includes_text';
         ii.data = inDS;
         ii.isEditing = false;
+        ii.isIncludes = true;
+        ii.isExcludes = false;
         ii.id = 0;
 
         let ex = new Object();
         ex.title = 'excludes_text';
         ex.data = exDS;
         ex.isEditing = false;
+        ex.isIncludes = false;
+        ex.isExcludes = true;
         ex.id = 1;
 
         ds.push(ii);
         ds.push(ex);
 
-        console.log(JSON.stringify(ds));
+        console.log("DS: ",JSON.stringify(ds));
 
         this.setState({ds: ds, loading: false, refresh: false});
     }
 
-    onError(error) {
+    onFetchError(error) {
         this.setState({ds: ds, loading: false, refresh: false});
         // this.setState({loading: false, usernameErrorKey: '', passwordErrorKey : 'wrong_username_or_password'});
     }
@@ -345,7 +354,7 @@ class SettingScreen extends React.Component {
 
     onHeaderPress(section) {
         console.log('On Section pressed');
-        console.log(section);
+        // console.log(section);
 
         let ds = this.state.ds;
         for (let i = 0; i < ds.length; i++) {
@@ -359,12 +368,16 @@ class SettingScreen extends React.Component {
 
     onMenuPress(item, section) {
         console.log('On Item pressed');
-        console.log(section);
+        // console.log(JSON.stringify(section));
+        console.log(JSON.stringify(item));
 
         this.props.navigation.navigate('DetailDateTime', {
             DateTimeSetting: item,
             isEditing: section.isEditing,
             isAddNew: false,
+            isIncludes: section.isIncludes,
+            isExcludes: section.isExcludes,
+            updateOrder: item.updateOrder,
             screenProps: {i18n: this.state.i18n, locale: this.state.language},
         });
     }
@@ -382,9 +395,12 @@ class SettingScreen extends React.Component {
 
         this.setPopoverIsOpen(false);
         this.props.navigation.navigate('DetailDateTime', {
-            DateTimeSetting: {timeSetting: comp.DTSetting},
+            DateTimeSetting: {timeSetting: comp.DTSetting, forRinging: true, forAlarm: true},
             isEditing: true,
             isAddNew: true,
+            isIncludes: true,
+            isExcludes: false,
+            updateOrder: "1.0.0",
             screenProps: {i18n: this.state.i18n, locale: this.state.language},
         });
     }
@@ -397,16 +413,60 @@ class SettingScreen extends React.Component {
         // console.log(JSON.stringify(comp.DTSetting));
         this.setPopoverIsOpen(false);
         this.props.navigation.navigate('DetailDateTime', {
-            DateTimeSetting: {timeSetting: comp.DTSetting},
+            DateTimeSetting: {timeSetting: comp.DTSetting, forRinging: true, forAlarm: true},
             isEditing: true,
             isAddNew: true,
+            isIncludes: false,
+            isExcludes: true,
+            updateOrder: "1.0.0",
             screenProps: {i18n: this.state.i18n, locale: this.state.language},
         });
     }
 
     onItemDelete(item) {
         console.log('On Item deleted');
-        console.log(item);
+        console.log(JSON.stringify(item));
+        Alert.alert(
+            I18n.t('delete_alert_title'),
+            I18n.t('delete_alert_message'),
+            [
+                {
+                    text: I18n.t('Cancel'),
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                {
+                    text: I18n.t('OK'),
+                    onPress: () => {
+                        // this.props.screenProps.parentNavigation.navigate("Auth");
+                        this.setState({loading: true});
+                        API.fetchAPI(this.onDeleteSuccess.bind(this), this.onDeleteError.bind(this), API.url.USER_CONFIGURATION_SOFT_DELETE + '/' + item.id, {}, {}, API.httpMethods.DELETE, API.baseURL.hot);
+                    },
+                },
+            ],
+            {cancelable: false},
+        );
+    }
+
+    onDeleteSuccess(json) {
+        this.setState({loading: false});
+        this.fetchTimeSetting();
+    }
+
+    onDeleteError(error) {
+        this.setState({loading: false});
+        Alert.alert(
+            I18n.t('delete_error_alert_title'),
+            I18n.t('delete_error_alert_message'),
+            [
+                {
+                    text: I18n.t('OK'),
+                    onPress: () => {
+                    },
+                },
+            ],
+            {cancelable: true},
+        );
     }
 
     handleRefresh() {

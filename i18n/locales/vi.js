@@ -35,8 +35,8 @@ export default {
     'both_ring_alarm_text': 'Chuông và thông báo',
     'includes_text': 'Bao gồm',
     'excludes_text': 'Ngoại trừ',
-    'change_text': 'Cập nhật',
-    'finish_text': 'Hoàn thành',
+    'change_text': 'Sửa',
+    'finish_text': 'Xong',
     'reset_text': 'Đặt lại',
     'add_include_text': 'Thêm 1 cài đặt trong Bao gồm',
     'add_exclude_text': 'Thêm 1 cài đặt trong Ngoại trừ',
@@ -51,6 +51,11 @@ export default {
     'daysOfWeek': 'ngày trong tuần',
     'month': 'tháng',
     'year': 'năm',
+
+    'delete_alert_title': 'Xác nhận xoá',
+    'delete_alert_message': 'Bạn thật sự muốn xoá cài đặt này?',
+    'delete_error_alert_title': 'Xoá thất bại',
+    'delete_error_alert_message': 'Gặp sự cố khi xoá cài đặt. Vui lòng thử lại!',
 
     // login screen
     'login_screen_title': 'Đăng nhập',

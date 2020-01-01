@@ -11,10 +11,12 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginBottom="@dimen/_36sdp"
+            android:layout_marginTop="@dimen/_36sdp"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_marginRight="@dimen/_16sdp"
             android:text="@string/dialing_activity_title"
-            android:textSize="@dimen/_36ssp"
+            android:textSize="@dimen/_26ssp"
             android:textStyle="bold"/>
 
     <LinearLayout
@@ -22,19 +24,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:gravity="bottom">
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp">
+                android:layout_height="@dimen/_50sdp">
 
             <Button
                     android:id="@+id/go_back_button"
                     android:layout_gravity="center"
-                    android:layout_width="@dimen/_200sdp"
+                    android:layout_width="@dimen/_50sdp"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
+                    android:layout_marginLeft="@dimen/_16sdp"
                     android:background="@color/red"
                     android:text="@string/go_back"
                     android:textColor="@color/white"/>
@@ -42,10 +46,11 @@
             <Button
                     android:id="@+id/trigger_alert_button"
                     android:layout_gravity="center"
-                    android:layout_width="@dimen/_200sdp"
+                    android:layout_width="@dimen/_50sdp"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginRight="@dimen/_16sdp"
                     android:background="@color/green"
                     android:text="@string/go_to_the_app"
                     android:textColor="@color/white"/>

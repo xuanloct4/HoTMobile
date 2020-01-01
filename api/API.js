@@ -4,7 +4,14 @@ import DataManager from '../app_data/DataManager';
 export default class API {
     static url = {
         USER: '/user',
+        USER_ACTIVATE: '/user/activate',
+        USER_HARD_DELETE: '/user/delete',
+        USER_SOFT_DELETE: '/user/soft-delete',
+        USER_DEACTIVATE: '/user/deactivate',
         USER_CONFIGURATION: '/user/configuration',
+        USER_CONFIGURATION_HARD_DELETE: '/user/configuration/delete',
+        USER_CONFIGURATION_SOFT_DELETE: '/user/configuration/soft-delete',
+        USER_CONFIGURATION_DEACTIVATE: '/user/configuration/deactivate',
         USER_AUTHORIZE: '/user/authorize',
         USER_ITS: '/user/its',
         USER_ALL: '/user/all',
@@ -14,15 +21,18 @@ export default class API {
         BOARD_ITS: '/board/its',
         BOARD_ALL: '/board/all',
         BOARD_CONFIGURATION_SEARCH: '/board/configuration/search',
+        USER_DEVICE_ACTIVATE: '/device/activate',
         USER_DEVICE_CONFIGURATION: '/device/configuration',
         USER_DEVICE_ITS: '/device/its',
         USER_DEVICE_ALL: '/device/all',
         USER_DEVICE_CONFIGURATION_SEARCH: '/device/configuration/search',
+
+        USER_REGISTER_DEVICE: '/device/register',
     };
 
     static baseURL = {
-        // hot: 'http://192.168.0.132/hot/public/api',
-        hot: 'http://localhost/hot/public/api',
+        hot: 'http://192.168.1.4/hot/public/api',
+        // hot: 'http://localhost/hot/public/api',
     };
 
     static defaultHeaders = {
@@ -40,7 +50,7 @@ export default class API {
     };
 
     static fetchAPI = (onSuccess, onError, url, bodyObject, additionalHeaders, method = API.httpMethods.GET, baseURL = API.baseURL.hot) => {
-        let headers = API.defaultHeaders;
+        let headers = JSON.parse(JSON.stringify(API.defaultHeaders));
         let status;
 
         let addHeaderKeys = Object.keys(additionalHeaders);

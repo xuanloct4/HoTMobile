@@ -19,6 +19,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,8 +57,9 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
     }
     @ReactMethod
     void navigateToExample() {
-        MyPushService.processNotification();
+        MyPushService.processNotification(null);
     }
+
     @ReactMethod
     void dialNumber(@Nonnull String number) {
         Activity activity = getCurrentActivity();
@@ -106,4 +108,85 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
     static void triggerAlert(@Nonnull String message) {
         eventEmitter.emit("MyEventValue", message);
     }
+
+
+
+
+
+
+
+
+    //
+    @ReactMethod
+    void getRandomId(Callback callback) {
+        callback.invoke(Utils.getRandomId());
+    }
+
+    @ReactMethod
+    void getSaltString(Callback callback) {  callback.invoke(Utils.getSaltString()); }
+
+    @ReactMethod
+    void getRamdomNumber(int max, Callback callback) {
+        callback.invoke(Utils.getRamdomNumber(max));
+    }
+
+    @ReactMethod
+    void setLanguage(Context context, String language) { Utils.setLanguage(MainApplication.getInstance(), language); }
+
+    @ReactMethod
+    void encryptRSA(String plaintext, String pub_key, Callback callback) {
+        String en = Utils.encryptRSA(plaintext, pub_key);
+        callback.invoke(en);
+    }
+
+    @ReactMethod
+    void decryptRSA(String plaintext, String pub_key, Callback callback) { callback.invoke(Utils.decryptRSA(plaintext, pub_key)); }
+
+    @ReactMethod
+    void getDeviceName(Callback callback) {
+        callback.invoke(Utils.getDeviceName());
+    }
+
+    @ReactMethod
+    void getSerialNumber(Callback callback) { callback.invoke(Utils.getSerialNumber()); }
+
+    @ReactMethod
+    void getFirmwareVersion(Callback callback) {
+        callback.invoke(Utils.getFirmwareVersion());
+    }
+
+    @ReactMethod
+    void getDeviceId(Callback callback) {
+        callback.invoke(Utils.getDeviceId());
+    }
+
+    @ReactMethod
+    void getDeviceDes(Callback callback) {
+        callback.invoke(Utils.getDeviceDes());
+    }
+
+    @ReactMethod
+    void getScreenWidth(Callback callback) { callback.invoke(Utils.getScreenWidth()); }
+
+    @ReactMethod
+    void getScreenHeight(Callback callback) { callback.invoke(Utils.getScreenHeight()); }
+
+    @ReactMethod
+    void getOSVersion(Callback callback) {
+        callback.invoke(android.os.Build.VERSION.SDK_INT);
+    }
+
+//    @ReactMethod
+//    void getUniqueIMEIId(Callback callback) {
+//        callback.invoke(getNetworkInfo(1));
+//    }
+
+    @ReactMethod
+    void getMACAddress(String interfaceName, Callback callback) { callback.invoke(Utils.getMACAddress(interfaceName)); }
+
+    @ReactMethod
+    void getIPAddress(boolean useIPv4, Callback callback) { callback.invoke(Utils.getIPAddress(useIPv4)); }
+
+    @ReactMethod
+    void getCurrentTime(Callback callback) { callback.invoke(Utils.getCurrentTime()); }
 }

@@ -8,7 +8,7 @@ import {
     Alert,
     StatusBar,
     TouchableHighlight,
-    Image,
+    Image, NativeModules, Platform,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 
@@ -22,6 +22,8 @@ import DefaultPreference from 'react-native-default-preference';
 import Loader from '../../components/Loader';
 import DataManager from '../../app_data/DataManager';
 import I18n from '../../i18n/i18n';
+import ActivityStarter from '../../native_modules/ActivityStarter';
+import PushNotification from '../../services/PushNotification';
 
 class LoginScreen extends React.Component {
 
@@ -39,41 +41,100 @@ class LoginScreen extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        this.setState({popoverIsOpen: false,loading: false});
+        this.setState({popoverIsOpen: false, loading: false});
+    }
+
+    callLoginAPI = (usrname, passwordEn) => {
+        let body = new Object();
+        body.uuid = usrname;
+        body.authorized_code = passwordEn;
+        API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_AUTHORIZE, body, {}, API.httpMethods.POST, API.baseURL.hot);
+    }
+
+    logCallback = (en) => {
+        this.callLoginAPI(this.username,en);
     }
 
     login() {
-        this.setState({loading: true, usernameErrorKey: '', passwordErrorKey : ''});
-        // fetchAPI(onSuccess, onError, url, bodyObject, additionalHeaders, method=API.httpMethods.GET, baseURL= API.baseURL.hot)
-
-        RSAUtils.encrypt(this.password)
-            .then((en) => {
-            let body = new Object();
-            body.uuid = this.username;
-            body.authorized_code = en;
-            API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_AUTHORIZE, body, {}, API.httpMethods.POST, API.baseURL.hot);
-        });
+        this.setState({loading: true, usernameErrorKey: '', passwordErrorKey: ''});
+        if(Platform.OS === 'android') {
+            ActivityStarter.encryptRSA(this.password, DataManager.getInstance().pubkeyRSATrimmed, this.logCallback);
+        } else {
+            RSAUtils.encrypt(this.password)
+                .then((en) => {
+                    this.callLoginAPI(this.username, en);
+                });
+        }
     }
 
-    goHome() {
+    goToHome = () => {
         this.setState({loading: false});
         this.navigation.navigate('Home', {screenProps: {i18n: this.state.i18n, locale: this.state.language}});
-        return;
     }
 
     onSuccess(json) {
-        console.log("Success");
-        DefaultPreference.set('Authorization', json).then(function() {
-            DefaultPreference.get('Authorization').then((a) => {
-                console.log("Save Authorization: ", a);
-            });
-        });
+        console.log('Success');
+        DataManager.getInstance().storeKeyValue('Authorization', json);
 
-       this.goHome();
+        let body = new Object();
+        API.fetchAPI(this.onUserActivateSuccess.bind(this), this.onUserActivateError.bind(this), API.url.USER_ACTIVATE, body, {}, API.httpMethods.POST, API.baseURL.hot);
     }
 
     onError(error) {
-        this.setState({loading: false, usernameErrorKey: '', passwordErrorKey : 'wrong_username_or_password'});
+        this.setState({loading: false, usernameErrorKey: '', passwordErrorKey: 'wrong_username_or_password'});
+    }
+
+    onRegisterSuccess(json) {
+        let auth =  DataManager.getInstance().valueForKey('Authorization');
+        DefaultPreference.set('Authorization', auth).then(function () {
+            console.log('Save Authorization: ', auth);
+            this.goToHome();
+        });
+    }
+
+    onRegisterError(error) {
+        this.setState({loading: false});
+        Alert.alert(
+            I18n.t('delete_error_alert_title'),
+            I18n.t('delete_error_alert_message'),
+            [
+                {
+                    text: I18n.t('OK'),
+                    onPress: () => {
+                    },
+                },
+            ],
+            {cancelable: true},
+        );
+    }
+
+    onUserActivateSuccess(json) {
+        DefaultPreference.get('Device Token').then((token) => {
+            console.log('Get Device Token:', token);
+
+            DefaultPreference.get('Device Activation').then((deviceActivation) => {
+                console.log('Get Device Activation:', deviceActivation);
+                let deviceActivationObj = JSON.parse(deviceActivation);
+                let query = {device_token: token, uuid: deviceActivationObj.id};
+                API.fetchAPI(this.onRegisterSuccess.bind(this), this.onRegisterError.bind(this), API.url.USER_REGISTER_DEVICE, query, {}, API.httpMethods.POST, API.baseURL.hot);
+            });
+        });
+    }
+
+    onUserActivateError(error) {
+        this.setState({loading: false});
+        Alert.alert(
+            I18n.t('delete_error_alert_title'),
+            I18n.t('delete_error_alert_message'),
+            [
+                {
+                    text: I18n.t('OK'),
+                    onPress: () => {
+                    },
+                },
+            ],
+            {cancelable: true},
+        );
     }
 
     onUsernameUpdate(text) {
@@ -96,7 +157,8 @@ class LoginScreen extends React.Component {
                 </View>
                 <View style={styles.password}>
                     <CustomEditText secureTextEntry={true} i18nTitleKey={'password_title'}
-                                    i18nMessageKey={this.state.passwordErrorKey} i18nPlaceholderKey={'password_placeholder'}
+                                    i18nMessageKey={this.state.passwordErrorKey}
+                                    i18nPlaceholderKey={'password_placeholder'}
                                     onTextChanged={(text) => this.onPasswordUpdate(text)}/>
                 </View>
 

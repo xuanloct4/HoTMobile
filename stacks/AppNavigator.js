@@ -10,6 +10,7 @@ import I18n from '../i18n/i18n';
 import HomeTabStack from './HomeTabStack';
 import SplashScreen from '../screens/Splash/SplashScreen';
 import {createAppContainer} from 'react-navigation';
+import DeviceManageScreen from '../screens/Profile/DeviceManageScreen';
 
 class AppNavigator extends React.Component {
     static navigationOptions = ({});
@@ -74,8 +75,7 @@ class AppNavigator extends React.Component {
                         //     headerVisible: false,
                         // },
                     },
-
-                    // Profile: {screen: ProfileScreen},
+                    Devices: DeviceManageScreen,
                 },
                 // {
                 //     initialRouteName: "Drawer",

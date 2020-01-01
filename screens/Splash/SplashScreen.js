@@ -7,7 +7,7 @@ import {
     Button,
     StatusBar,
     SectionList,
-    Alert, TouchableOpacity, Image, Picker,
+    Alert, TouchableOpacity, Image, Picker, NativeModules,
 } from 'react-native';
 import I18n from '../../i18n/i18n';
 // import connect from 'react-redux/es/connect/connect';
@@ -17,6 +17,9 @@ import CustomButton from '../../components/CustomButton';
 import CustomTextView from '../../components/CustomTextView';
 import DefaultPreference from 'react-native-default-preference';
 import DataManager from '../../app_data/DataManager';
+import PushNotification from '../../services/PushNotification';
+import API from '../../api/API';
+import ActivityStarter from '../../native_modules/ActivityStarter';
 
 class SplashScreen extends React.Component {
     static navigationOptions = {
@@ -25,6 +28,9 @@ class SplashScreen extends React.Component {
 
     constructor(props) {
         super(props);
+
+        PushNotification();
+
         this.state = {
             i18n: I18n,
         };
@@ -35,48 +41,73 @@ class SplashScreen extends React.Component {
         // if (language) {
         //     this.setMainLocaleLanguage(language);
         // } else {
+
+
+
         DefaultPreference.get('App Language').then((language) => {
             console.log('Get language:', language);
             let appLanaguage = language;
             if (language == null) {
-                appLanaguage = "vi";
+                appLanaguage = 'vi';
             }
             this.setLanguage(appLanaguage);
 
-            let json = new Object();
-            json.token = "bTAZS1IZvpjmRqYMUUvafSBm09xtnicGE8RMPg8W1VhLDd2UDE6vcQJC97QaBblW";
-            json.expired_interval = 7776000;
-            json.number_of_valid_access = 1;
+            let query = {};
+            API.fetchAPI(this.onDeviceActivateSuccess.bind(this), this.onDeviceActivateError.bind(this), API.url.USER_DEVICE_ACTIVATE, query, {'Chanel-ID': 2}, API.httpMethods.POST, API.baseURL.hot);
+        });
+    }
 
-            DefaultPreference.set('Authorization', JSON.stringify(json)).then(function() {
-                DefaultPreference.get('Authorization').then((a) => {
-                    console.log("Save Authorization: ", a);
-                });
-            });
+    updateAuthorization = () => {
+        // //TODO
+        // // Delete when release
+        // let authorizationJSON = new Object();
+        // authorizationJSON.token = 'bTAZS1IZvpjmRqYMUUvafSBm09xtnicGE8RMPg8W1VhLDd2UDE6vcQJC97QaBblW';
+        // authorizationJSON.expired_interval = 7776000;
+        // authorizationJSON.number_of_valid_access = 1;
+        // DefaultPreference.set('Authorization', JSON.stringify(authorizationJSON)).then(function () {
+        //     DefaultPreference.get('Authorization').then((a) => {
+        //         console.log('Save Authorization: ', a);
+        //     });
+        // });
+        // //
 
-            DefaultPreference.get('Authorization').then((auth) => {
-                console.log('Authorization: ', auth);
-                if (auth) {
-                    let token = JSON.parse(auth).token;
-                    console.log('Token: ', token);
-                    if (token) {
-                        DataManager.getInstance().storeKeyValue('token', token);
-                        setTimeout(() => {
-                            this.goHome();
-                        }, 2000);
-                    } else {
-                        setTimeout(() => {
-                            this.goLogin();
-                        }, 1000);
-                    }
+        DefaultPreference.get('Authorization').then((auth) => {
+            console.log('Authorization: ', auth);
+            if (auth) {
+                let token = JSON.parse(auth).token;
+                console.log('Token: ', token);
+                if (token) {
+                    DataManager.getInstance().storeKeyValue('token', token);
+                    // setTimeout(() => {
+                    //     this.goHome();
+                    // }, 2000);
                 } else {
                     setTimeout(() => {
                         this.goLogin();
                     }, 1000);
                 }
-            });
+            } else {
+                setTimeout(() => {
+                    this.goLogin();
+                }, 1000);
+            }
         });
     }
+
+    onDeviceActivateSuccess(json) {
+        console.log('Success');
+        DefaultPreference.set('Device Activation', json).then(function () {
+            console.log('Save Device Activation: ', json);
+        });
+
+        this.updateAuthorization();
+    }
+
+    onDeviceActivateError(error) {
+        this.updateAuthorization();
+        // this.goLogin();
+    }
+
 
     goHome() {
         this.props.navigation.navigate('Home', {screenProps: {i18n: this.state.i18n, locale: this.state.language}});

@@ -54,11 +54,11 @@ public class MyPushService extends FirebaseMessagingService {
 //            service.onMessageReceived(remoteMessage);
 //        });
 
-        MyPushService.processNotification();
+        MyPushService.processNotification(remoteMessage);
     }
 
 
-    public static void processNotification() {
+    public static void processNotification(RemoteMessage remoteMessage) {
         Intent myIntent = new Intent(MainApplication.getContext(), DialingActitvity.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -92,26 +92,27 @@ public class MyPushService extends FirebaseMessagingService {
             mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
 
             mNotifyManager.createNotificationChannel(mChannel);
-        }
+        } else {
 //For Android Version lower than oreo.
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainApplication.getContext(), "Seasame");
-        mBuilder.setContentTitle("dsff")
-                .setContentText("dsfsdfds")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(MainApplication.getContext().getResources(), R.mipmap.ic_launcher))
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setColor(Color.parseColor("#FFD600"))
-                .setContentIntent(notifyPendingIntent)
-                .setChannelId("Sesame")
-                .setPriority(NotificationCompat.PRIORITY_LOW);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainApplication.getContext(), "Seasame");
+            mBuilder.setContentTitle("dsff")
+                    .setContentText("dsfsdfds")
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setLargeIcon(BitmapFactory.decodeResource(MainApplication.getContext().getResources(), R.mipmap.ic_launcher))
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setColor(Color.parseColor("#FFD600"))
+                    .setContentIntent(notifyPendingIntent)
+                    .setChannelId("Sesame")
+                    .setPriority(NotificationCompat.PRIORITY_LOW);
 
-        String CHANNEL_ID = "android";
-        int NOTIFICATION_ID = 1;
+            String CHANNEL_ID = "android";
+            int NOTIFICATION_ID = 1;
 //        NotificationCompat.Builder builder = new NotificationCompat.Builder((Application)reactContext.getApplicationContext(), CHANNEL_ID);
 //        builder.setContentIntent(notifyPendingIntent);
 //
 //        NotificationManagerCompat mNotifyManager = NotificationManagerCompat.from((Application)reactContext.getApplicationContext());
-        mNotifyManager.notify(NOTIFICATION_ID, mBuilder.build());
+            mNotifyManager.notify(NOTIFICATION_ID, mBuilder.build());
+        }
     }
 }

@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     View,
-    BackHandler
+    BackHandler, Picker,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 // import { Ionicons } from '@expo/vector-icons';
@@ -22,6 +22,7 @@ import Loader from '../../components/Loader';
 import CustomButton from '../../components/CustomButton';
 import Alarm from './AlarmType';
 import I18n from '../../i18n/i18n';
+import API from '../../api/API';
 
 class ListItem extends React.Component {
     render() {
@@ -55,7 +56,8 @@ class ListItem extends React.Component {
                 return (
                     <TouchableOpacity onPress={onPress}>
                         <View style={listItemStyles.itemStyle}>
-                            <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleUnEditing]} numberOfLines={1000}>{word}</Text>
+                            <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleUnEditing]}
+                                  numberOfLines={1000}>{word}</Text>
                             <Image style={listItemStyles.rightIconStyle}
                                    source={require('../../assets/images/ic_reveal.png')}/>
                         </View>
@@ -65,7 +67,8 @@ class ListItem extends React.Component {
                 return (
                     <TouchableOpacity onPress={onPress}>
                         <View style={listItemStyles.itemStyle}>
-                            <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleUnEditing]} numberOfLines={1000}>{word}</Text>
+                            <Text style={[listItemStyles.titleStyle, listItemStyles.leftTitleUnEditing]}
+                                  numberOfLines={1000}>{word}</Text>
                         </View>
                     </TouchableOpacity>
                 );
@@ -155,15 +158,15 @@ class DetailDateTimeScreen extends React.Component {
     }
 
     componentWillUnmount() {
-        this.backHandler.remove()
+        this.backHandler.remove();
     }
 
     handleBackPress = () => {
         // this.goBack(); // works best when the goBack is async
-        console.log("On back pressed");
+        console.log('On back pressed');
         this.props.navigation.navigate('Home', {});
         return true;
-    }
+    };
 
     UNSAFE_componentWillMount() {
         this.setState({popoverIsOpen: false});
@@ -172,34 +175,36 @@ class DetailDateTimeScreen extends React.Component {
     }
 
     reset() {
-        console.log("Reset");
-        const { navigation } = this.props;
-        this.initDS(navigation.getParam('DateTimeSetting'), navigation.getParam('isEditing'), navigation.getParam('isAddNew'));
-        navigation.setParams({"component": null});
+        console.log('Reset');
+        const {navigation} = this.props;
+        this.initDS(navigation.getParam('DateTimeSetting'), navigation.getParam('isEditing'), navigation.getParam('isAddNew'), navigation.getParam('isIncludes'), navigation.getParam('isExcludes'), navigation.getParam('updateOrder'));
+        navigation.setParams({'component': null});
     }
 
-    initDS(item, isEditing, isAddNew) {
+    initDS(item, isEditing, isAddNew, isIncludes, isExcludes, updateOrder) {
         let arr = [];
         let dtComponent = new DTComponent;
 
         let itemCloned = JSON.parse(JSON.stringify(item));
+        console.log("Init DS", JSON.stringify(item));
+
         // dtComponent.DTSetting = item.timeSetting;
         dtComponent.DTSetting = itemCloned.timeSetting;
 
         for (let i = 0; i < DateTimePickerModel.TimeComponents().length; i++) {
             let comp = DateTimePickerModel.TimeComponents()[i].component;
             let desc = dtComponent.description(comp, I18n);
-            console.log(desc);
+            // console.log(desc);
 
             arr.push({
                 description: desc,
                 indexPath: {section: 0, row: i},
                 component: DateTimePickerModel.TimeComponents()[i].component,
                 selectedItems: dtComponent.DTSetting[comp].selectedItems,
+                range: dtComponent.DTSetting[comp].range,
             });
         }
 
-        // console.log(JSON.stringify(arr));
 
         let ds = [
             {
@@ -207,9 +212,12 @@ class DetailDateTimeScreen extends React.Component {
                 data: arr,
                 isEditing: isEditing,
                 isAddNew: isAddNew,
+                isIncludes: isIncludes,
+                isExcludes: isExcludes,
+                updateOrder: updateOrder,
                 forRinging: item.forRinging,
                 forAlarm: item.forAlarm,
-                id: 0,
+                id: item.id,
             },
         ];
         this.setState({ds: ds, loading: false, refresh: true});
@@ -221,7 +229,7 @@ class DetailDateTimeScreen extends React.Component {
         comp.DTSetting[component].selectedItems = selectedItems;
         let ds = this.state.ds;
         for (let i = 0; i < ds[0].data.length; i++) {
-            if ( ds[0].data[i].component === component) {
+            if (ds[0].data[i].component === component) {
                 ds[0].data[i].selectedItems = selectedItems;
                 ds[0].data[i].description = comp.description(component, I18n);
                 break;
@@ -266,17 +274,79 @@ class DetailDateTimeScreen extends React.Component {
     }
 
     confirmChange() {
-        if (!this.state.ds[0].isEditing) {
 
+        let ds = this.state.ds;
+        if (!ds[0].isEditing) {
         } else {
-            let ds = this.state.ds;
-            let selectedItems = [];
+            this.setState({loading: false});
+
+            let body = new Object();
+            // body.files =
+            // body.uris =
+            // body.binary =
+            let settingObject = new Object();
+            settingObject.forRinging = ds[0].forRinging;
+            settingObject.forAlarm = ds[0].forAlarm;
+
+            let component = new Object();
             for (let i = 0; i < ds[0].data.length; i++) {
-                selectedItems.push(ds[0].data[i].item);
+                let obj = new Object();
+                let timeComp = ds[0].data[i].component;
+                obj.range = ds[0].data[i].range;
+                obj.selectedItems = ds[0].data[i].selectedItems;
+                component[timeComp] = obj;
+            }
+
+            if (ds[0].isIncludes) {
+                settingObject.includes = component;
+            }
+
+            if (ds[0].isExcludes) {
+                settingObject.excludes = component;
+            }
+
+            body.strings = JSON.stringify(settingObject);
+            body.update_order =  ds[0].updateOrder;
+            body.type = 3;
+            // body.scopes":"0,1,0,0",
+            body.category = 2;
+            body.is_deleted = false;
+            body.is_activated = true;
+            if (this.state.ds[0].isAddNew) {
+                console.log('Add new item');
+                API.fetchAPI(this.onAddSuccess, this.onAddError.bind(this), API.url.USER_CONFIGURATION, body, {}, API.httpMethods.POST, API.baseURL.hot);
+
+            } else {
+                console.log('Update item id', ds[0].id);
+                body.id = ds[0].id;
+                API.fetchAPI(this.onAddSuccess.bind(this), this.onAddError.bind(this), API.url.USER_CONFIGURATION, body, {}, API.httpMethods.PUT, API.baseURL.hot);
+
             }
         }
-        this.props.navigation.navigate('Setting', {"refresh": true});
+
     }
+
+    onAddSuccess = (json) => {
+        this.setState({loading: false});
+        this.props.navigation.navigate('Setting', {'refresh': true});
+    }
+
+    onAddError(error) {
+        this.setState({loading: false});
+        Alert.alert(
+            I18n.t('delete_error_alert_title'),
+            I18n.t('delete_error_alert_message'),
+            [
+                {
+                    text: I18n.t('OK'),
+                    onPress: () => {
+                    },
+                },
+            ],
+            {cancelable: true},
+        );
+    }
+
 
     setAlarmType = (type) => {
         if (!this.state.ds[0].isEditing) {
@@ -298,7 +368,7 @@ class DetailDateTimeScreen extends React.Component {
                 break;
         }
         this.setState({ds: ds, refresh: !this.state.refresh});
-    }
+    };
 
     FlatListItemSeparator = () => {
         return (
@@ -314,7 +384,7 @@ class DetailDateTimeScreen extends React.Component {
 
     render() {
 
-        const { navigation } = this.props;
+        const {navigation} = this.props;
         // if (navigation.getParam('DateTimeSetting')) {
         //     this.initDS(navigation.getParam('DateTimeSetting'), navigation.getParam('isEditing'));
         //     this.props.navigation.setParams({DateTimeSetting: null, isEditing: null});
@@ -324,9 +394,9 @@ class DetailDateTimeScreen extends React.Component {
         let ds;
         // console.log(navigation.getParam("component"));
         // console.log(navigation.getParam("selectedItems"));
-        if (navigation.getParam("component")) {
-            console.log("Got param component");
-            ds = this.onComponentUpdated(navigation.getParam("component"), navigation.getParam("selectedItems"));
+        if (navigation.getParam('component')) {
+            console.log('Got param component');
+            ds = this.onComponentUpdated(navigation.getParam('component'), navigation.getParam('selectedItems'));
             console.log(JSON.stringify(ds));
         } else {
             ds = this.state.ds;
@@ -342,21 +412,24 @@ class DetailDateTimeScreen extends React.Component {
                     loading={this.state.loading}/>
 
                 <View style={homeStyles.segmentSelection}>
-                    <View style={[(ds[0].forRinging && ds[0].forAlarm) ? homeStyles.selectedSegment : homeStyles.unselectedSegment, homeStyles.firstSegment]}>
+                    <View
+                        style={[(ds[0].forRinging && ds[0].forAlarm) ? homeStyles.selectedSegment : homeStyles.unselectedSegment, homeStyles.firstSegment]}>
                         {/*<Button title='Chuông và thông báo' > </Button>*/}
-                        <TouchableOpacity onPress={ this.setAlarmType.bind(this, Alarm.AlarmType.BOTH) }>
+                        <TouchableOpacity onPress={this.setAlarmType.bind(this, Alarm.AlarmType.BOTH)}>
                             <Text style={homeStyles.segmentText}>Chuông và thông báo</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={(ds[0].forRinging && !ds[0].forAlarm) ? homeStyles.selectedSegment : homeStyles.unselectedSegment}>
+                    <View
+                        style={(ds[0].forRinging && !ds[0].forAlarm) ? homeStyles.selectedSegment : homeStyles.unselectedSegment}>
                         {/*<Button title='Chỉ chuông' > </Button>*/}
-                        <TouchableOpacity onPress={ this.setAlarmType.bind(this, Alarm.AlarmType.RING_ONLY) }>
+                        <TouchableOpacity onPress={this.setAlarmType.bind(this, Alarm.AlarmType.RING_ONLY)}>
                             <Text style={homeStyles.segmentText}>Chỉ chuông</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={[(!ds[0].forRinging && ds[0].forAlarm) ? homeStyles.selectedSegment : homeStyles.unselectedSegment, homeStyles.lastSegment]}>
+                    <View
+                        style={[(!ds[0].forRinging && ds[0].forAlarm) ? homeStyles.selectedSegment : homeStyles.unselectedSegment, homeStyles.lastSegment]}>
                         {/*<Button title='Chỉ thông báo'> </Button>*/}
-                        <TouchableOpacity onPress={ this.setAlarmType.bind(this, Alarm.AlarmType.NOTIFICATION_ONLY) }>
+                        <TouchableOpacity onPress={this.setAlarmType.bind(this, Alarm.AlarmType.NOTIFICATION_ONLY)}>
                             <Text style={homeStyles.segmentText}>Chỉ thông báo</Text>
                         </TouchableOpacity>
                     </View>

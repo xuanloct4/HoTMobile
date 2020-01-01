@@ -35,8 +35,8 @@ export default {
     'both_ring_alarm_text': 'Ring and Notification',
     'includes_text': 'Includes',
     'excludes_text': 'Excludes',
-    'change_text': 'Change',
-    'finish_text': 'Finish',
+    'change_text': 'Edit',
+    'finish_text': 'Done',
     'reset_text': 'Reset',
     'add_include_text': 'Add an include item',
     'add_exclude_text': 'Add an exclude item',
@@ -51,6 +51,11 @@ export default {
     'daysOfWeek': 'week day',
     'month': 'month',
     'year': 'year',
+
+    'delete_alert_title': 'Confirm Delete',
+    'delete_alert_message': 'Are you really want to delete?',
+    'delete_error_alert_title': 'Error Delete',
+    'delete_error_alert_message': 'There is a problem when delete. Please try again!',
 
     // login screen
     'login_screen_title': 'Login',

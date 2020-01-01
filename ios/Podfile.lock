@@ -289,6 +289,8 @@ PODS:
     - React-cxxreact (= 0.61.2)
     - React-jsi (= 0.61.2)
     - ReactCommon/jscallinvoker (= 0.61.2)
+  - RNCPushNotificationIOS (1.0.3):
+    - React
   - RNDefaultPreference (1.4.1):
     - React
   - RNFirebase (5.5.6):
@@ -345,6 +347,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNDefaultPreference (from `../node_modules/react-native-default-preference`)
   - RNFirebase (from `../node_modules/react-native-firebase/ios`)
   - RNFS (from `../node_modules/react-native-fs`)
@@ -427,6 +430,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCPushNotificationIOS:
+    :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDefaultPreference:
     :path: "../node_modules/react-native-default-preference"
   RNFirebase:
@@ -488,6 +493,7 @@ SPEC CHECKSUMS:
   React-RCTText: 3f24042210886ee8c02613758013010be04b291e
   React-RCTVibration: d55e1365be416980217914fe009e9d55dec02e03
   ReactCommon: eb96b70a2a5bed775e919151fd77699fed52944c
+  RNCPushNotificationIOS: e063e649fa697b77869c05fd18e370799285db4f
   RNDefaultPreference: df8a585db3fb7ab5575005ef3a3efac93454f239
   RNFirebase: ca408d6bee0ca9383bd0cfe84f40b01370b8ad4d
   RNFS: 6a2bfb5d0b14cf0ad72667f76202358abba4aacf
@@ -498,6 +504,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 66af4d5c8ff4f584c7b7cd9c4b0780920f27fce2
   Yoga: 6af72bedeaea291a3a3717772d6d41836f23a1b9
 
-PODFILE CHECKSUM: 19183658451f5c910aee8818441f475c3144bb14
+PODFILE CHECKSUM: fe8a66fec31fc7be2dc00d295109ee84964e0481
 
 COCOAPODS: 1.6.0.beta.1
