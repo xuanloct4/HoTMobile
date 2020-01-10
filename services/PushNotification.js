@@ -1,51 +1,48 @@
-
-import {AppState, NativeModules} from 'react-native';
+import {AppState, NativeModules, Platform} from 'react-native';
 // import { PushNotificationIOS } from "react-native";
-import PushNotificationIOS from "@react-native-community/push-notification-ios";
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PubNubReact from 'pubnub-react';
-import type { RemoteMessage } from 'react-native-firebase';
+import type {RemoteMessage} from 'react-native-firebase';
 import API from '../api/API';
 import DefaultPreference from 'react-native-default-preference';
-const activityStarter = NativeModules.ActivityStarter;
 
 export default async () => {
-    var PushNotification = require("react-native-push-notification");
+    var PushNotification = require('react-native-push-notification');
 
+    if (Platform.OS === 'ios') {
+        PushNotificationIOS.addEventListener('register', (token) => {
+            this.setState({
+                deviceToken: token,
+            });
+        });
 
-    PushNotificationIOS.addEventListener('register', (token) => {
-        this.setState({
-            deviceToken: token
-        })
-    });
-
-    PushNotificationIOS.addEventListener('registrationError', (registrationError) => {
-        console.log('was error');
-        console.log(registrationError.message);
-        console.log(registrationError.code);
-        console.log(registrationError.details);
-    });
+        PushNotificationIOS.addEventListener('registrationError', (registrationError) => {
+            console.log('was error');
+            console.log(registrationError.message);
+            console.log(registrationError.code);
+            console.log(registrationError.details);
+        });
 
 // yes I'm aware I've added an event listener in the constructor also. Neither of these callbacks fire
-    PushNotificationIOS.addEventListener('register', (token) => {
-        console.log('this is the token', token);
-    });
+        PushNotificationIOS.addEventListener('register', (token) => {
+            console.log('this is the token', token);
+        });
 
-    // console.log('requesting permissions');
-    // PushNotificationIOS.requestPermissions();
+        // console.log('requesting permissions');
+        // PushNotificationIOS.requestPermissions();
+    }
 
     PushNotification.configure({
         // (optional) Called when Token is generated (iOS and Android)
-        onRegister: function(token) {
-            console.log("TOKEN:", token);
-
-            DefaultPreference.set('Device Token', token).then(function() {
-                console.log("Save Device Token: ", token);
+        onRegister: function (token) {
+            DefaultPreference.set('Device Token', token.token).then(function () {
+                console.log('Save Device Token: ', token);
             });
         },
 
         // (required) Called when a remote or local notification is opened or received
-        onNotification: function(notification) {
-            console.log("NOTIFICATION:", notification);
+        onNotification: function (notification) {
+            console.log('NOTIFICATION:', notification);
 
             // process the notification
             console.log('Running Headless….');
@@ -57,13 +54,13 @@ export default async () => {
         },
 
         // ANDROID ONLY: GCM or FCM Sender ID (product_number) (optional - not required for local notifications, but is need to receive remote push notifications)
-        senderID: "657467070181",
+        senderID: '657467070181',
 
         // IOS ONLY (optional): default: all - Permissions to register.
         permissions: {
             alert: true,
             badge: true,
-            sound: true
+            sound: true,
         },
 
         // Should the initial notification be popped automatically
@@ -75,7 +72,7 @@ export default async () => {
          * - Specified if permissions (ios) and token (android and ios) will requested or not,
          * - if not, you must call PushNotificationsHandler.requestPermissions() later
          */
-        requestPermissions: true
+        requestPermissions: true,
     });
 
 

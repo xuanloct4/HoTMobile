@@ -5,12 +5,44 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* HoTMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HoTMobileTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1A05B7C123BDDE52004FB795 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7A123BDDE51004FB795 /* KeychainConfiguration.swift */; };
+		1A05B7C223BDDE52004FB795 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7A223BDDE51004FB795 /* KeychainPasswordItem.swift */; };
+		1A05B7C323BDDE52004FB795 /* KeychainUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7A323BDDE51004FB795 /* KeychainUtil.swift */; };
+		1A05B7C423BDDE52004FB795 /* Dictionary+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7A423BDDE51004FB795 /* Dictionary+Ext.swift */; };
+		1A05B7C623BDDE52004FB795 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7A623BDDE51004FB795 /* TextUtils.swift */; };
+		1A05B7C723BDDE52004FB795 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7A723BDDE51004FB795 /* UIColorExtension.swift */; };
+		1A05B7C823BDDE52004FB795 /* UITextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7A823BDDE51004FB795 /* UITextViewExtension.swift */; };
+		1A05B7C923BDDE52004FB795 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7AA23BDDE51004FB795 /* FileSystem.swift */; };
+		1A05B7CA23BDDE52004FB795 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7AB23BDDE51004FB795 /* UILabelExtension.swift */; };
+		1A05B7CB23BDDE52004FB795 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7AC23BDDE51004FB795 /* UIApplicationExtension.swift */; };
+		1A05B7CC23BDDE52004FB795 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7AD23BDDE51004FB795 /* DateUtils.swift */; };
+		1A05B7CD23BDDE52004FB795 /* LocalizeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7AF23BDDE51004FB795 /* LocalizeText.swift */; };
+		1A05B7CE23BDDE52004FB795 /* L012Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B023BDDE51004FB795 /* L012Localizer.swift */; };
+		1A05B7CF23BDDE52004FB795 /* L102Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B123BDDE51004FB795 /* L102Language.swift */; };
+		1A05B7D023BDDE52004FB795 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B223BDDE51004FB795 /* UIViewExtension.swift */; };
+		1A05B7D123BDDE52004FB795 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B323BDDE51004FB795 /* String+MD5.swift */; };
+		1A05B7D223BDDE52004FB795 /* CallStackAnalyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B423BDDE51004FB795 /* CallStackAnalyser.swift */; };
+		1A05B7D323BDDE52004FB795 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B523BDDE51004FB795 /* StringExtension.swift */; };
+		1A05B7D423BDDE52004FB795 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B623BDDE52004FB795 /* UIImageExtension.swift */; };
+		1A05B7D523BDDE52004FB795 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B723BDDE52004FB795 /* DoubleExtension.swift */; };
+		1A05B7D623BDDE52004FB795 /* Date+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7B823BDDE52004FB795 /* Date+ISO8601.swift */; };
+		1A05B7D723BDDE52004FB795 /* ValidatorEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7BA23BDDE52004FB795 /* ValidatorEmail.swift */; };
+		1A05B7D823BDDE52004FB795 /* ValidatorPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7BB23BDDE52004FB795 /* ValidatorPhoneNumber.swift */; };
+		1A05B7D923BDDE52004FB795 /* ValidatorRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7BC23BDDE52004FB795 /* ValidatorRegex.swift */; };
+		1A05B7DA23BDDE52004FB795 /* Validable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7BD23BDDE52004FB795 /* Validable.swift */; };
+		1A05B7DB23BDDE52004FB795 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7BE23BDDE52004FB795 /* Validator.swift */; };
+		1A05B7DC23BDDE52004FB795 /* ValidatorMinMax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7BF23BDDE52004FB795 /* ValidatorMinMax.swift */; };
+		1A05B7DD23BDDE52004FB795 /* ValidatorEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7C023BDDE52004FB795 /* ValidatorEmpty.swift */; };
+		1A05B7DF23BDE16B004FB795 /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7DE23BDE16B004FB795 /* ApplicationData.swift */; };
+		1A05B7E123BDE1D9004FB795 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B7E023BDE1D9004FB795 /* Constants.swift */; };
+		1A41300923BDACAE00B9C626 /* ActivityStarter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41300823BDACAE00B9C626 /* ActivityStarter.m */; };
 		1A762F3623BB8B13000618F0 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762F3523BB8B13000618F0 /* libBVLinearGradient.a */; };
 		1A762F3823BB8B13000618F0 /* libDoubleConversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762F3723BB8B13000618F0 /* libDoubleConversion.a */; };
 		1A762F3A23BB8B13000618F0 /* libFBReactNativeSpec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762F3923BB8B13000618F0 /* libFBReactNativeSpec.a */; };
@@ -168,6 +200,7 @@
 		1AAC3B6E2350E5EF009D46F6 /* libRNTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B6D2350E5EF009D46F6 /* libRNTableView.a */; };
 		1AAC3B702350E5EF009D46F6 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B6F2350E5EF009D46F6 /* libRNVectorIcons.a */; };
 		1AAC3B722350E5EF009D46F6 /* libYoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAC3B712350E5EF009D46F6 /* libYoga.a */; };
+		1AF0F16023BDCB9A000D6991 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF0F15F23BDCB9A000D6991 /* Utils.swift */; };
 		1AF6AA75238D9766001C7AA4 /* libDoubleConversion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AA74238D9766001C7AA4 /* libDoubleConversion.a */; };
 		1AF6AA77238D9766001C7AA4 /* libFBReactNativeSpec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AA76238D9766001C7AA4 /* libFBReactNativeSpec.a */; };
 		1AF6AA79238D9766001C7AA4 /* libFirebaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AA78238D9766001C7AA4 /* libFirebaseCore.a */; };
@@ -260,15 +293,18 @@
 		35EEF878676EBAC3DD7CAE62 /* libPods-HoTMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9084BC1EDE16FC8B46056F6B /* libPods-HoTMobile-tvOSTests.a */; };
 		39A9A10846A37B480BD6D07B /* libPods-HoTMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762F4F23BB8B13000618F0 /* libPods-HoTMobile-tvOSTests.a */; };
 		441E4E39367E0E27B4365B06 /* libPods-HoTMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AA8A238D9766001C7AA4 /* libPods-HoTMobile-tvOS.a */; };
+		496A61D2504A211AD16BD24E /* libPods-HoTMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762FA723BB90E2000618F0 /* libPods-HoTMobile-tvOS.a */; };
 		53E193A8414348FE8039EBAA /* libPods-HoTMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AAE2238D98AE001C7AA4 /* libPods-HoTMobile-tvOSTests.a */; };
 		76A4A7E2C63241F5F67A6F9D /* libPods-HoTMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AA8C238D9766001C7AA4 /* libPods-HoTMobile-tvOSTests.a */; };
 		892B159AC8D6587A7C0AB41A /* libPods-HoTMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AA90238D9766001C7AA4 /* libPods-HoTMobileTests.a */; };
 		8EB485343B8001E043A5CEA4 /* libPods-HoTMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762F4D23BB8B13000618F0 /* libPods-HoTMobile-tvOS.a */; };
 		A31566C4DAC41C5CCBE56AD9 /* libPods-HoTMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F363C0389CA9DA9C3AF63528 /* libPods-HoTMobileTests.a */; };
+		B0341AC096969ED4D1890655 /* libPods-HoTMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762FA923BB90E2000618F0 /* libPods-HoTMobile-tvOSTests.a */; };
 		D23689C914BD3147786515C2 /* libPods-HoTMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AAE6238D98AE001C7AA4 /* libPods-HoTMobileTests.a */; };
 		D990B76ED00B70EF5F89CA58 /* libPods-HoTMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF6AAE0238D98AE001C7AA4 /* libPods-HoTMobile-tvOS.a */; };
 		E6661F0E272B39F086E76A37 /* libPods-HoTMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C2A391384468E7566D0415 /* libPods-HoTMobile-tvOS.a */; };
 		EB93DF0AAB13C2847115E7C0 /* libPods-HoTMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E579980FC3F0BFE1418B71C6 /* libPods-HoTMobile.a */; };
+		ECAA5627A4D84B0C2F3D66EE /* libPods-HoTMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762FAD23BB90E2000618F0 /* libPods-HoTMobileTests.a */; };
 		F628D8E5271F905049E19E30 /* libPods-HoTMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A762F5323BB8B13000618F0 /* libPods-HoTMobileTests.a */; };
 /* End PBXBuildFile section */
 
@@ -290,7 +326,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* HoTMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HoTMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HoTMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HoTMobileTests.m; sourceTree = "<group>"; };
@@ -303,6 +338,39 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HoTMobile/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = HoTMobile/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HoTMobile/main.m; sourceTree = "<group>"; };
+		1A05B7A123BDDE51004FB795 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		1A05B7A223BDDE51004FB795 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		1A05B7A323BDDE51004FB795 /* KeychainUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
+		1A05B7A423BDDE51004FB795 /* Dictionary+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Ext.swift"; sourceTree = "<group>"; };
+		1A05B7A623BDDE51004FB795 /* TextUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
+		1A05B7A723BDDE51004FB795 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		1A05B7A823BDDE51004FB795 /* UITextViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextViewExtension.swift; sourceTree = "<group>"; };
+		1A05B7AA23BDDE51004FB795 /* FileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
+		1A05B7AB23BDDE51004FB795 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		1A05B7AC23BDDE51004FB795 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
+		1A05B7AD23BDDE51004FB795 /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		1A05B7AF23BDDE51004FB795 /* LocalizeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizeText.swift; sourceTree = "<group>"; };
+		1A05B7B023BDDE51004FB795 /* L012Localizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L012Localizer.swift; sourceTree = "<group>"; };
+		1A05B7B123BDDE51004FB795 /* L102Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L102Language.swift; sourceTree = "<group>"; };
+		1A05B7B223BDDE51004FB795 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		1A05B7B323BDDE51004FB795 /* String+MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
+		1A05B7B423BDDE51004FB795 /* CallStackAnalyser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallStackAnalyser.swift; sourceTree = "<group>"; };
+		1A05B7B523BDDE51004FB795 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		1A05B7B623BDDE52004FB795 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		1A05B7B723BDDE52004FB795 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		1A05B7B823BDDE52004FB795 /* Date+ISO8601.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+ISO8601.swift"; sourceTree = "<group>"; };
+		1A05B7BA23BDDE52004FB795 /* ValidatorEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorEmail.swift; sourceTree = "<group>"; };
+		1A05B7BB23BDDE52004FB795 /* ValidatorPhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorPhoneNumber.swift; sourceTree = "<group>"; };
+		1A05B7BC23BDDE52004FB795 /* ValidatorRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorRegex.swift; sourceTree = "<group>"; };
+		1A05B7BD23BDDE52004FB795 /* Validable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validable.swift; sourceTree = "<group>"; };
+		1A05B7BE23BDDE52004FB795 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		1A05B7BF23BDDE52004FB795 /* ValidatorMinMax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorMinMax.swift; sourceTree = "<group>"; };
+		1A05B7C023BDDE52004FB795 /* ValidatorEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorEmpty.swift; sourceTree = "<group>"; };
+		1A05B7DE23BDE16B004FB795 /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationData.swift; path = HoTMobile/ApplicationData.swift; sourceTree = "<group>"; };
+		1A05B7E023BDE1D9004FB795 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1A412FF723BDAB4300B9C626 /* HoTMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HoTMobile-Bridging-Header.h"; sourceTree = "<group>"; };
+		1A41300723BDACAE00B9C626 /* ActivityStarter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ActivityStarter.h; path = HoTMobile/ActivityStarter.h; sourceTree = "<group>"; };
+		1A41300823BDACAE00B9C626 /* ActivityStarter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ActivityStarter.m; path = HoTMobile/ActivityStarter.m; sourceTree = "<group>"; };
 		1A762F3523BB8B13000618F0 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A762F3723BB8B13000618F0 /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A762F3923BB8B13000618F0 /* libFBReactNativeSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBReactNativeSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -478,6 +546,7 @@
 		1AAC3B6D2350E5EF009D46F6 /* libRNTableView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNTableView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AAC3B6F2350E5EF009D46F6 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AAC3B712350E5EF009D46F6 /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AF0F15F23BDCB9A000D6991 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = HoTMobile/Utils.swift; sourceTree = "<group>"; };
 		1AF6AA74238D9766001C7AA4 /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF6AA76238D9766001C7AA4 /* libFBReactNativeSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBReactNativeSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AF6AA78238D9766001C7AA4 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -604,6 +673,7 @@
 				892B159AC8D6587A7C0AB41A /* libPods-HoTMobileTests.a in Frameworks */,
 				D23689C914BD3147786515C2 /* libPods-HoTMobileTests.a in Frameworks */,
 				F628D8E5271F905049E19E30 /* libPods-HoTMobileTests.a in Frameworks */,
+				ECAA5627A4D84B0C2F3D66EE /* libPods-HoTMobileTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,6 +935,7 @@
 				441E4E39367E0E27B4365B06 /* libPods-HoTMobile-tvOS.a in Frameworks */,
 				D990B76ED00B70EF5F89CA58 /* libPods-HoTMobile-tvOS.a in Frameworks */,
 				8EB485343B8001E043A5CEA4 /* libPods-HoTMobile-tvOS.a in Frameworks */,
+				496A61D2504A211AD16BD24E /* libPods-HoTMobile-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,6 +947,7 @@
 				76A4A7E2C63241F5F67A6F9D /* libPods-HoTMobile-tvOSTests.a in Frameworks */,
 				53E193A8414348FE8039EBAA /* libPods-HoTMobile-tvOSTests.a in Frameworks */,
 				39A9A10846A37B480BD6D07B /* libPods-HoTMobile-tvOSTests.a in Frameworks */,
+				B0341AC096969ED4D1890655 /* libPods-HoTMobile-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -902,15 +974,89 @@
 		13B07FAE1A68108700A75B9A /* HoTMobile */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				1A05B7DE23BDE16B004FB795 /* ApplicationData.swift */,
+				1A05B79F23BDDE51004FB795 /* Utilities */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				1A412FF723BDAB4300B9C626 /* HoTMobile-Bridging-Header.h */,
+				1A41300723BDACAE00B9C626 /* ActivityStarter.h */,
+				1A41300823BDACAE00B9C626 /* ActivityStarter.m */,
+				1AF0F15F23BDCB9A000D6991 /* Utils.swift */,
+				1A05B7E023BDE1D9004FB795 /* Constants.swift */,
 			);
 			name = HoTMobile;
+			sourceTree = "<group>";
+		};
+		1A05B79F23BDDE51004FB795 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1A05B7A023BDDE51004FB795 /* KeychainService */,
+				1A05B7A423BDDE51004FB795 /* Dictionary+Ext.swift */,
+				1A05B7A623BDDE51004FB795 /* TextUtils.swift */,
+				1A05B7A723BDDE51004FB795 /* UIColorExtension.swift */,
+				1A05B7A823BDDE51004FB795 /* UITextViewExtension.swift */,
+				1A05B7A923BDDE51004FB795 /* File */,
+				1A05B7AB23BDDE51004FB795 /* UILabelExtension.swift */,
+				1A05B7AC23BDDE51004FB795 /* UIApplicationExtension.swift */,
+				1A05B7AD23BDDE51004FB795 /* DateUtils.swift */,
+				1A05B7AE23BDDE51004FB795 /* Language */,
+				1A05B7B223BDDE51004FB795 /* UIViewExtension.swift */,
+				1A05B7B323BDDE51004FB795 /* String+MD5.swift */,
+				1A05B7B423BDDE51004FB795 /* CallStackAnalyser.swift */,
+				1A05B7B523BDDE51004FB795 /* StringExtension.swift */,
+				1A05B7B623BDDE52004FB795 /* UIImageExtension.swift */,
+				1A05B7B723BDDE52004FB795 /* DoubleExtension.swift */,
+				1A05B7B823BDDE52004FB795 /* Date+ISO8601.swift */,
+				1A05B7B923BDDE52004FB795 /* Validation */,
+			);
+			name = Utilities;
+			path = HoTMobile/Utilities;
+			sourceTree = "<group>";
+		};
+		1A05B7A023BDDE51004FB795 /* KeychainService */ = {
+			isa = PBXGroup;
+			children = (
+				1A05B7A123BDDE51004FB795 /* KeychainConfiguration.swift */,
+				1A05B7A223BDDE51004FB795 /* KeychainPasswordItem.swift */,
+				1A05B7A323BDDE51004FB795 /* KeychainUtil.swift */,
+			);
+			path = KeychainService;
+			sourceTree = "<group>";
+		};
+		1A05B7A923BDDE51004FB795 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				1A05B7AA23BDDE51004FB795 /* FileSystem.swift */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		1A05B7AE23BDDE51004FB795 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				1A05B7AF23BDDE51004FB795 /* LocalizeText.swift */,
+				1A05B7B023BDDE51004FB795 /* L012Localizer.swift */,
+				1A05B7B123BDDE51004FB795 /* L102Language.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		1A05B7B923BDDE52004FB795 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				1A05B7BA23BDDE52004FB795 /* ValidatorEmail.swift */,
+				1A05B7BB23BDDE52004FB795 /* ValidatorPhoneNumber.swift */,
+				1A05B7BC23BDDE52004FB795 /* ValidatorRegex.swift */,
+				1A05B7BD23BDDE52004FB795 /* Validable.swift */,
+				1A05B7BE23BDDE52004FB795 /* Validator.swift */,
+				1A05B7BF23BDDE52004FB795 /* ValidatorMinMax.swift */,
+				1A05B7C023BDDE52004FB795 /* ValidatorEmpty.swift */,
+			);
+			path = Validation;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -1356,6 +1502,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = DFWCLDTJJD;
+						LastSwiftMigration = 1110;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1647,8 +1794,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A05B7DC23BDDE52004FB795 /* ValidatorMinMax.swift in Sources */,
+				1A05B7E123BDE1D9004FB795 /* Constants.swift in Sources */,
+				1A05B7D923BDDE52004FB795 /* ValidatorRegex.swift in Sources */,
+				1A05B7C323BDDE52004FB795 /* KeychainUtil.swift in Sources */,
+				1A05B7DF23BDE16B004FB795 /* ApplicationData.swift in Sources */,
+				1A05B7C423BDDE52004FB795 /* Dictionary+Ext.swift in Sources */,
+				1A05B7D823BDDE52004FB795 /* ValidatorPhoneNumber.swift in Sources */,
+				1A05B7C923BDDE52004FB795 /* FileSystem.swift in Sources */,
+				1A41300923BDACAE00B9C626 /* ActivityStarter.m in Sources */,
+				1A05B7CA23BDDE52004FB795 /* UILabelExtension.swift in Sources */,
+				1A05B7D523BDDE52004FB795 /* DoubleExtension.swift in Sources */,
+				1A05B7CD23BDDE52004FB795 /* LocalizeText.swift in Sources */,
+				1A05B7C823BDDE52004FB795 /* UITextViewExtension.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				1A05B7D723BDDE52004FB795 /* ValidatorEmail.swift in Sources */,
+				1A05B7D123BDDE52004FB795 /* String+MD5.swift in Sources */,
+				1A05B7D023BDDE52004FB795 /* UIViewExtension.swift in Sources */,
+				1A05B7CE23BDDE52004FB795 /* L012Localizer.swift in Sources */,
+				1A05B7CF23BDDE52004FB795 /* L102Language.swift in Sources */,
+				1A05B7CC23BDDE52004FB795 /* DateUtils.swift in Sources */,
+				1AF0F16023BDCB9A000D6991 /* Utils.swift in Sources */,
+				1A05B7C123BDDE52004FB795 /* KeychainConfiguration.swift in Sources */,
+				1A05B7DD23BDDE52004FB795 /* ValidatorEmpty.swift in Sources */,
+				1A05B7D623BDDE52004FB795 /* Date+ISO8601.swift in Sources */,
+				1A05B7C723BDDE52004FB795 /* UIColorExtension.swift in Sources */,
+				1A05B7CB23BDDE52004FB795 /* UIApplicationExtension.swift in Sources */,
+				1A05B7C623BDDE52004FB795 /* TextUtils.swift in Sources */,
+				1A05B7C223BDDE52004FB795 /* KeychainPasswordItem.swift in Sources */,
+				1A05B7D323BDDE52004FB795 /* StringExtension.swift in Sources */,
+				1A05B7D223BDDE52004FB795 /* CallStackAnalyser.swift in Sources */,
+				1A05B7DA23BDDE52004FB795 /* Validable.swift in Sources */,
+				1A05B7D423BDDE52004FB795 /* UIImageExtension.swift in Sources */,
+				1A05B7DB23BDDE52004FB795 /* Validator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1701,6 +1880,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2752F8A8F8355B6A1BC9DA52 /* Pods-HoTMobileTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1725,6 +1905,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80448694A7EF4303147C0C50 /* Pods-HoTMobileTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = DFWCLDTJJD;
@@ -1746,9 +1927,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C97CD2B9812E84D7E23849C /* Pods-HoTMobile.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				INFOPLIST_FILE = HoTMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1760,6 +1944,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SimpleFFPlayer;
 				PRODUCT_NAME = HoTMobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "HoTMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1769,8 +1956,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 33DA2DD5D6206CBD7245F4BA /* Pods-HoTMobile.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = DFWCLDTJJD;
 				INFOPLIST_FILE = HoTMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1782,6 +1972,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SimpleFFPlayer;
 				PRODUCT_NAME = HoTMobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "HoTMobile-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -63,7 +63,7 @@ public class Utils {
      *
      * @return UUID - Type 4
      */
-    public static String getRandomId() {
+    public static String getRandomUUID() {
         return UUID.randomUUID().toString();
     }
 

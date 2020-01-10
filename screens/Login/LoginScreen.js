@@ -38,6 +38,39 @@ class LoginScreen extends React.Component {
     constructor(props) {
         super(props);
         this.navigation = this.props.navigation;
+
+        // ActivityStarter.getDeviceName((info) => {
+        //     console.log('getDeviceName', info);
+        //     this.state.deviceInfo = ({deviceName: info});
+        // });
+        // ActivityStarter.getSerialNumber((info) => {
+        //     console.log('getSerialNumber', info);
+        //     this.state.deviceInfo = ({serialNumber: info});
+        // });
+        // ActivityStarter.getFirmwareVersion((info) => {
+        //     console.log('getFirmwareVersion', info);
+        //     this.state.deviceInfo = ({firmwareVersion: info});
+        // });
+        // ActivityStarter.getDeviceId((info) => {
+        //     console.log('getDeviceId', info);
+        //     this.state.deviceInfo = ({deviceId: info});
+        // });
+        // ActivityStarter.getOSVersion((info) => {
+        //     console.log('getOSVersion', info);
+        //     this.state.deviceInfo = ({osVersion: info});
+        // });
+        // ActivityStarter.getDeviceDes((info) => {
+        //     console.log('getDeviceDes', info);
+        //     this.state.deviceInfo = ({deviceDes: info});
+        // });
+        // ActivityStarter.getOSName((info) => {
+        //     console.log('getOSName', info);
+        //     this.state.deviceInfo = ({osName: info});
+        // });
+        // ActivityStarter.getIPAddress((info) => {
+        //     console.log('getIPAddress', info);
+        //     this.state.deviceInfo = ({ipAddress: info});
+        // });
     }
 
     UNSAFE_componentWillMount() {
@@ -49,15 +82,15 @@ class LoginScreen extends React.Component {
         body.uuid = usrname;
         body.authorized_code = passwordEn;
         API.fetchAPI(this.onSuccess.bind(this), this.onError.bind(this), API.url.USER_AUTHORIZE, body, {}, API.httpMethods.POST, API.baseURL.hot);
-    }
+    };
 
     logCallback = (en) => {
-        this.callLoginAPI(this.username,en);
-    }
+        this.callLoginAPI(this.username, en);
+    };
 
     login() {
         this.setState({loading: true, usernameErrorKey: '', passwordErrorKey: ''});
-        if(Platform.OS === 'android') {
+        if (Platform.OS === 'android') {
             ActivityStarter.encryptRSA(this.password, DataManager.getInstance().pubkeyRSATrimmed, this.logCallback);
         } else {
             RSAUtils.encrypt(this.password)
@@ -67,17 +100,18 @@ class LoginScreen extends React.Component {
         }
     }
 
-    goToHome = () => {
+    goToHome() {
         this.setState({loading: false});
         this.navigation.navigate('Home', {screenProps: {i18n: this.state.i18n, locale: this.state.language}});
-    }
+    };
 
     onSuccess(json) {
         console.log('Success');
         DataManager.getInstance().storeKeyValue('Authorization', json);
 
-        let body = new Object();
-        API.fetchAPI(this.onUserActivateSuccess.bind(this), this.onUserActivateError.bind(this), API.url.USER_ACTIVATE, body, {}, API.httpMethods.POST, API.baseURL.hot);
+        // let body = new Object();
+        // API.fetchAPI(this.onUserActivateSuccess.bind(this), this.onUserActivateError.bind(this), API.url.USER_ACTIVATE, body, {}, API.httpMethods.POST, API.baseURL.hot);
+        this.updateRegistrationToken();
     }
 
     onError(error) {
@@ -85,10 +119,18 @@ class LoginScreen extends React.Component {
     }
 
     onRegisterSuccess(json) {
-        let auth =  DataManager.getInstance().valueForKey('Authorization');
-        DefaultPreference.set('Authorization', auth).then(function () {
+        let auth = DataManager.getInstance().valueForKey('Authorization');
+        DefaultPreference.set('Authorization', auth).then(() => {
             console.log('Save Authorization: ', auth);
-            this.goToHome();
+            let ob = JSON.parse(json);
+            if (ob && ob.id) {
+                DefaultPreference.set('Device ID', ob.id).then(() => {
+                    console.log('Save Device ID: ', ob.id);
+                    this.goToHome();
+                });
+            } else {
+                this.goToHome();
+            }
         });
     }
 
@@ -109,33 +151,72 @@ class LoginScreen extends React.Component {
     }
 
     onUserActivateSuccess(json) {
-        DefaultPreference.get('Device Token').then((token) => {
-            console.log('Get Device Token:', token);
+        this.setState({loading: false});
 
-            DefaultPreference.get('Device Activation').then((deviceActivation) => {
-                console.log('Get Device Activation:', deviceActivation);
-                let deviceActivationObj = JSON.parse(deviceActivation);
-                let query = {device_token: token, uuid: deviceActivationObj.id};
-                API.fetchAPI(this.onRegisterSuccess.bind(this), this.onRegisterError.bind(this), API.url.USER_REGISTER_DEVICE, query, {}, API.httpMethods.POST, API.baseURL.hot);
-            });
-        });
+        this.updateRegistrationToken();
     }
 
     onUserActivateError(error) {
         this.setState({loading: false});
-        Alert.alert(
-            I18n.t('delete_error_alert_title'),
-            I18n.t('delete_error_alert_message'),
-            [
-                {
-                    text: I18n.t('OK'),
-                    onPress: () => {
-                    },
-                },
-            ],
-            {cancelable: true},
-        );
+        // Alert.alert(
+        //     I18n.t('delete_error_alert_title'),
+        //     I18n.t('delete_error_alert_message'),
+        //     [
+        //         {
+        //             text: I18n.t('OK'),
+        //             onPress: () => {
+        //             },
+        //         },
+        //     ],
+        //     {cancelable: true},
+        // );
+
+        this.updateRegistrationToken();
     }
+
+
+    updateRegistrationToken = () => {
+        DefaultPreference.get('Device Token').then((token) => {
+            console.log('Get Device Token:', token);
+
+            DefaultPreference.get('Device ID').then((deviceID) => {
+                console.log('Get Device ID:', deviceID);
+                let query = {};
+                if (token != null && token !== '') {
+                    query.push_registration_token = token;
+                }
+                if (deviceID != null && deviceID !== '') {
+                    query.id = deviceID;
+                }
+
+                ActivityStarter.getDeviceName((deviceName) => {
+                    ActivityStarter.getDeviceDes((deviceDes) => {
+                        ActivityStarter.getSerialNumber((serialNumber) => {
+                            ActivityStarter.getOSVersion((osVersion) => {
+                                ActivityStarter.getOSName((osName) => {
+                                    ActivityStarter.getFirmwareVersion((firmwareVersion) => {
+                                        ActivityStarter.getDeviceId((id) => {
+                                            query.name = deviceName;
+                                            query.description = deviceDes;
+                                            query.model = id;
+                                            query.manufacturer = serialNumber;
+                                            query.version = osVersion;
+                                            query.os = osName;
+                                            query.firmware = firmwareVersion;
+
+                                            API.fetchAPI(this.onRegisterSuccess.bind(this), this.onRegisterError.bind(this), API.url.USER_REGISTER_DEVICE, query, {}, API.httpMethods.POST, API.baseURL.hot);
+
+
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    };
 
     onUsernameUpdate(text) {
         this.username = text;

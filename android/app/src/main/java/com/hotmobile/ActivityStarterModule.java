@@ -40,6 +40,7 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
         super.initialize();
         eventEmitter = getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
     }
+
     /**
      * @return the name of this module. This will be the name used to {@code require()} this module
      * from JavaScript.
@@ -48,6 +49,7 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
     public String getName() {
         return "ActivityStarter";
     }
+
     @Nullable
     @Override
     public Map<String, Object> getConstants() {
@@ -55,6 +57,7 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
         constants.put("MyEventName", "MyEventValue");
         return constants;
     }
+
     @ReactMethod
     void navigateToExample() {
         MyPushService.processNotification(null);
@@ -118,8 +121,8 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
 
     //
     @ReactMethod
-    void getRandomId(Callback callback) {
-        callback.invoke(Utils.getRandomId());
+    void getRandomUUID(Callback callback) {
+        callback.invoke(Utils.getRandomUUID());
     }
 
     @ReactMethod
@@ -176,6 +179,10 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
         callback.invoke(android.os.Build.VERSION.SDK_INT);
     }
 
+    @ReactMethod
+    void getOSName(Callback callback) {
+        callback.invoke("Android");
+    }
 //    @ReactMethod
 //    void getUniqueIMEIId(Callback callback) {
 //        callback.invoke(getNetworkInfo(1));
@@ -185,7 +192,10 @@ class ActivityStarterModule extends ReactContextBaseJavaModule {
     void getMACAddress(String interfaceName, Callback callback) { callback.invoke(Utils.getMACAddress(interfaceName)); }
 
     @ReactMethod
-    void getIPAddress(boolean useIPv4, Callback callback) { callback.invoke(Utils.getIPAddress(useIPv4)); }
+    void getIPv6Address(Callback callback) { callback.invoke(Utils.getIPAddress(false)); }
+
+    @ReactMethod
+    void getIPAddress(Callback callback) { callback.invoke(Utils.getIPAddress(true)); }
 
     @ReactMethod
     void getCurrentTime(Callback callback) { callback.invoke(Utils.getCurrentTime()); }

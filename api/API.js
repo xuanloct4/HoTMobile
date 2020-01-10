@@ -31,7 +31,7 @@ export default class API {
     };
 
     static baseURL = {
-        hot: 'http://192.168.1.4/hot/public/api',
+        hot: 'http://192.168.0.148/hot/public/api',
         // hot: 'http://localhost/hot/public/api',
     };
 
@@ -59,9 +59,10 @@ export default class API {
             headers[key] = additionalHeaders[key];
         }
 
-        let token = DataManager.getInstance().valueForKey("token");
-        if (token) {
-            headers["Authorization"] = token;
+        let authorization = DataManager.getInstance().valueForKey("Authorization");
+        console.log("Auth", authorization);
+        if (authorization) {
+            headers["Authorization"] = JSON.parse(authorization).token;
         }
 
         let fullURL = baseURL + url;

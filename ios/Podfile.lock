@@ -4,6 +4,7 @@ PODS:
     - React
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
+  - CryptoSwift (1.2.0)
   - DoubleConversion (1.1.6)
   - Fabric (1.10.2)
   - FBLazyVector (0.61.2)
@@ -314,10 +315,14 @@ PODS:
     - React
   - RNVectorIcons (6.6.0):
     - React
+  - SwiftyRSA (1.5.0):
+    - SwiftyRSA/ObjC (= 1.5.0)
+  - SwiftyRSA/ObjC (1.5.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
+  - CryptoSwift
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
@@ -356,12 +361,14 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNTableView (from `../node_modules/react-native-tableview`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - SwiftyRSA
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - boost-for-react-native
     - Crashlytics
+    - CryptoSwift
     - Fabric
     - Firebase
     - FirebaseAnalytics
@@ -374,6 +381,7 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
     - nanopb
+    - SwiftyRSA
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -455,6 +463,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: b0b70acf63ee888829b7c2ebbf6b50e227396e55
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  CryptoSwift: 40e374e45291d8dceedcb0d6184da94533eaabdf
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FBLazyVector: cb37b5590a27600f0a889222d7c1f019625f4168
@@ -502,8 +511,9 @@ SPEC CHECKSUMS:
   RNReanimated: 9f7976535c5cde50189acd84751871f5414190b9
   RNTableView: 1899b6c998647c926019f3ed2ea93fcf814a8058
   RNVectorIcons: 66af4d5c8ff4f584c7b7cd9c4b0780920f27fce2
+  SwiftyRSA: 6e528fb1b1a87d5111c48081083b141d6d65f1cf
   Yoga: 6af72bedeaea291a3a3717772d6d41836f23a1b9
 
-PODFILE CHECKSUM: fe8a66fec31fc7be2dc00d295109ee84964e0481
+PODFILE CHECKSUM: 1d6a5f5a03a1cacdc6b2b0e6b7504c96b01145f2
 
 COCOAPODS: 1.6.0.beta.1

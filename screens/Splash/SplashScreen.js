@@ -28,21 +28,14 @@ class SplashScreen extends React.Component {
 
     constructor(props) {
         super(props);
-
-        PushNotification();
-
         this.state = {
             i18n: I18n,
         };
+
     }
 
     componentDidMount() {
-        // const { language } = this.props;
-        // if (language) {
-        //     this.setMainLocaleLanguage(language);
-        // } else {
-
-
+        PushNotification();
 
         DefaultPreference.get('App Language').then((language) => {
             console.log('Get language:', language);
@@ -52,8 +45,21 @@ class SplashScreen extends React.Component {
             }
             this.setLanguage(appLanaguage);
 
+
             let query = {};
-            API.fetchAPI(this.onDeviceActivateSuccess.bind(this), this.onDeviceActivateError.bind(this), API.url.USER_DEVICE_ACTIVATE, query, {'Chanel-ID': 2}, API.httpMethods.POST, API.baseURL.hot);
+
+            ActivityStarter.getOSName((os) => {
+                query.os = os;
+
+                ActivityStarter.getDeviceName((model) => {
+                    query.model = model;
+                    // query.manufacturer = deviceDes;
+                    // query.version = osVersion;
+                    // query.firmware = firmwareVersion;
+                    API.fetchAPI(this.onDeviceActivateSuccess.bind(this), this.onDeviceActivateError.bind(this), API.url.USER_DEVICE_ACTIVATE, query, {'Chanel-ID': 2}, API.httpMethods.POST, API.baseURL.hot);
+                });
+            });
+
         });
     }
 
@@ -74,13 +80,13 @@ class SplashScreen extends React.Component {
         DefaultPreference.get('Authorization').then((auth) => {
             console.log('Authorization: ', auth);
             if (auth) {
+                DataManager.getInstance().storeKeyValue('Authorization', auth);
                 let token = JSON.parse(auth).token;
                 console.log('Token: ', token);
                 if (token) {
-                    DataManager.getInstance().storeKeyValue('token', token);
-                    // setTimeout(() => {
-                    //     this.goHome();
-                    // }, 2000);
+                    setTimeout(() => {
+                        this.goHome();
+                    }, 2000);
                 } else {
                     setTimeout(() => {
                         this.goLogin();
@@ -92,7 +98,7 @@ class SplashScreen extends React.Component {
                 }, 1000);
             }
         });
-    }
+    };
 
     onDeviceActivateSuccess(json) {
         console.log('Success');
@@ -151,7 +157,7 @@ class SplashScreen extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.setLanguage('en')}
                                       style={{marginLeft: 5}}>
-                        <Text style={{color: !isVNLang ? 'blue' : 'grey'}}>England</Text>
+                        <Text style={{color: !isVNLang ? 'blue' : 'grey'}}>English</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={this.goLogin.bind(this)}
